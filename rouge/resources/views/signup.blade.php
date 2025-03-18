@@ -25,6 +25,8 @@
             </div>
             <button type="submit" class="w-full py-2 text-white bg-[#C02626] rounded-lg hover:bg-red-700">Inscription</button>
         </form>
+        <p class="text-center text-gray-700">Déjà un compte ? <a href="login.html" class="text-[#C02626]">Connectez-vous</a></p>
+    </div>
     </div>
 </body>
 </html>
