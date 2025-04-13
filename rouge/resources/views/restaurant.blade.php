@@ -174,6 +174,56 @@
           
         </div>
     </section>
+
+    {{-- les carts 2 --}}
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-4">
+        <div class="flex flex-col md:flex-row justify-center items-stretch space-y-8 md:space-y-0 md:space-x-8">
+          
+          <!-- Carte 1 -->
+          <div class="bg-white rounded-3xl shadow-lg overflow-hidden w-full md:w-1/3 flex flex-col">
+            <div class="h-48 overflow-hidden">
+              <img src="{{ asset('images/palais-dar-soukar.png') }}" alt="Restaurant élégant avec tables en bois et banquettes bleues" class="w-full h-full object-cover">
+            </div>
+            <div class="p-6 flex-grow">
+              <h2 class="text-2xl font-bold text-gray-800 mb-2">Palais Dar Soukar</h2>
+              <p class="text-gray-600 mb-4">offre une expérience unique alliant gastronomie, ambiance festive et vue panoramique.</p>
+            </div>
+            <div class="p-6 bg-white">
+              <p class="text-4xl font-bold text-gray-800 text-right">35€</p>
+            </div>
+          </div>
+          
+          <!-- Carte 2 -->
+          <div class="bg-white rounded-3xl shadow-lg overflow-hidden w-full md:w-1/3 flex flex-col">
+            <div class="h-48 overflow-hidden">
+              <img src="{{ asset('images/pointbar.png') }}" alt="Espace de réunion moderne avec tables en bois et chaises noires" class="w-full h-full object-cover">
+            </div>
+            <div class="p-6 flex-grow">
+              <h2 class="text-2xl font-bold text-gray-800 mb-2">Pointbar</h2>
+              <p class="text-gray-600 mb-4">propose des cocktails raffinés dans une atmosphère élégante</p>
+            </div>
+            <div class="p-6 bg-white">
+              <p class="text-4xl font-bold text-gray-800 text-right">35€</p>
+            </div>
+          </div>
+          
+          <!-- Carte 3-->
+          <div class="bg-white rounded-3xl shadow-lg overflow-hidden w-full md:w-1/3 flex flex-col">
+            <div class="h-48 overflow-hidden">
+              <img src="{{ asset('images/rooftop.png') }}" alt="Restaurant avec toit en verre et plantes suspendues" class="w-full h-full object-cover">
+            </div>
+            <div class="p-6 flex-grow">
+              <h2 class="text-2xl font-bold text-gray-800 mb-2">Rooftop</h2>
+              <p class="text-gray-600 mb-4">vous invite à profiter de soirées envoûtantes sous les étoiles, avec une vue imprenable et une ambiance musicale envoûtante.</p>
+            </div>
+            <div class="p-6 bg-white">
+              <p class="text-4xl font-bold text-gray-800 text-right">35€</p>
+            </div>
+          </div>
+          
+        </div>
+    </section>
+
     
   
 
