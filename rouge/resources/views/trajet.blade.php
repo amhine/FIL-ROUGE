@@ -56,3 +56,13 @@
             </ul>
         </div>
     </nav>
+
+     <!-- Hero Image -->
+     <section id="accueil" class=" w-full min-h-screen pt-16">
+        
+        <div class="relative w-full h-full">
+        <img src="{{ asset('images/hero-trajet.png') }}" alt="Équipe nationale du Maroc" class="w-full h-full object-cover" />
+        </div>
+        
+        
+    </section>
