@@ -283,6 +283,20 @@
             </div>
         </div>
 
+            <!-- Pagination -->
+            <div class="flex justify-center mt-8 space-x-2">
+                <span class="px-4 py-2 bg-gray-300 text-gray-600 rounded-lg">Précédent</span>
+                
+                <a href="#" class="px-4 py-2 bg-red-700 text-white font-bold rounded-lg">1</a>
+                <a href="#" class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-purple-700 transition duration-300">2</a>
+                <a href="#" class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-purple-700 transition duration-300">3</a>
+                
+                <a href="#" class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-purple-700 transition duration-300">Suivant</a>
+            </div>
+        </div>
+
+        
+
 
   
 
