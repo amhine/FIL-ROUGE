@@ -84,5 +84,205 @@
                 </div>
             </div>
         </form>
+
+        <!-- Grille d'annonces -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Annonce 1 -->
+            <div class="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300">
+                <div class="relative">
+                    <img src="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1080&q=80" alt="Appartement avec vue" class="w-full h-48 object-cover">
+                    <div class="absolute top-4 right-4 bg-green-600 text-white px-3 py-1 rounded-full text-sm font-bold">
+                        850 DH/nuit
+                    </div>
+                    <div class="absolute bottom-4 left-4 bg-green-500 text-white px-3 py-1 rounded-full text-xs font-bold">
+                        Disponible
+                    </div>
+                    <button type="button" class="absolute top-4 left-4 text-white bg-gray-800 bg-opacity-60 p-2 rounded-full hover:bg-red-500 transition duration-300">
+                        <i class="fas fa-heart text-white"></i>
+                    </button>
+                </div>
+                
+                <div class="p-5">
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Appartement moderne avec vue sur mer</h3>
+                    <div class="flex items-center text-gray-600 mb-2">
+                        <i class="fas fa-map-marker-alt mr-2 text-red-600"></i>
+                        <span>Ave Mohammed V, Tanger</span>
+                    </div>
+                    <!-- Description -->
+                    <p class="text-gray-600 mb-4 line-clamp-3">
+                        Magnifique appartement récemment rénové avec vue imprenable sur la mer. Situé dans un quartier calme et proche de toutes commodités.
+                    </p>
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center">
+                            <div class="flex items-center mr-4">
+                                <i class="fas fa-bed mr-1 text-red-600"></i>
+                                <span>2</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-bath mr-1 text-red-600"></i>
+                                <span>1</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Équipements -->
+                    <div class="border-t pt-4">
+                        <div class="flex justify-around">
+                            <div class="text-center transform hover:-translate-y-1 transition-transform duration-300">
+                                <i class="fas fa-wifi text-green-600 text-xl mb-1"></i>
+                                <p class="text-xs">Wifi</p>
+                            </div>
+                            <div class="text-center transform hover:-translate-y-1 transition-transform duration-300">
+                                <i class="fas fa-snowflake text-green-600 text-xl mb-1"></i>
+                                <p class="text-xs">Climatisation</p>
+                            </div>
+                            <div class="text-center transform hover:-translate-y-1 transition-transform duration-300">
+                                <i class="fas fa-tv text-green-600 text-xl mb-1"></i>
+                                <p class="text-xs">TV</p>
+                            </div>
+                            <div class="text-center transform hover:-translate-y-1 transition-transform duration-300">
+                                <i class="fas fa-utensils text-green-600 text-xl mb-1"></i>
+                                <p class="text-xs">Cuisine</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Bouton Réserver -->
+                    <button class="w-full mt-4 bg-red-600 text-white py-2 rounded-lg font-medium hover:opacity-90 transition duration-300 transform hover:scale-105 ">
+                      Réserver
+                  </button>
+                </div>
+            </div>
+            
+            <!-- Annonce 2 -->
+            <div class="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300">
+                <div class="relative">
+                    <img src="https://images.unsplash.com/photo-1484154218962-a197022b5858?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1080&q=80" alt="Villa de luxe" class="w-full h-48 object-cover">
+                    <div class="absolute top-4 right-4 bg-green-600 text-white px-3 py-1 rounded-full text-sm font-bold">
+                        1200 DH/nuit
+                    </div>
+                    <div class="absolute bottom-4 left-4 bg-green-500 text-white px-3 py-1 rounded-full text-xs font-bold">
+                        Disponible
+                    </div>
+                    <button type="button" class="absolute top-4 left-4 text-white bg-gray-800 bg-opacity-60 p-2 rounded-full hover:bg-red-500 transition duration-300">
+                        <i class="fas fa-heart text-white"></i>
+                    </button>
+                </div>
+                
+                <div class="p-5">
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Villa de luxe avec piscine privée</h3>
+                    <div class="flex items-center text-gray-600 mb-2">
+                        <i class="fas fa-map-marker-alt mr-2 text-red-600"></i>
+                        <span>Route de Rabat, Casablanca</span>
+                    </div>
+                    <!-- Description -->
+                    <p class="text-gray-600 mb-4 line-clamp-3">
+                        Superbe villa moderne avec piscine privée et jardin, idéale pour des vacances en famille ou entre amis. Quartier sécurisé et calme.
+                    </p>
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center">
+                            <div class="flex items-center mr-4">
+                                <i class="fas fa-bed mr-1 text-red-600"></i>
+                                <span>4</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-bath mr-1 text-red-600"></i>
+                                <span>3</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Équipements -->
+                    <div class="border-t pt-4">
+                        <div class="flex justify-around">
+                            <div class="text-center transform hover:-translate-y-1 transition-transform duration-300">
+                                <i class="fas fa-wifi text-green-600 text-xl mb-1"></i>
+                                <p class="text-xs">Wifi</p>
+                            </div>
+                            <div class="text-center transform hover:-translate-y-1 transition-transform duration-300">
+                                <i class="fas fa-swimming-pool text-green-600 text-xl mb-1"></i>
+                                <p class="text-xs">Piscine</p>
+                            </div>
+                            <div class="text-center transform hover:-translate-y-1 transition-transform duration-300">
+                                <i class="fas fa-parking text-green-600 text-xl mb-1"></i>
+                                <p class="text-xs">Parking</p>
+                            </div>
+                            <div class="text-center transform hover:-translate-y-1 transition-transform duration-300">
+                                <i class="fas fa-leaf text-green-600 text-xl mb-1"></i>
+                                <p class="text-xs">Jardin</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Bouton Réserver -->
+                    <button class="w-full mt-4 bg-red-600 text-white py-2 rounded-lg font-medium hover:opacity-90 transition duration-300 transform hover:scale-105 ">
+                      Réserver
+                  </button>
+                </div>
+            </div>
+            
+            <!-- Annonce 3 -->
+            <div class="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300">
+                <div class="relative">
+                    <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1080&q=80" alt="Studio moderne" class="w-full h-48 object-cover">
+                    <div class="absolute top-4 right-4 bg-green-600 text-white px-3 py-1 rounded-full text-sm font-bold">
+                        500 DH/nuit
+                    </div>
+                    <div class="absolute bottom-4 left-4 bg-green-500 text-white px-3 py-1 rounded-full text-xs font-bold">
+                        Disponible
+                    </div>
+                    <button type="button" class="absolute top-4 left-4 text-white bg-gray-800 bg-opacity-60 p-2 rounded-full hover:bg-red-500 transition duration-300">
+                        <i class="fas fa-heart text-white"></i>
+                    </button>
+                </div>
+                
+                <div class="p-5">
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Studio confortable en centre-ville</h3>
+                    <div class="flex items-center text-gray-600 mb-2">
+                        <i class="fas fa-map-marker-alt mr-2 text-red-600"></i>
+                        <span>Rue Moulay Ismail, Marrakech</span>
+                    </div>
+                    <!-- Description -->
+                    <p class="text-gray-600 mb-4 line-clamp-3">
+                        Studio moderne et fonctionnel situé en plein centre-ville, à deux pas des sites touristiques et des commerces. Parfait pour un séjour urbain.
+                    </p>
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center">
+                            <div class="flex items-center mr-4">
+                                <i class="fas fa-bed mr-1 text-red-600"></i>
+                                <span>1</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-bath mr-1 text-red-600"></i>
+                                <span>1</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Équipements -->
+                    <div class="border-t pt-4">
+                        <div class="flex justify-around">
+                            <div class="text-center transform hover:-translate-y-1 transition-transform duration-300">
+                                <i class="fas fa-wifi text-green-600 text-xl mb-1"></i>
+                                <p class="text-xs">Wifi</p>
+                            </div>
+                            <div class="text-center transform hover:-translate-y-1 transition-transform duration-300">
+                                <i class="fas fa-snowflake text-green-600 text-xl mb-1"></i>
+                                <p class="text-xs">Climatisation</p>
+                            </div>
+                            <div class="text-center transform hover:-translate-y-1 transition-transform duration-300">
+                                <i class="fas fa-coffee text-green-600 text-xl mb-1"></i>
+                                <p class="text-xs">Cafetière</p>
+                            </div>
+                            <div class="text-center transform hover:-translate-y-1 transition-transform duration-300">
+                                <i class="fas fa-tv text-green-600 text-xl mb-1"></i>
+                                <p class="text-xs">TV</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Bouton Réserver -->
+                    <button class="w-full mt-4 bg-red-600 text-white py-2 rounded-lg font-medium hover:opacity-90 transition duration-300 transform hover:scale-105 ">
+                      Réserver
+                  </button>
+                </div>
+            </div>
+        </div>
+
+
   
 
