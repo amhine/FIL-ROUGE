@@ -65,3 +65,54 @@
         
         
     </section>
+    <!-- Section Stades -->
+    <section id="stades" class=" py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center mb-12">Stades du Maroc</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-2 h-64 ">
+                
+                <div class="relative group overflow-hidden rounded-3xl shadow-lg md:col-span-2 md:row-span-2 ">
+                    <img src="{{ asset('images/stade1.png') }}" alt="Stade Mohammed V" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                    <div class="absolute bottom-0 right-0 bg-[#C02626] text-white p-2 rounded-tl-xl">
+                        <span class="font-medium">Casablanca</span>
+                    </div>
+                </div>
+            
+                <div class="relative group overflow-hidden rounded-3xl shadow-lg h-64">
+                    <img src="{{ asset('images/stade2.png') }}" alt="stades" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                    <div class="absolute bottom-0 right-0 bg-[#C02626] text-white p-2 rounded-tl-xl">
+                        <span class="font-medium">Marrakech</span>
+                    </div>
+                </div>
+            
+                <div class="relative group overflow-hidden rounded-3xl shadow-lg h-64">
+                    <img src="{{ asset('images/stade3.png') }}" alt="stades" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                    <div class="absolute bottom-0 right-0 bg-[#C02626] text-white p-2 rounded-tl-xl">
+                        <span class="font-medium">Agadir</span>
+                    </div>
+                </div>
+            
+                <div class="relative group overflow-hidden rounded-3xl shadow-lg h-64">
+                    <img src="{{ asset('images/stade4.png') }}" alt="stades" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                    <div class="absolute bottom-0 right-0 bg-[#C02626] text-white p-2 rounded-tl-xl">
+                        <span class="font-medium">Fès</span>
+                    </div>
+                </div>
+            
+                <div class="relative group overflow-hidden rounded-3xl shadow-lg h-64">
+                    <img src="{{ asset('images/stade5.png') }}" alt="stades" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                    <div class="absolute bottom-0 right-0 bg-[#C02626] text-white p-2 rounded-tl-xl">
+                        <span class="font-medium">Tanger</span>
+                    </div>
+                </div>
+            </div>
+            <div class="text-end mt-[300px]">
+                <a href="#tous-les-stades" class="bg-[#C02626] hover:bg-[#A42020] text-white font-bold py-3 px-8 rounded-full transition-colors duration-300 inline-block">
+                    Voir tous les stades
+                </a>
+            </div>
+        </div>
+    </section>
+    
+
