@@ -153,6 +153,47 @@
             </div>
         </div>
     </section>
+    <!-- Section Restaurants -->
+    <section id="Restaurants" class=" py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center mb-12">Morocoo Restaurants</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-2 h-64 ">
+                <div class="relative group overflow-hidden rounded-3xl shadow-lg md:col-span-2 md:row-span-2 ">
+                    <img src="{{ asset('images/Restaurants1.png') }}" alt="Restaurants" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                   
+                </div>
+            
+                <div class="relative group overflow-hidden rounded-3xl shadow-lg h-64">
+                    <img src="{{ asset('images/Restaurants2.png') }}" alt="Restaurants" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                   
+                </div>
+            
+                <div class="relative group overflow-hidden rounded-3xl shadow-lg h-64">
+                    <img src="{{ asset('images/Restaurants3.png') }}" alt="Restaurants" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                   
+                </div>
+            
+                <div class="relative group overflow-hidden rounded-3xl shadow-lg h-64">
+                    <img src="{{ asset('images/Restaurants4.png') }}" alt="Restaurants" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                   
+                </div>
+            
+                <div class="relative group overflow-hidden rounded-3xl shadow-lg h-64">
+                    <img src="{{ asset('images/Restaurants5.png') }}" alt="Restaurants" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                  
+                </div>
+            </div>
+
+            <div class="text-end mt-[300px]">
+                <a href="#tous-les-stades" class="bg-[#C02626] hover:bg-[#A42020] text-white font-bold py-3 px-8 rounded-full transition-colors duration-300 inline-block">
+                    Voir tous les Restaurants
+                </a>
+            </div>
+        </div>
+    </section>
+
+
 
     
 
