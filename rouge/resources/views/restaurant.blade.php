@@ -55,3 +55,42 @@
             </ul>
         </div>
     </nav>
+
+    <!--  Hero -->
+    <section id="restaurants" class="pt-20 pb-12">
+        <div class="max-w-7xl mx-auto h-[600px]">
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="h-full">
+                    <div class="relative h-full rounded-lg overflow-hidden shadow-lg">
+                        <img src="{{ asset('images/restau-hero1.png') }}" alt="Marrakech rooftop restaurant with Koutoubia Mosque view" class="w-full h-full object-cover"/>
+                    </div>
+                </div>
+                
+                <div class="grid grid-rows-2 gap-4">
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="relative rounded-lg overflow-hidden shadow-lg">
+                            <img src="{{ asset('images/restau-hero2.png') }}" alt="Colorful Moroccan feast" class="w-full h-full object-cover"/>
+                        </div>
+                        
+                        <div class="relative rounded-lg overflow-hidden shadow-lg">
+                            <img src="{{ asset('images/restau-hero3.png') }}" alt="Modern Moroccan restaurant with mosaic" class="w-full h-full object-cover"/>
+                        </div>
+                    </div>
+                    
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="relative rounded-lg overflow-hidden shadow-lg">
+                            <img src="{{ asset('images/restau-hero4.png') }}" alt="Colorful Moroccan feast" class="w-full h-full object-cover"/>
+                        </div>
+                        
+                        <div class="relative rounded-lg overflow-hidden shadow-lg">
+                            <img src="{{ asset('images/restau-hero5.png') }}" alt="Modern Moroccan restaurant with mosaic" class="w-full h-full object-cover"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        
+        </div>
+    </section>
+
