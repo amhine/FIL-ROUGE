@@ -95,35 +95,85 @@
     </section>
 
     <!-- Barre de recherche -->
-<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-    <div class="w-full bg-white rounded-full shadow-lg overflow-hidden">
-      <form class="flex items-center">
-        <div class="relative flex-grow">
-          <input type="text" id="searchInput" placeholder="Rechercher un restaurant..." class="w-full py-4 px-6 text-gray-700 focus:outline-none">
-          <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-            </svg>
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div class="w-full bg-white rounded-full shadow-lg overflow-hidden">
+        <form class="flex items-center">
+            <div class="relative flex-grow">
+            <input type="text" id="searchInput" placeholder="Rechercher un restaurant..." class="w-full py-4 px-6 text-gray-700 focus:outline-none">
+            <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+            </div>
+            </div>
+            
+            <div class="flex items-center px-4">
+            <select id="cityFilter" class="py-4 px-3 text-gray-700 bg-transparent border-l border-gray-300 focus:outline-none">
+                <option value="">Toutes les villes</option>
+                <option value="Rabat">Rabat</option>
+                <option value="Casablanca">Casablanca</option>
+                <option value="Agadir">Agadir</option>
+                <option value="Marrakech">Marrakech</option>
+                <option value="Fès">Fès</option>
+                <option value="Tanger">Tanger</option>
+            </select>
+            </div>
+            
+            <button type="submit" class="bg-[#C02626] text-white px-8 py-4 hover:bg-[#A42020] transition-colors duration-300">
+            Rechercher
+            </button>
+        </form>
+        </div>
+    </section>
+
+    {{-- les carts 1 --}}
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-4">
+        <div class="flex flex-col md:flex-row justify-center items-stretch space-y-8 md:space-y-0 md:space-x-8">
+          
+          <!-- Carte 1 -->
+          <div class="bg-white rounded-3xl shadow-lg overflow-hidden w-full md:w-1/3 flex flex-col">
+            <div class="h-48 overflow-hidden">
+              <img src="{{ asset('images/palais-dar-soukar.png') }}" alt="Restaurant élégant avec tables en bois et banquettes bleues" class="w-full h-full object-cover">
+            </div>
+            <div class="p-6 flex-grow">
+              <h2 class="text-2xl font-bold text-gray-800 mb-2">Palais Dar Soukar</h2>
+              <p class="text-gray-600 mb-4">offre une expérience unique alliant gastronomie, ambiance festive et vue panoramique.</p>
+            </div>
+            <div class="p-6 bg-white">
+              <p class="text-4xl font-bold text-gray-800 text-right">35€</p>
+            </div>
           </div>
+          
+          <!-- Carte 2 -->
+          <div class="bg-white rounded-3xl shadow-lg overflow-hidden w-full md:w-1/3 flex flex-col">
+            <div class="h-48 overflow-hidden">
+              <img src="{{ asset('images/pointbar.png') }}" alt="Espace de réunion moderne avec tables en bois et chaises noires" class="w-full h-full object-cover">
+            </div>
+            <div class="p-6 flex-grow">
+              <h2 class="text-2xl font-bold text-gray-800 mb-2">Pointbar</h2>
+              <p class="text-gray-600 mb-4">propose des cocktails raffinés dans une atmosphère élégante</p>
+            </div>
+            <div class="p-6 bg-white">
+              <p class="text-4xl font-bold text-gray-800 text-right">35€</p>
+            </div>
+          </div>
+          
+          <!-- Carte 3-->
+          <div class="bg-white rounded-3xl shadow-lg overflow-hidden w-full md:w-1/3 flex flex-col">
+            <div class="h-48 overflow-hidden">
+              <img src="{{ asset('images/rooftop.png') }}" alt="Restaurant avec toit en verre et plantes suspendues" class="w-full h-full object-cover">
+            </div>
+            <div class="p-6 flex-grow">
+              <h2 class="text-2xl font-bold text-gray-800 mb-2">Rooftop</h2>
+              <p class="text-gray-600 mb-4">vous invite à profiter de soirées envoûtantes sous les étoiles, avec une vue imprenable et une ambiance musicale envoûtante.</p>
+            </div>
+            <div class="p-6 bg-white">
+              <p class="text-4xl font-bold text-gray-800 text-right">35€</p>
+            </div>
+          </div>
+          
         </div>
-        
-        <div class="flex items-center px-4">
-          <select id="cityFilter" class="py-4 px-3 text-gray-700 bg-transparent border-l border-gray-300 focus:outline-none">
-            <option value="">Toutes les villes</option>
-            <option value="Rabat">Rabat</option>
-            <option value="Casablanca">Casablanca</option>
-            <option value="Agadir">Agadir</option>
-            <option value="Marrakech">Marrakech</option>
-            <option value="Fès">Fès</option>
-            <option value="Tanger">Tanger</option>
-          </select>
-        </div>
-        
-        <button type="submit" class="bg-[#C02626] text-white px-8 py-4 hover:bg-[#A42020] transition-colors duration-300">
-          Rechercher
-        </button>
-      </form>
-    </div>
-  </section>
+    </section>
+    
   
 
