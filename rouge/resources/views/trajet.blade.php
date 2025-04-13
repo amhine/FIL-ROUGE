@@ -66,3 +66,59 @@
         
         
     </section>
+
+    <section class="bg-white rounded-lg shadow-md p-6 mb-8">
+        <form>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
+                <div class="mb-4">
+                    <label for="departure" class="block text-gray-700 font-medium mb-2">Ville de départ</label>
+                    <select id="departure" name="departure" class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-600">
+                        <option value="">Sélectionner une ville</option>
+                        <option value="casablanca">Casablanca</option>
+                        <option value="rabat">Rabat</option>
+                        <option value="marrakech">Marrakech</option>
+                        <option value="agadir">Agadir</option>
+                        <option value="tanger">Tanger</option>
+                        <option value="fes">Fès</option>
+                    </select>
+                </div>
+                
+                <div class="mb-4">
+                    <label for="arrival" class="block text-gray-700 font-medium mb-2">Ville d'arrivée</label>
+                    <select id="arrival" name="arrival" class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-600">
+                        <option value="">Sélectionner une ville</option>
+                        <option value="casablanca">Casablanca</option>
+                        <option value="rabat">Rabat</option>
+                        <option value="marrakech">Marrakech</option>
+                        <option value="agadir">Agadir</option>
+                        <option value="tanger">Tanger</option>
+                        <option value="fes">Fès</option>
+                    </select>
+                </div>
+                
+                <div class="mb-4">
+                    <label for="date" class="block text-gray-700 font-medium mb-2">Date</label>
+                    <input type="date" id="date" name="date" class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-600">
+                </div>
+                
+                <div class="mb-4">
+                    <label for="transport" class="block text-gray-700 font-medium mb-2">Mode de transport</label>
+                    <select id="transport" name="transport" class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-600">
+                        <option value="">Tous</option>
+                        <option value="train">Train</option>
+                        <option value="bus">Bus</option>
+                        <option value="navette">Navette</option>
+                    </select>
+                </div>
+                
+                <div class="mb-4 flex items-end">
+                    <button type="submit" class="w-full bg-green-700 hover:bg-green-800 text-white py-2 px-4 rounded-md font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-green-600">
+                        Rechercher
+                    </button>
+                </div>
+            </div>
+        </form>
+    </section>
+</body>
+
+
