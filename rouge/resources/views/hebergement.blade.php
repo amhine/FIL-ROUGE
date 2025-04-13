@@ -68,5 +68,21 @@
         
         
     </section>
+
+    <div class="container mx-auto px-4 py-8">
+        <!-- Barre de Recherche -->
+        <form action="#" method="GET" class="mb-8 bg-white rounded-lg shadow-md p-4">
+            <div class="flex flex-wrap items-center justify-between gap-4">
+                <div class="flex flex-wrap gap-2">
+                    <input type="text" name="ville" placeholder="Rechercher par ville" class="px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 w-60">
+                    <input type="date" name="disponibilite" class="px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500">
+                </div>
+                <div>
+                    <button type="submit" class="bg-green-600 hover:bg-purple-700 text-white px-6 py-2 rounded-lg transition duration-300 flex items-center">
+                        <i class="fas fa-search mr-2"></i> Rechercher
+                    </button>
+                </div>
+            </div>
+        </form>
   
 
