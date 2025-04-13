@@ -94,3 +94,36 @@
         </div>
     </section>
 
+    <!-- Barre de recherche -->
+<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div class="w-full bg-white rounded-full shadow-lg overflow-hidden">
+      <form class="flex items-center">
+        <div class="relative flex-grow">
+          <input type="text" id="searchInput" placeholder="Rechercher un restaurant..." class="w-full py-4 px-6 text-gray-700 focus:outline-none">
+          <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+          </div>
+        </div>
+        
+        <div class="flex items-center px-4">
+          <select id="cityFilter" class="py-4 px-3 text-gray-700 bg-transparent border-l border-gray-300 focus:outline-none">
+            <option value="">Toutes les villes</option>
+            <option value="Rabat">Rabat</option>
+            <option value="Casablanca">Casablanca</option>
+            <option value="Agadir">Agadir</option>
+            <option value="Marrakech">Marrakech</option>
+            <option value="Fès">Fès</option>
+            <option value="Tanger">Tanger</option>
+          </select>
+        </div>
+        
+        <button type="submit" class="bg-[#C02626] text-white px-8 py-4 hover:bg-[#A42020] transition-colors duration-300">
+          Rechercher
+        </button>
+      </form>
+    </div>
+  </section>
+  
+
