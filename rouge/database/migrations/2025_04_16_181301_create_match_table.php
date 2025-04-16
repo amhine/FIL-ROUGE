@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use PHPUnit\Framework\Constraint\Constraint;
 
 return new class extends Migration
 {
@@ -16,6 +17,8 @@ return new class extends Migration
             $table->date('date');
             $table->string('equipe1');
             $table->string('equipe2');
+            $table->foreignId('id_stade')->constrained('stades')->onDelete('cascade');
+
             $table->timestamps();
         });
     }
