@@ -74,11 +74,11 @@
         <form action="#" method="GET" class="mb-8 bg-white rounded-lg shadow-md p-4">
             <div class="flex flex-wrap items-center justify-between gap-4">
                 <div class="flex flex-wrap gap-2">
-                    <input type="text" name="ville" placeholder="Rechercher par ville" class="px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 w-60">
-                    <input type="date" name="disponibilite" class="px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500">
+                    <input type="text" name="ville" placeholder="Rechercher par ville" class="px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 w-60">
+                    <input type="date" name="disponibilite" class="px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500">
                 </div>
                 <div>
-                    <button type="submit" class="bg-green-600 hover:bg-purple-700 text-white px-6 py-2 rounded-lg transition duration-300 flex items-center">
+                    <button type="submit" class="bg-green-600 hover:bg-red-700 text-white px-6 py-2 rounded-lg transition duration-300 flex items-center">
                         <i class="fas fa-search mr-2"></i> Rechercher
                     </button>
                 </div>
@@ -288,10 +288,10 @@
                 <span class="px-4 py-2 bg-gray-300 text-gray-600 rounded-lg">Précédent</span>
                 
                 <a href="#" class="px-4 py-2 bg-red-700 text-white font-bold rounded-lg">1</a>
-                <a href="#" class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-purple-700 transition duration-300">2</a>
-                <a href="#" class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-purple-700 transition duration-300">3</a>
+                <a href="#" class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-red-700 transition duration-300">2</a>
+                <a href="#" class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-red-700 transition duration-300">3</a>
                 
-                <a href="#" class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-purple-700 transition duration-300">Suivant</a>
+                <a href="#" class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-red-700 transition duration-300">Suivant</a>
             </div>
         </div>
 
