@@ -11,13 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('restaurant', function (Blueprint $table) {
+        Schema::create('restaurants', function (Blueprint $table) {
             $table->id();
             $table->string('nom_resteau');
             $table->string('localisation');
             $table->string('type_cuisine');
             $table->int('capaciter');
             $table->string('image');
+            $table->foreignId('id_users')->constrained('users')->onDelete('cascade');
             $table->timestamps();
         });
     }
