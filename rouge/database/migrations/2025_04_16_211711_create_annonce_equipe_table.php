@@ -12,16 +12,16 @@ return new class extends Migration
     public function up(): void
     {
        
-        Schema::create('annonce_equipe', function (Blueprint $table) {
+        Schema::create('hotel_equipe', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('annonce_id');
+            $table->unsignedBigInteger('hotel_id');
             $table->unsignedBigInteger('equipe_id');
             $table->timestamps();
     
-            $table->foreign('annonce_id')->references('id')->on('annonce')->onDelete('cascade');
-            $table->foreign('equipe_id')->references('id')->on('equipement')->onDelete('cascade');
+            $table->foreign('hotel_id')->references('id')->on('hotels')->onDelete('cascade');
+            $table->foreign('equipe_id')->references('id')->on('equipements')->onDelete('cascade');
     
-            $table->unique(['annonce_id', 'equipe_id']);
+            $table->unique(['hotel_id', 'equipe_id']);
         });
     }
 
