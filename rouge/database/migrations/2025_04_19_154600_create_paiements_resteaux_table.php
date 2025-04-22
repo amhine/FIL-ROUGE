@@ -11,14 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('stades', function (Blueprint $table) {
+        Schema::create('paiements_resteaux', function (Blueprint $table) {
             $table->id();
-            $table->string('nom_stade');
-            $table->string('localisation');
-            $table->integer('capaciter');
-            $table->string('equipements');
-            
-            $table->foreignId('id_admin')->constrained('users')->onDelete('cascade');
+            $table->foreignId('reservation_id')->constrained('reservations_resteaux')->onDelete('cascade');
+            $table->foreignId('tourist_id')->constrained('users')->onDelete('cascade');
+            $table->date('date_paiement');
             $table->timestamps();
         });
     }
@@ -28,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('stades');
+        Schema::dropIfExists('paiements_resteaux');
     }
 };

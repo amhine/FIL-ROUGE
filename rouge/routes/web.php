@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\hotelcontroller;
+use App\Http\Controllers\RestaurantController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,5 +17,17 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('hebergement');
+    return view('touriste.restaurant');
 });
+Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register.form');
+Route::post('/register', [AuthController::class, 'createUser'])->name('register');
+Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login.form');
+Route::post('/login', [AuthController::class, 'loginUser'])->name('login');
+
+
+
+
+Route::get('/touriste/hotel', [hotelcontroller::class, 'search'])->name('hotel');
+Route::get('/touriste/resteau', [RestaurantController::class, 'search'])->name('restaurants.search');
+
+

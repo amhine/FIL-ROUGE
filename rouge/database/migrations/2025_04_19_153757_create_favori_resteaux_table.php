@@ -11,15 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('stades', function (Blueprint $table) {
+        Schema::create('favori_resteaux', function (Blueprint $table) {
             $table->id();
-            $table->string('nom_stade');
-            $table->string('localisation');
-            $table->integer('capaciter');
-            $table->string('equipements');
-            
-            $table->foreignId('id_admin')->constrained('users')->onDelete('cascade');
             $table->timestamps();
+            $table->foreignId('id_touriste')->constrained('users')->onDelete('cascade');
+            $table->foreignId('id_resteau')->constrained('restaurants')->onDelete('cascade');
+        
         });
     }
 
@@ -28,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('stades');
+        Schema::dropIfExists('_favori_hotels');
     }
 };

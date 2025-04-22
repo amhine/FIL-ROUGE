@@ -16,9 +16,9 @@ return new class extends Migration
             $table->string('nom_resteau');
             $table->string('localisation');
             $table->string('type_cuisine');
-            $table->int('capaciter');
+            $table->integer('capaciter');
             $table->string('image');
-            $table->foreignId('id_users')->constrained('users')->onDelete('cascade');
+            $table->foreignId('id_resteau')->constrained('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

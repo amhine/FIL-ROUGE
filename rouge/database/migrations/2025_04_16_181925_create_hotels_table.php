@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('ville');
             $table->string('image');
             $table->date('disponibilite');
+            $table->foreignId('hebergeur_id')->constrained('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

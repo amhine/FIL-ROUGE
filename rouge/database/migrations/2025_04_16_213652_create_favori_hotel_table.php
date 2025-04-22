@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('paiement', function (Blueprint $table) {
+        Schema::create('favori_hotels', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('reservation_id')->constrained('reservations')->onDelete('cascade');
-            $table->date('date_paiement');
+            $table->foreignId('id_touriste')->constrained('users')->onDelete('cascade');
+            $table->foreignId('id_hotels')->constrained('hotels')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -24,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('paiement');
+        Schema::dropIfExists('favori_hotel');
     }
 };
