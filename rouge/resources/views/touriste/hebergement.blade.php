@@ -69,31 +69,7 @@
         
     </section>
 
-        <!-- Barre de Recherche -->
-        <section class="max-w-7xl mx-auto px-4 py-10">
-            <form class="flex flex-col md:flex-row items-center gap-4 bg-white p-6 rounded-xl shadow-md" method="GET" action="{{ route('hotel') }}" ">
-                
-                <div class="relative w-full md:flex-1">
-                    <input type="text" name="nom_hotel" placeholder="Nom d'hotel" class="w-full pl-12 py-3 px-4 text-gray-700 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#C02626] focus:border-transparent transition">
-                    <svg class="w-5 h-5 text-gray-400 absolute left-4 top-1/2 transform -translate-y-1/2 pointer-events-none" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35M17 11a6 6 0 11-12 0 6 6 0 0112 0z" />
-                    </svg>
-                </div>
-                <div class="relative w-full md:flex-1">
-                    <input  type="date" name="disponibilite"  placeholder="Type du restaurant"  class="w-full pl-12 py-3 px-4 text-gray-700 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#C02626] focus:border-transparent transition">
-                    <svg class="w-5 h-5 text-gray-400 absolute left-4 top-1/2 transform -translate-y-1/2 pointer-events-none" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35M17 11a6 6 0 11-12 0 6 6 0 0112 0z" />
-                    </svg>
-                </div>
         
-               
-                <button 
-                    type="submit" 
-                    class="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-[#A42020] transition duration-300 transform hover:scale-105">
-                    Rechercher
-                </button>
-            </form>
-        </section>
 
         <!-- Grille d'annonces -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-4 sm:px-6 lg:px-8">
