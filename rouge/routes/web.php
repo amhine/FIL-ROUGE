@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\hotelcontroller;
 use App\Http\Controllers\RestaurantController;
+use App\Http\Controllers\stadeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,5 +30,6 @@ Route::post('/login', [AuthController::class, 'loginUser'])->name('login');
 
 Route::get('/touriste/hotel', [hotelcontroller::class, 'search'])->name('hotel');
 Route::get('/touriste/resteau', [RestaurantController::class, 'search'])->name('restaurants.search');
+Route::get('touriste/stade',[stadeController::class,'index'])->name('stade.afficher');
 
 

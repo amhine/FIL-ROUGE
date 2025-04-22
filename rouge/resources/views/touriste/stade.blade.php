@@ -64,200 +64,45 @@
         </section>
 
         {{-- stades Rabat --}}
-        <div class="w-full flex justify-center p-6">
-            <div class="w-full max-w-screen-lg bg-white shadow-lg rounded-2xl overflow-hidden p-2">
-                <h1 class="text-4xl font-bold text-red-600 P-2 ml-6">Stade Rabat </h1>
-                <div class="relative w-full py-4 overflow-hidden">
-                    <img src="{{ asset('images/stade-rabat.jpg') }}" alt="Stade Rabat " class="w-full h-64 object-cover rounded-xl">
-                </div>
-
-
-                
-                
-                <div class="p-4">
-                    
-                    <div class="flex items-center text-gray-700 mt-4">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-red-600 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                        </svg>
-                        <span>Rabat, Maroc</span>
+        {{-- stades Rabat --}}
+<div class="w-full flex justify-center p-6" id="stades">
+    @if($stade->count() > 0)
+        <div class="w-full max-w-screen-lg grid grid-cols-1 gap-8">
+            @foreach($stade as $stades)
+                <div class="bg-white shadow-lg rounded-2xl overflow-hidden">
+                    <h1 class="text-4xl font-bold text-red-600 p-4">{{ $stades->nom_stade }}</h1>
+                    <div class="relative w-full overflow-hidden">
+                        <img src="{{ $stades->image }}" alt="Stade Rabat" class="w-full h-64  object-cover rounded-xl">
                     </div>
-                    
-                    <div class="flex items-center text-gray-700 mt-3">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-red-600 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-                        </svg>
-                        <span>Capacité: 65.000</span>
+                    <div class="p-4">
+                        <div class="flex items-center text-gray-700 mt-4">
+                            <svg class="h-5 w-5 text-red-600 mr-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                                <path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                            </svg>
+                            <span>{{ $stades->localisation }}</span>
+                        </div>
+                        <div class="flex items-center text-gray-700 mt-3">
+                            <svg class="h-5 w-5 text-red-600 mr-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <path d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
+                            </svg>
+                            <span>{{ $stades->capaciter }} spectateurs</span>
+                        </div>
+                        <a href="#" class="block mt-6 text-center bg-red-600 text-white py-3 px-4 rounded-lg hover:bg-red-700 transition">
+                            Voir Les Détails
+                        </a>
                     </div>
-                    <a href="#" class="block mt-6 text-center bg-red-600 text-white py-3 px-4 rounded-lg hover:bg-red-700 transition">
-                        Voir Les Détails
-                    </a>
                 </div>
-            </div>
+            @endforeach
         </div>
+    @else
+        <p class="text-center text-gray-600">Aucun stade trouvé pour l’instant.</p>
+    @endif
+</div>
 
-        {{-- stades casa --}}
-        <div class="w-full flex justify-center p-6">
-            <div class="w-full max-w-screen-lg bg-white shadow-lg rounded-2xl overflow-hidden p-2">
-                <h1 class="text-4xl font-bold text-red-600 P-2 ml-6">Stade Casablanca</h1>
-                <div class="relative w-full py-4 overflow-hidden">
-                    <img src="{{ asset('images/stade-casablanca.png') }}" alt="Stade Casablanca" class="w-full h-64 object-cover rounded-xl">
-                </div>
+       
 
-
-                
-                <div class="p-4">
-                    
-                    <div class="flex items-center text-gray-700 mt-4">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-red-600 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                        </svg>
-                        <span>Casablanca, Maroc</span>
-                    </div>
-                    
-                    <div class="flex items-center text-gray-700 mt-3">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-red-600 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-                        </svg>
-                        <span>Capacité: 115.000</span>
-                    </div>
-                    <a href="#" class="block mt-6 text-center bg-red-600 text-white py-3 px-4 rounded-lg hover:bg-red-700 transition">
-                        Voir Les Détails
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        {{-- stades agadir --}}
-        <div class="w-full flex justify-center p-6">
-            <div class="w-full max-w-screen-lg bg-white shadow-lg rounded-2xl overflow-hidden p-2">
-                <h1 class="text-4xl font-bold text-red-600 P-2 ml-6">Stade Agadir</h1>
-                <div class="relative w-full py-4 overflow-hidden">
-                    <img src="{{ asset('images/stade-agadir.jpg') }}" alt="Stade Agadir" class="w-full h-64 object-cover rounded-xl">
-                </div>
-
-
-                <div class="p-4">
-                    
-                    <div class="flex items-center text-gray-700 mt-4">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-red-600 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                        </svg>
-                        <span>Agadir, Maroc</span>
-                    </div>
-                    
-                    <div class="flex items-center text-gray-700 mt-3">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-red-600 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-                        </svg>
-                        <span>Capacité: 42.000</span>
-                    </div>
-                    <a href="#" class="block mt-6 text-center bg-red-600 text-white py-3 px-4 rounded-lg hover:bg-red-700 transition">
-                        Voir Les Détails
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        {{-- stade kech --}}
-        <div class="w-full flex justify-center p-6">
-            <div class="w-full max-w-screen-lg bg-white shadow-lg rounded-2xl overflow-hidden p-2">
-                <h1 class="text-4xl font-bold text-red-600 P-2 ml-6">Stade Marrakech</h1>
-                <div class="relative w-full py-4 overflow-hidden">
-                    <img src="{{ asset('images/stade_marrakech.jpg') }}" alt="Stade marrakech" class="w-full h-64 object-cover rounded-xl">
-                </div>
-
-
-                
-                <div class="p-4">
-                    <div class="flex items-center text-gray-700 mt-4">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-red-600 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                        </svg>
-                        <span>Marrakech, Maroc</span>
-                    </div>
-                    
-                    <div class="flex items-center text-gray-700 mt-3">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-red-600 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-                        </svg>
-                        <span>Capacité: 42.000</span>
-                    </div>
-                    
-                    <a href="#" class="block mt-6 text-center bg-red-600 text-white py-3 px-4 rounded-lg hover:bg-red-700 transition">
-                        Voir Les Détails
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        {{-- stade fes --}}
-        <div class="w-full flex justify-center p-6">
-            <div class="w-full max-w-screen-lg bg-white shadow-lg rounded-2xl overflow-hidden p-2">
-                <h1 class="text-4xl font-bold text-red-600 P-2 ml-6">Stade Fes</h1>
-                <div class="relative w-full py-4 overflow-hidden">
-                    <img src="{{ asset('images/stade-fes.png') }}" alt="Stade fes" class="w-full h-64 object-cover rounded-xl">
-                </div>
-
-
-                
-                <div class="p-4">
-                    
-                    <div class="flex items-center text-gray-700 mt-4">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-red-600 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                        </svg>
-                        <span>Fes, Maroc</span>
-                    </div>
-                    
-                    <div class="flex items-center text-gray-700 mt-3">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-red-600 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-                        </svg>
-                        <span>Capacité: 46.000</span>
-                    </div>
-                    <a href="#" class="block mt-6 text-center bg-red-600 text-white py-3 px-4 rounded-lg hover:bg-red-700 transition">
-                        Voir Les Détails
-                    </a>
-                </div>
-            </div>
-        </div>
-        
-        {{-- stade tanger --}}
-        <div class="w-full flex justify-center p-6">
-            <div class="w-full max-w-screen-lg bg-white shadow-lg rounded-2xl overflow-hidden p-2">
-                <h1 class="text-4xl font-bold text-red-600 P-2 ml-6">Stade Tanger</h1>
-                <div class="relative w-full py-4 overflow-hidden">
-                    <img src="{{ asset('images/stade-tanger.png') }}" alt="Stade Tanger" class="w-full h-64 object-cover rounded-xl">
-                </div>
-
-                <div class="p-4">
-                    
-                    <div class="flex items-center text-gray-700 mt-4">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-red-600 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                        </svg>
-                        <span>Tanger, Maroc</span>
-                    </div>
-                    
-                    <div class="flex items-center text-gray-700 mt-3">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-red-600 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-                        </svg>
-                        <span>Capacité: 65.000</span>
-                    </div>
-                    <a href="#" class="block mt-6 text-center bg-red-600 text-white py-3 px-4 rounded-lg hover:bg-red-700 transition">
-                        Voir Les Détails
-                    </a>
-                </div>
-            </div>
-        </div>
+       
 
         <!-- Footer -->
         <footer class="bg-[#c92424] text-white py-16">

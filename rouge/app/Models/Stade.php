@@ -15,7 +15,7 @@ class Stade extends Model
         'nom_stade',
         'localisation',
         'capaciter',
-        'equipements',
+        'image',
         'id_admin',
     ];
 
