@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\hotelcontroller;
 use App\Http\Controllers\RestaurantController;
 use App\Http\Controllers\stadeController;
+use App\Models\Restaurant;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -34,8 +35,10 @@ Route::get('touriste/stade',[stadeController::class,'index'])->name('stade.affic
 // Route::get('/favoris', [hotelcontroller::class, 'favoris'])->name('favoris.index');
 // Route::post('/favoris/{id}', [hotelcontroller::class, 'Favorite'])->name('favoris');
 
-// For adding/removing favorites
-Route::post('/hotel/{id}/favorite', [HotelController::class, 'toggleFavorite'])->name('favoris');
+Route::post('/hotel/{id}/favorite', [HotelController::class, 'toggleFavorite'])->name('favoris.hebergement');
 
-// For viewing favorites
 Route::get('/favoris', [HotelController::class, 'favoris'])->name('favoris.index');
+
+
+
+Route::post('/hotel/{id}/favorite', [RestaurantController::class, 'toggleFavorite'])->name('favoris.restaurant');

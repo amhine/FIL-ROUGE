@@ -105,7 +105,7 @@
                     <div class="absolute bottom-4 left-4 bg-green-500 text-white px-3 py-1 rounded-full text-xs font-bold">
                         {{ ( $hotel->disponibilite) }}
                     </div>
-                    <form action="{{ route('favoris', $hotel->id) }}" method="POST" class="absolute top-4 left-4">
+                    <form action="{{ route('favoris.hebergement', $hotel->id) }}" method="POST" class="absolute top-4 left-4">
                         @csrf
                         <button type="submit" class="favorite-btn text-white bg-gray-800 bg-opacity-60 p-2 rounded-full hover:bg-red-500 transition">
                             <i class="fas fa-heart {{ $hotel->isFavorited() ? 'text-red-500' : 'text-white' }}"></i>
