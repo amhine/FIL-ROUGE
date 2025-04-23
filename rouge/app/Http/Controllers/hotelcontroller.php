@@ -163,37 +163,5 @@ class hotelcontroller extends Controller
 
 
 
-public function toggleFavorite(Request $request, $id)
-    {
-        $hotel = Hotel::findOrFail($id);
-        $user = Auth::user();
-
-        if (!$user) {
-            return redirect()->route('login')->with('error', 'Vous devez être connecté pour gérer vos favoris.');
-        }
-
-        if ($user->favoris()->where('id_hotels', $id)->exists()) {
-            $user->favoris()->detach($id);
-        } else {
-            $user->favoris()->attach($id);
-        }
-        
-
-        return redirect()->back()->with('success', $message);
-    }
-
-    public function favoris()
-    {
-        $user = Auth::user(); 
-    
-        if (!$user) {
-            return redirect()->route('login')->with('error', 'Vous devez être connecté pour voir vos favoris.');
-        }
-    
-        $hotels = $user->favoris()->paginate(9); 
-    
-        return view('touriste.favori', compact('hotels'));
-    }
-
 }
 

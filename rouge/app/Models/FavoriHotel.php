@@ -13,6 +13,7 @@ class FavoriHotel extends Model
     protected $fillable = [
         'id_touriste',
         'id_hotels',
+        
     ];
 
     public function tourist()

@@ -35,10 +35,10 @@ Route::get('touriste/stade',[stadeController::class,'index'])->name('stade.affic
 // Route::get('/favoris', [hotelcontroller::class, 'favoris'])->name('favoris.index');
 // Route::post('/favoris/{id}', [hotelcontroller::class, 'Favorite'])->name('favoris');
 
-Route::post('/hotel/{id}/favorite', [HotelController::class, 'toggleFavorite'])->name('favoris.hebergement');
+Route::get('/hotel/{id}/favorite', [HotelController::class, 'toggleFavorite'])->name('favoris.hebergement');
 
 Route::get('/favoris', [HotelController::class, 'favoris'])->name('favoris.index');
 
 
 
-Route::post('/hotel/{id}/favorite', [RestaurantController::class, 'toggleFavorite'])->name('favoris.restaurant');
+// Route::get('/resteau/{id}/favorite', [RestaurantController::class, 'toggleFavorite'])->name('favoris.restaurant');

@@ -36,36 +36,5 @@ class RestaurantController extends Controller
     
     //     return view('rest.restaurant', compact('restaurants'));
     // }
-    public function toggleFavorite(Request $request, $id)
-    {
-        $hotel = Restaurant::findOrFail($id);
-        $user = Auth::user();
-
-        if (!$user) {
-            return redirect()->route('login')->with('error', 'Vous devez être connecté pour gérer vos favoris.');
-        }
-
-        if ($user->favorisR()->where('id_resteau', $id)->exists()) {
-            $user->favorisR()->detach($id);
-        } else {
-            $user->favorisR()->attach($id);
-        }
-        
-
-        return redirect()->back()->with('success', $message);
-    }
-
-    public function favorisR()
-    {
-        $user = Auth::user(); 
-    
-        if (!$user) {
-            return redirect()->route('login')->with('error', 'Vous devez être connecté pour voir vos favoris.');
-        }
-    
-        $hotels = $user->favorisR()->paginate(9); 
-    
-        return view('touriste.favori', compact('hotels'));
-    }
-
+   
 }

@@ -23,6 +23,7 @@
                         <li><a href="#stades" class="">Stades</a></li>
                         <li><a href="#hebergements" class="">Hébergements</a></li>
                         <li><a href="#restaurants" class="">Restaurants</a></li>
+                        <li><a href="#restaurants" class="">Favoris</a></li>
                         <li><a href="#trajets" class="">Trajets</a></li>
                     </ul>
                 </div>
