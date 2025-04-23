@@ -20,6 +20,8 @@ class FavoriHotel extends Model
         return $this->belongsTo(User::class, 'id_touriste');
     }
 
+
+
     public function hotel()
     {
         return $this->belongsTo(Hotel::class, 'id_hotels');

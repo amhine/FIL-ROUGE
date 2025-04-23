@@ -82,6 +82,12 @@ class User extends Authenticatable
     {
         return $this->hasMany(FavoriMatch::class, 'id_touriste');
     }
+    public function favoris()
+    {
+        return $this->belongsToMany(Hotel::class, 'favori_hotels', 'id_touriste', 'id_hotels');
+    }
+    
+
 
     /**
      * The attributes that should be hidden for serialization.

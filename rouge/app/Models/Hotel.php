@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class Hotel extends Model
 {
@@ -41,8 +42,19 @@ class Hotel extends Model
         return $this->hasMany(ReservationHotel::class, 'hotels_id');
     }
 
+   
     public function favorites()
     {
-        return $this->hasMany(FavoriHotel::class, 'id_hotels');
+        return $this->hasMany(FavoriHotel::class, 'id_hotels', 'id');
     }
+    
+    public function isFavorited()
+    {
+        $user = Auth::user();
+        if (!$user) return false;
+    
+        return $user->favoris()->where('id_hotels', $this->id)->exists();
+    }
+    
+    
 }

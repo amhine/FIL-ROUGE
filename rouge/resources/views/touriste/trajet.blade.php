@@ -27,11 +27,6 @@
                 </ul>
             </div>
             
-            <!-- Buttons -->
-            <div class="flex space-x-4">
-                <a href="#connexion" class="bg-white text-[#C02626] px-4 py-2 rounded-full font-medium hover:bg-gray-100 transition-colors duration-300">Connexion</a>
-                <a href="#inscrire" class="bg-[#C02626] text-white px-4 py-2 rounded-full border border-white font-medium hover:bg-[#A42020] transition-colors duration-300">S'inscrire</a>
-            </div>
             
             <!-- Mobile menu button -->
             <div class="md:hidden flex items-center space-x-4">

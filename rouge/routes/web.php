@@ -31,5 +31,11 @@ Route::post('/login', [AuthController::class, 'loginUser'])->name('login');
 Route::get('/touriste/hotel', [hotelcontroller::class, 'search'])->name('hotel');
 Route::get('/touriste/resteau', [RestaurantController::class, 'search'])->name('restaurants.search');
 Route::get('touriste/stade',[stadeController::class,'index'])->name('stade.afficher');
+// Route::get('/favoris', [hotelcontroller::class, 'favoris'])->name('favoris.index');
+// Route::post('/favoris/{id}', [hotelcontroller::class, 'Favorite'])->name('favoris');
 
+// For adding/removing favorites
+Route::post('/hotel/{id}/favorite', [HotelController::class, 'toggleFavorite'])->name('favoris');
 
+// For viewing favorites
+Route::get('/favoris', [HotelController::class, 'favoris'])->name('favoris.index');

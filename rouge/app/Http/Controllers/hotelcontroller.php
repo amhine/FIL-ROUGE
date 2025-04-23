@@ -163,35 +163,37 @@ class hotelcontroller extends Controller
 
 
 
-// public function Favorite(Request $request, $id)
-// {
-//     $hotel = Hotel::findOrFail($id);
-//     $user = Auth::user();
+public function toggleFavorite(Request $request, $id)
+    {
+        $hotel = Hotel::findOrFail($id);
+        $user = Auth::user();
 
-//     if ($user->favoris()->where('id_hotel', $id)->exists()) {
-//         $user->favoris()->detach($id);
-//         $message = 'Annonce retirée des favoris.';
-//     } else {
-//         $user->favoris()->attach($id);
-//         $message = 'Annonce ajoutée aux favoris.';
-//     }
+        if (!$user) {
+            return redirect()->route('login')->with('error', 'Vous devez être connecté pour gérer vos favoris.');
+        }
 
-//     return redirect()->route('favoris.index')->with('success', $message);
-// }
+        if ($user->favoris()->where('id_hotels', $id)->exists()) {
+            $user->favoris()->detach($id);
+        } else {
+            $user->favoris()->attach($id);
+        }
+        
 
-//     public function favoris()
-//     {
-//         $user = Auth::user(); 
+        return redirect()->back()->with('success', $message);
+    }
+
+    public function favoris()
+    {
+        $user = Auth::user(); 
     
-//         if (!$user) {
-//             return redirect()->route('login')->with('error', 'Vous devez être connecté pour voir vos favoris.');
-//         }
+        if (!$user) {
+            return redirect()->route('login')->with('error', 'Vous devez être connecté pour voir vos favoris.');
+        }
     
-//         $hotels = $user->favoris()->paginate(9); 
+        $hotels = $user->favoris()->paginate(9); 
     
-//         return view('touriste.favori', compact('annonces'));
-//     }
-    
+        return view('touriste.favori', compact('hotels'));
+    }
 
 }
 

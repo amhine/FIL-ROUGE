@@ -29,11 +29,7 @@
                 </ul>
             </div>
             
-            <!-- Buttons -->
-            <div class="flex space-x-4">
-                <a href="#connexion" class="bg-white text-[#C02626] px-4 py-2 rounded-full font-medium hover:bg-gray-100 transition-colors duration-300">Connexion</a>
-                <a href="#inscrire" class="bg-[#C02626] text-white px-4 py-2 rounded-full border border-white font-medium hover:bg-[#A42020] transition-colors duration-300">S'inscrire</a>
-            </div>
+            
             
             <!-- Mobile menu button -->
             <div class="md:hidden flex items-center space-x-4">
@@ -109,12 +105,12 @@
                     <div class="absolute bottom-4 left-4 bg-green-500 text-white px-3 py-1 rounded-full text-xs font-bold">
                         {{ ( $hotel->disponibilite) }}
                     </div>
-                    {{-- <form action="{{ route('favoris.toggle', $annonce->id) }}" method="POST" class="absolute top-4 left-4">
+                    <form action="{{ route('favoris', $hotel->id) }}" method="POST" class="absolute top-4 left-4">
                         @csrf
                         <button type="submit" class="favorite-btn text-white bg-gray-800 bg-opacity-60 p-2 rounded-full hover:bg-red-500 transition">
-                            <i class="fas fa-heart {{ $annonce->isFavorited() ? 'text-red-500' : 'text-white' }}"></i>
+                            <i class="fas fa-heart {{ $hotel->isFavorited() ? 'text-red-500' : 'text-white' }}"></i>
                         </button>
-                    </form> --}}
+                    </form>
                 </div>
                 
                 <div class="p-5">
