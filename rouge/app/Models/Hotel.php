@@ -33,8 +33,7 @@ class Hotel extends Model
 
     public function equipements()
     {
-        return $this->belongsToMany(Equipement::class, 'hotel_equipe', 'hotel_id', 'equipe_id')
-            ->withTimestamps();
+        return $this->belongsToMany(Equipement::class, 'hotel_equipe', 'hotel_id', 'equipe_id');
     }
 
     public function reservations()
@@ -47,14 +46,19 @@ class Hotel extends Model
     {
         return $this->hasMany(FavoriHotel::class, 'id_hotels', 'id');
     }
+   
+   
     
     public function isFavorited()
     {
         $user = Auth::user();
         if (!$user) return false;
     
-        return $user->favoris()->where('id_hotels', $this->id)->exists();
+        return $user->favoritesHotels()->where('id_hotels', $this->id)->exists();
     }
-    
+     public function touristesFavoris()
+    {
+        return $this->belongsToMany(User::class, 'favori_hotels', 'id_hotels', 'id_touriste');
+    }
     
 }

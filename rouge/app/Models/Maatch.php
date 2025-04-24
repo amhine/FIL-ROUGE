@@ -27,4 +27,8 @@ class Maatch extends Model
     {
         return $this->hasMany(FavoriMatch::class, 'id_match');
     }
+    public function touristesFavoris()
+    {
+        return $this->belongsToMany(User::class, 'favori_match', 'id_match', 'id_touriste');
+    }
 }

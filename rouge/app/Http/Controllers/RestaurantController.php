@@ -36,5 +36,10 @@ class RestaurantController extends Controller
     
     //     return view('rest.restaurant', compact('restaurants'));
     // }
-   
+public function showRestaurants()
+{
+    $restaurants = Restaurant::paginate(9);
+    $user = Auth::user();
+    return view('touriste.restaurants', compact('restaurants', 'user'));
+}
 }

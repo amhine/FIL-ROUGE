@@ -18,6 +18,6 @@ class Equipement extends Model
     public function hotels()
     {
         return $this->belongsToMany(Hotel::class, 'hotel_equipe', 'equipe_id', 'hotel_id')
-            ->withTimestamps();
+            ;
     }
 }

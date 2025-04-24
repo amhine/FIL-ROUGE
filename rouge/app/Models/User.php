@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -24,10 +23,27 @@ class User extends Authenticatable
         'id_role',
     ];
 
+    /**
+     * The attributes that should be hidden for serialization.
+     *
+     * @var array<int, string>
+     */
+    protected $hidden = [
+        'password',
+        'remember_token',
+    ];
 
-   
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array<string, string>
+     */
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+        'password' => 'hashed',
+    ];
 
-
+    // Relations
     public function role()
     {
         return $this->belongsTo(Role::class, 'id_role');
@@ -68,48 +84,19 @@ class User extends Authenticatable
         return $this->hasMany(PaiementResteau::class, 'tourist_id');
     }
 
-    public function favoriteHotels()
-    {
-        return $this->hasMany(FavoriHotel::class, 'id_touriste');
-    }
-
-    public function favoriteRestaurants()
-    {
-        return $this->hasMany(FavoriResteau::class, 'id_touriste');
-    }
-
-    public function favoriteMatches()
-    {
-        return $this->hasMany(FavoriMatch::class, 'id_touriste');
-    }
-    public function favoris()
+    // Favorites - Many to Many
+    public function favoritesHotels()
     {
         return $this->belongsToMany(Hotel::class, 'favori_hotels', 'id_touriste', 'id_hotels');
     }
-  
-    public function favorisR()
-{
-    return $this->belongsToMany(Restaurant::class, 'favori_resteaux', 'id_touriste', 'id_resteau');
-}
 
+    public function favoritesRestaurants()
+    {
+        return $this->belongsToMany(Restaurant::class, 'favori_resteaux', 'id_touriste', 'id_resteau');
+    }
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
-    protected $hidden = [
-        'password',
-        'remember_token',
-    ];
-
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-        'password' => 'hashed',
-    ];
+    public function favoritesMatches()
+    {
+        return $this->belongsToMany(Maatch::class, 'favori_match', 'id_touriste', 'id_match');
+    }
 }

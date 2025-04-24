@@ -45,4 +45,9 @@ class Restaurant extends Model
     
         return $user->favorisR()->where('favori_resteaux.id_resteau', $this->id)->exists();
     }
+
+    public function touristesFavoris()
+    {
+        return $this->belongsToMany(User::class, 'favori_resteaux', 'id_resteau', 'id_touriste');
+    }
 }

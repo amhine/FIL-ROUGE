@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\hotelcontroller;
 use App\Http\Controllers\RestaurantController;
 use App\Http\Controllers\stadeController;
+use App\Http\Controllers\FavorisController;
 use App\Models\Restaurant;
 use Illuminate\Support\Facades\Route;
 
@@ -35,10 +36,19 @@ Route::get('touriste/stade',[stadeController::class,'index'])->name('stade.affic
 // Route::get('/favoris', [hotelcontroller::class, 'favoris'])->name('favoris.index');
 // Route::post('/favoris/{id}', [hotelcontroller::class, 'Favorite'])->name('favoris');
 
-Route::get('/hotel/{id}/favorite', [HotelController::class, 'toggleFavorite'])->name('favoris.hebergement');
+// Route::get('/hotel/{id}/favorite', [HotelController::class, 'toggleFavorite'])->name('favoris.hebergement');
 
-Route::get('/favoris', [HotelController::class, 'favoris'])->name('favoris.index');
+// Route::get('/favoris', [HotelController::class, 'favoris'])->name('favoris.index');
 
-
+// Routes pour les favoris
+Route::middleware(['auth'])->group(function () {
+    // Page des favoris
+    Route::get('/favoris', [FavorisController::class, 'index'])->name('favoris.index');
+    
+    // Toggle favoris
+    Route::post('/hotel/{id}/favorite', [FavorisController::class, 'toggleHotelFavorite'])->name('favoris.hotel');
+    Route::post('/restaurant/{id}/favorite', [FavorisController::class, 'toggleRestaurantFavorite'])->name('favoris.restaurant');
+    Route::post('/match/{id}/favorite', [FavorisController::class, 'toggleMatchFavorite'])->name('favoris.match');
+});
 
 // Route::get('/resteau/{id}/favorite', [RestaurantController::class, 'toggleFavorite'])->name('favoris.restaurant');

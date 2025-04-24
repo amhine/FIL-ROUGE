@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Maroc </title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
  
 </head>
 <body class="bg-gray-50">
@@ -55,6 +56,71 @@
         </div>
     </nav>
    
+     <!-- Section Hôtels -->
+     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 px-4 sm:px-6 lg:px-8 pt-20">
+        @if($hotels->count() > 0)
+            @foreach($hotels as $hotel)
+        <!-- Annonce 1 -->
+        <div class="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300">
+            <div class="relative">
+                <img src="{{ ( $hotel->image) }}" alt="Appartement avec vue" class="w-full h-48 object-cover">
+                <div class="absolute top-4 right-4 bg-green-600 text-white px-3 py-1 rounded-full text-sm font-bold">
+                    {{ ( $hotel->prix_nuit) }} DH/nuit
+                </div>
+                <div class="absolute bottom-4 left-4 bg-green-500 text-white px-3 py-1 rounded-full text-xs font-bold">
+                    {{ ( $hotel->disponibilite) }}
+                </div>
+                
+            </div>
+            
+            <div class="p-5">
+                <h3 class="text-xl font-bold text-gray-800 mb-2">{{ ( $hotel->nom_hotel) }}</h3>
+                <div class="flex items-center text-gray-600 mb-2">
+                    <i class="fas fa-map-marker-alt mr-2 text-red-600"></i>
+                    <span>{{ ( $hotel->adress) }}, {{ ( $hotel->ville) }}</span>
+                </div>
+                <!-- Description -->
+                <p class="text-gray-600 mb-4 line-clamp-3">
+                    {{ ( $hotel->description) }} 
+                </p>
+                <div class="flex items-center justify-between mb-4">
+                    <div class="flex items-center">
+                        <div class="flex items-center mr-4">
+                            <i class="fas fa-bed mr-1 text-red-600"></i>
+                            <span>{{ ( $hotel->nombre_chambre) }}</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-bath mr-1 text-red-600"></i>
+                            <span>{{ ( $hotel->nombre_salle_debain) }}</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Équipements -->
+                <div class="border-t pt-4">
+                    <div class="flex justify-around">
+                        @foreach($hotel->equipements as $equip)
+
+                        <div class="text-center transform hover:-translate-y-1 transition-transform duration-300">
+                            <i class="fas fa-{{ $equip->image }} text-green-600 text-xl mb-1"></i>
+                            <p class="text-xs">{{ $equip->nom_equipe }}</p>
+                        </div>
+                        @endforeach
+                    </div>
+                </div>
+                <!-- Bouton Réserver -->
+                <button class="w-full mt-4 bg-red-600 text-white py-2 rounded-lg font-medium hover:opacity-90 transition duration-300 transform hover:scale-105 ">
+                  Réserver
+              </button>
+            </div>
+        </div>
+        @endforeach
+        @else
+            <div class="col-span-3 text-center py-10">
+                <p class="text-gray-500 text-xl">Aucune hotel en  favoris.</p>
+            </div>
+        @endif
+        
+    </div>
   
      <!-- Footer -->
      <footer class="bg-[#c92424] text-white py-16">
@@ -125,6 +191,7 @@
     
   
 </body>
+
 </html>
 
 
