@@ -15,7 +15,6 @@ class FavorisController extends Controller
         $this->middleware('auth');
     }
 
-    // Page d'index des favoris
     public function index()
     {
         $user = Auth::user();
@@ -27,7 +26,6 @@ class FavorisController extends Controller
         return view('touriste.favori', compact('hotels', 'restaurants', 'matches'));
     }
 
-    // Toggle favoris pour les hôtels
     public function toggleHotelFavorite($id)
     {
         $hotel = Hotel::findOrFail($id);
@@ -48,7 +46,6 @@ class FavorisController extends Controller
         return redirect()->back()->with('success', $message);
     }
 
-    // Toggle favoris pour les restaurants
     public function toggleRestaurantFavorite($id)
     {
         $restaurant = Restaurant::findOrFail($id);
@@ -58,7 +55,7 @@ class FavorisController extends Controller
             return redirect()->route('login')->with('error', 'Vous devez être connecté pour gérer vos favoris.');
         }
         
-        if ($user->favoritesRestaurants()->where('id_resteau', $id)->exists()) {
+        if ($user->favoritesRestaurants()->where('favori_resteaux.id_resteau', $id)->exists()) {
             $user->favoritesRestaurants()->detach($id);
             $message = 'Restaurant retiré des favoris.';
         } else {
@@ -69,7 +66,6 @@ class FavorisController extends Controller
         return redirect()->back()->with('success', $message);
     }
 
-    // Toggle favoris pour les matchs
     public function toggleMatchFavorite($id)
     {
         $match = Maatch::findOrFail($id);

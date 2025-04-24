@@ -84,7 +84,6 @@ class User extends Authenticatable
         return $this->hasMany(PaiementResteau::class, 'tourist_id');
     }
 
-    // Favorites - Many to Many
     public function favoritesHotels()
     {
         return $this->belongsToMany(Hotel::class, 'favori_hotels', 'id_touriste', 'id_hotels');

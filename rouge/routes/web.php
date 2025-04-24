@@ -42,10 +42,8 @@ Route::get('touriste/stade',[stadeController::class,'index'])->name('stade.affic
 
 // Routes pour les favoris
 Route::middleware(['auth'])->group(function () {
-    // Page des favoris
     Route::get('/favoris', [FavorisController::class, 'index'])->name('favoris.index');
     
-    // Toggle favoris
     Route::post('/hotel/{id}/favorite', [FavorisController::class, 'toggleHotelFavorite'])->name('favoris.hotel');
     Route::post('/restaurant/{id}/favorite', [FavorisController::class, 'toggleRestaurantFavorite'])->name('favoris.restaurant');
     Route::post('/match/{id}/favorite', [FavorisController::class, 'toggleMatchFavorite'])->name('favoris.match');

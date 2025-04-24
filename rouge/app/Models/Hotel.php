@@ -56,9 +56,5 @@ class Hotel extends Model
     
         return $user->favoritesHotels()->where('id_hotels', $this->id)->exists();
     }
-     public function touristesFavoris()
-    {
-        return $this->belongsToMany(User::class, 'favori_hotels', 'id_hotels', 'id_touriste');
-    }
-    
+   
 }
