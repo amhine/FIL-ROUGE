@@ -10,17 +10,12 @@
             background-color: #C02626;
             color: white;
         }
-        .match-card {
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .match-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-        }
+        
+       
     </style>
 </head>
 <body class="bg-gray-100">
-   <!-- navbar - conservée telle quelle -->
+   <!-- navbar -->
    <nav id="navbar" class="fixed w-full bg-[#C02626] text-white transition-all duration-300 z-50">
     <div class="container mx-auto py-4 flex items-center justify-between">
         <div class="flex items-center">
@@ -57,12 +52,12 @@
     </div>
 </nav>
 
-    <!-- Contenu principal - MODIFIÉ -->
+    <!-- Contenu -->
     <main class="pt-24 pb-12 bg-gradient-to-b from-gray-100 to-gray-200">
         <div class="container mx-auto px-4">
            
 
-            <!-- Filtre par étape -->
+            <!-- Filtre -->
             <div class="flex flex-wrap justify-center gap-3 mb-12">
                 <button class="filter-btn px-6 py-2 bg-[#F5F5DC] rounded-full text-black font-medium shadow-md hover:shadow-lg transition active" data-stage="all">Tous</button>
                 @foreach (array_unique(array_column($matches, 'stage')) as $stage)
@@ -74,7 +69,7 @@
             <div id="matches-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 @foreach ($matches as $match)
                     <div class="match-card bg-white rounded-xl shadow-lg overflow-hidden" data-stage="{{ $match['stage'] }}">
-                        <!-- En-tête du match -->
+                        
                         <div class="bg-[#C02626] text-white p-3 flex justify-between items-center">
                             <span class="font-bold">{{ $match['stage'] }}</span>
                             @if(isset($match['group']))
@@ -82,27 +77,27 @@
                             @endif
                         </div>
                         
-                        <!-- Contenu du match -->
+                        
                         <div class="p-6">
-                            <!-- Date et lieu -->
+                            
                             <div class="flex justify-between items-center text-gray-500 text-sm mb-6">
                                 <span>{{ $match['date'] ?? 'Date à confirmer' }}</span>
                                 <span>{{ $match['stadium'] ?? 'Stade' }}</span>
                             </div>
                             
-                            <!-- Équipes et score -->
+                            
                             <div class="flex justify-between items-center">
-                                <!-- Équipe domicile -->
+                                
                                 <div class="flex flex-col items-center w-2/5">
                                     <div class="w-16 h-16 bg-gray-200 rounded-full mb-2 flex items-center justify-center overflow-hidden">
-                                        <!-- Affichage du drapeau/logo -->
+                                        
                                         <img src="{{ $match['homeFlag'] }}" alt="Flag of {{ $match['homeTeam'] }}" class="w-full h-full object-cover">
                                     </div>
                                     <p class="font-bold text-center">{{ $match['homeTeam'] }}</p>
                                 </div>
                                 
                                 
-                                <!-- Score -->
+                                
                                 <div class="flex flex-col items-center w-1/5">
                                     <div class="bg-gray-100 rounded-lg px-4 py-2 flex items-center justify-center">
                                         <span class="text-xl font-black text-[#C02626]">{{ $match['homeScore'] }}</span>
@@ -114,7 +109,7 @@
                                     @endif
                                 </div>
                                 
-                                <!-- Équipe extérieur -->
+                                
                                 <div class="flex flex-col items-center w-2/5">
                                    
                                         <div class="w-16 h-16 bg-gray-200 rounded-full mb-2 flex items-center justify-center overflow-hidden">
@@ -128,24 +123,19 @@
                             </div>
                             
                             <!-- Bouton détails -->
-                            <div class="mt-6 text-center">
-                                <a href="#" class="inline-block px-4 py-2 bg-gray-200 hover:bg-[#C02626] hover:text-white text-gray-700 rounded-full text-sm font-medium transition-colors duration-300">Détails du match</a>
-                            </div>
+<div class="mt-6 text-center">
+    <a href="{{ route('matche.details', ['id' => $match['id']]) }}"
+       class="inline-block px-4 py-2 bg-gray-200 hover:bg-[#C02626] hover:text-white text-gray-700 rounded-full text-sm font-medium transition-colors duration-300">
+        Détails du match
+    </a>
+</div>
+
                         </div>
                     </div>
                 @endforeach
             </div>
             
-            <!-- Pagination -->
-            <div class="mt-12 flex justify-center">
-                <div class="inline-flex rounded-md shadow-sm">
-                    <a href="#" class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-l-md hover:bg-gray-50">Précédent</a>
-                    <a href="#" class="px-4 py-2 text-sm font-medium text-white bg-[#C02626] border border-[#C02626]">1</a>
-                    <a href="#" class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 hover:bg-gray-50">2</a>
-                    <a href="#" class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 hover:bg-gray-50">3</a>
-                    <a href="#" class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-r-md hover:bg-gray-50">Suivant</a>
-                </div>
-            </div>
+           
         </div>
     </main>
 

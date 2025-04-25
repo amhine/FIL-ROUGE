@@ -19,4 +19,13 @@ class MatcheController extends Controller
 
         return view('match', compact('tournament', 'host', 'dates', 'matches'));
     }
+
+    public function show($id)
+    {
+        $json = Storage::get('worldcup.json');
+        $data = json_decode($json, true);
+        $match = collect($data['matches'])->firstWhere('id', $id);
+        $tournament = $data['tournament'];
+    return view('match_details', compact('tournament', 'match'));
+    }
 }

@@ -12,11 +12,11 @@
         <form action="{{ route('login') }}" method="POST">
             @csrf
             <div>
-                <label for="email" class="block text-gray-700">Email</label>
+                <label for="email" class="block text-gray-700 pb-4">Email</label>
                 <input type="email" id="email" name="email" class="w-full px-4 py-2 border rounded-lg" placeholder="Entrez votre email" value="{{ old('email') }}">
             </div>
             <div>
-                <label for="password" class="block text-gray-700">Mot de passe</label>
+                <label for="password" class="block text-gray-700 pb-4">Mot de passe</label>
                 <input type="password" id="password" name="password" class="w-full px-4 py-2 border rounded-lg" placeholder="Entrez votre mot de passe">
             </div>
             <button type="submit" class="w-full py-2 text-white bg-[#C02626] rounded-lg">Connexion</button>

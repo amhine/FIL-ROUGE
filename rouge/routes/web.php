@@ -55,4 +55,5 @@ Route::middleware(['auth'])->group(function () {
 
 Route::get('/matches', [MatcheController::class, 'index'])->name('matche');
 
+Route::get('/matches/{id}', [MatcheController::class, 'show'])->name('matche.details');
 // Route::get('/resteau/{id}/favorite', [RestaurantController::class, 'toggleFavorite'])->name('favoris.restaurant');
