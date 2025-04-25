@@ -1,0 +1,22 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+
+class MatcheController extends Controller
+{
+    public function index()
+    {
+        $json = Storage::get('worldcup.json');
+        $data = json_decode($json, true);
+        
+        $tournament = $data['tournament'];
+        $host = $data['host'];
+        $dates = $data['dates'];
+        $matches = $data['matches'];
+
+        return view('match', compact('tournament', 'host', 'dates', 'matches'));
+    }
+}
