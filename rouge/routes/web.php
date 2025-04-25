@@ -6,6 +6,7 @@ use App\Http\Controllers\RestaurantController;
 use App\Http\Controllers\stadeController;
 use App\Http\Controllers\FavorisController;
 use App\Models\Restaurant;
+use App\Http\Controllers\GroupController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -49,4 +50,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/match/{id}/favorite', [FavorisController::class, 'toggleMatchFavorite'])->name('favoris.match');
 });
 
+
+
+Route::get('/groupes', [GroupController::class, 'index'])->name('groupes');
 // Route::get('/resteau/{id}/favorite', [RestaurantController::class, 'toggleFavorite'])->name('favoris.restaurant');
