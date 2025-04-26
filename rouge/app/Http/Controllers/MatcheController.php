@@ -17,7 +17,7 @@ class MatcheController extends Controller
         $dates = $data['dates'];
         $matches = $data['matches'];
 
-        return view('match', compact('tournament', 'host', 'dates', 'matches'));
+        return view('touriste.match', compact('tournament', 'host', 'dates', 'matches'));
     }
 
     public function show($id)
@@ -26,6 +26,6 @@ class MatcheController extends Controller
         $data = json_decode($json, true);
         $match = collect($data['matches'])->firstWhere('id', $id);
         $tournament = $data['tournament'];
-    return view('match_details', compact('tournament', 'match'));
+    return view('touriste.match_details', compact('tournament', 'match'));
     }
 }

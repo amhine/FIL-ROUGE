@@ -34,9 +34,9 @@ class hotelcontroller extends Controller
     public function index()
     {
         $userId = Auth::id(); 
-        $hotels = Hotel::where('hebergeur_id', $userId)->with('equipement')->get();
+        $hotels = Hotel::where('hebergeur_id', $userId)->with('equipements')->get();
     
-        return view('hebergeur.hebergement', compact('hotels'));
+        return view('hebergeur.afficherhebergement', compact('hotels'));
     }
 
 
@@ -49,115 +49,115 @@ class hotelcontroller extends Controller
     }
 
    
-    // public function store(Request $request)
-    // {
-    //     if (!Auth::check()) {
-    //         return redirect()->route('login')->with('error', 'Vous devez être connecté pour ajouter une annonce.');
-    //     }
-
-    //     $request->validate([
-    //         'titre' => 'required|string|max:255',
-    //         'description' => 'required|string',
-    //         'prixparnuit' => 'required|numeric|min:0',
-    //         'nbrchambre' => 'required|integer|min:0',
-    //         'nbrsallesebain' => 'required|integer|min:0',
-    //         'adress' => 'required|string|max:255',
-    //         'ville' => 'required|string|max:255',
-    //         'image' => 'required|string',
-    //         'disponibilite' => 'required|date',
-    //         'equipement' => 'array', 
-    //     ]);
-
-    //     $userId = Auth::id();
-    //     $annonce = Annonce::create([
-    //         'titre' => $request->titre,
-    //         'description' => $request->description,
-    //         'prixparnuit' => $request->prixparnuit,
-    //         'nbrchambre' => $request->nbrchambre,
-    //         'nbrsallesebain' => $request->nbrsallesebain,
-    //         'adress' => $request->adress,
-    //         'ville' => $request->ville,
-    //         'image' => $request->image,
-    //         'disponibilite' => $request->disponibilite,
-    //         'id_proprietaire' => $userId,
-    //     ]);
-
-    //     if ($request->has('equipement')) {
-    //         $annonce->equipement()->attach($request->equipement);
-    //     }
-
-    //     return redirect()->route('annonce.proprietaire')->with('success', 'Annonce ajoutée avec succès.');
-    // }
-
-    /**
-     * Affiche le formulaire de modification d'une annonce
-     */
-    // public function edit($id)
-    // {
-    //     $userId = Auth::id();
+    
+    public function store(Request $request)
+    {
+        if (!Auth::check()) {
+            return redirect()->route('login')->with('error', 'Vous devez être connecté pour ajouter une annonce.');
+        }
+    
+        $request->validate([
+            'nom_hotel' => 'required|string',
+            'description' => 'required|string',
+            'prix_nuit' => 'required|numeric',
+            'nombre_chambre' => 'required|integer',
+            'nombre_salle_debain' => 'required|integer', 
+            'adress' => 'required|string',
+            'ville' => 'required|string',
+            'image' => 'required|string',
+            'disponibilite' => 'required|date|after_or_equal:today',
+            'equipement' => 'nullable|array',
+        ]);
+    
+        $userId = Auth::id();
+        $hotel = Hotel::create([
+            'nom_hotel' => $request->nom_hotel,
+            'description' => $request->description,
+            'prix_nuit' => $request->prix_nuit,
+            'nombre_chambre' => $request->nombre_chambre,
+            'nombre_salle_debain' => $request->nombre_salle_debain,
+            'adress' => $request->adress,
+            'ville' => $request->ville,
+            'image' => $request->image,
+            'disponibilite' => $request->disponibilite,
+            'hebergeur_id' => $userId,
+        ]);
+    
+        if ($request->has('equipement')) {
+            $hotel->equipements()->attach($request->equipement); 
+        }
+    
+        return redirect()->route('hebergeur.hebergement')->with('success', 'Annonce ajoutée avec succès.');
+    }
+   
+    public function edit($id)
+    {
+        $userId = Auth::id();
         
-    //     $annonce = Annonce::where('id_proprietaire', $userId)->where('id', $id)->with('equipement') ->first(); 
+        $hotel = Hotel::where('hebergeur_id', $userId)->where('id', $id)->with('equipements') ->first(); 
         
-    //     if (!$annonce) {
-    //         return redirect()->route('annonce.proprietaire')->with('error', 'Annonce introuvable.');
-    //     }
+        if (!$hotel) {
+            return redirect()->route('hebergeur.hebergement')->with('error', 'Annonce introuvable.');
+        }
     
-    //     $equipement = Equipement::all();
+        $equipement = Equipement::all();
     
-    //     $equipementsSelectionnes = $annonce->equipement ? $annonce->equipement->pluck('id')->toArray() : [];
+        $equipementsSelectionnes = $hotel->equipements ? $hotel->equipements->pluck('id')->toArray() : [];
     
-    //     return view('proprietaire.editannonce', compact('annonce', 'equipement', 'equipementsSelectionnes'));
-    // }
+        return view('hebergeur.edithebergement', compact('hotel', 'equipement', 'equipementsSelectionnes'));
+    }
     
     
     
 
-    /**
-     * Met à jour une annonce existante
-     */
-    // public function update(Request $request, $id)
-    // {
-    //     $annonce = Annonce::findOrFail($id);
+    
+    public function update(Request $request, $id)
+    {
+        $userId = Auth::id();
+        $hotel = Hotel::where('hebergeur_id', $userId)->where('id', $id)->first();
+        
+        if (!$hotel) {
+            return redirect()->route('hebergeur.hebergement')->with('error', 'Annonce introuvable ou vous n\'êtes pas autorisé à la modifier.');
+        }
+        $request->validate([
+            'nom_hotel' => 'required|string|max:255',
+            'description' => 'required|string',
+            'prix_nuit' => 'required|numeric|min:0',
+            'nombre_chambre' => 'required|integer|min:0',
+            'nombre_salle_debain' => 'required|integer|min:0',
+            'adress' => 'required|string|max:255',
+            'ville' => 'required|string|max:255',
+            'image' => 'required|string|max:255',
+            'disponibilite' => 'required|date',
+            'equipement' => 'array',
+        ]);
 
-    //     $request->validate([
-    //         'titre' => 'required|string|max:255',
-    //         'description' => 'required|string',
-    //         'prixparnuit' => 'required|numeric|min:0',
-    //         'nbrchambre' => 'required|integer|min:0',
-    //         'nbrsallesebain' => 'required|integer|min:0',
-    //         'adress' => 'required|string|max:255',
-    //         'ville' => 'required|string|max:255',
-    //         'disponibilite' => 'required|date',
-    //         'equipement' => 'array',
-    //     ]);
+        $hotel->update([
+            'nom_hotel' => $request->nom_hotel,
+            'prix_nuit' => $request->prix_nuit,
+            'description' => $request->description,
+            'nombre_chambre' => $request->nombre_chambre,
+            'nombre_salle_debain' => $request->nombre_salle_debain,
+            'adress' => $request->adress,
+            'ville' => $request->ville,
+            'disponibilite' => $request->disponibilite,
+            'image' => $request->image,
+        ]);
 
-    //     $annonce->update([
-    //         'titre' => $request->titre,
-    //         'prixparnuit' => $request->prixparnuit,
-    //         'description' => $request->description,
-    //         'nbrchambre' => $request->nbrchambre,
-    //         'nbrsallesebain' => $request->nbrsallesebain,
-    //         'adress' => $request->adress,
-    //         'ville' => $request->ville,
-    //         'disponibilite' => $request->disponibilite,
-    //     ]);
+        $hotel->equipements()->sync($request->equipement ?? []);
 
-    //     $annonce->equipement()->sync($request->equipement ?? []);
+        return redirect()->route('hebergeur.hebergement')->with('success', 'Annonce mise a jour avec succes');
+    }
 
-    //     return redirect()->route('annonce.proprietaire')->with('success', 'Annonce mise à jour avec succès.');
-    // }
+        
+    public function destroy($id)
+    {
+        $hotel = Hotel::where('id', $id)->first();
 
-    /**
-     * Supprime une annonce
-     */
-//    public function destroy($id)
-// {
-//     $annonce = Annonce::where('id', $id)->first();
+        $hotel->delete();
 
-//     $annonce->delete();
-
-//     return redirect()->route('annonce.proprietaire');
-// }
+        return redirect()->route('hebergeur.hebergement');
+    }
 
 
 

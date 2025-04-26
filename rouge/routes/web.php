@@ -22,7 +22,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('touriste.restaurant');
+    return view('auth.login');
 });
 Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register.form');
 Route::post('/register', [AuthController::class, 'createUser'])->name('register');
@@ -53,7 +53,16 @@ Route::middleware(['auth'])->group(function () {
 
 
 
-Route::get('/matches', [MatcheController::class, 'index'])->name('matche');
+Route::get('touriste/matches', [MatcheController::class, 'index'])->name('matche');
 
-Route::get('/matches/{id}', [MatcheController::class, 'show'])->name('matche.details');
+Route::get('touriste/matches/{id}', [MatcheController::class, 'show'])->name('matche.details');
 // Route::get('/resteau/{id}/favorite', [RestaurantController::class, 'toggleFavorite'])->name('favoris.restaurant');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/hebergeur/hebergement', [HotelController::class, 'index'])->name('hebergeur.hebergement');
+    Route::get('/hebergeur/hebergement/ajouter', [HotelController::class, 'afficherForm'])->name('hebergeur.hebergement.ajouter');
+    Route::post('/hebergeur/hebergement/store', [HotelController::class, 'store'])->name('hebergeur.hebergement.store');
+    Route::get('/hebergeur/hebergement/edit/{id}', [HotelController::class, 'edit'])->name('hebergeur.hebergement.edit');
+    Route::put('/hebergeur/hebergement/update/{id}', [HotelController::class, 'update'])->name('hebergeur.hebergement.update');
+    Route::delete('/hebergeur/hebergement/delete/{id}', [HotelController::class, 'destroy'])->name('hebergeur.hebergement.delete');
+});
