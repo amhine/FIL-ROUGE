@@ -149,9 +149,12 @@
                         </div>
                     </div>
                     <!-- Bouton Réserver -->
-                    <button class="w-full mt-4 bg-red-600 text-white py-2 rounded-lg font-medium hover:opacity-90 transition duration-300 transform hover:scale-105 ">
-                      Réserver
-                  </button>
+                    <form action="{{ route('reservations.hotel.create', $hotel->id) }}" method="GET">
+                        <button type="submit" class="w-full mt-4 bg-red-600 text-white py-2 rounded-lg font-medium hover:opacity-90 transition duration-300 transform hover:scale-105">
+                            Réserver
+                        </button>
+                    </form>
+                    
                 </div>
             </div>
             @endforeach

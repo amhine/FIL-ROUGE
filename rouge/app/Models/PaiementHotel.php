@@ -15,6 +15,8 @@ class PaiementHotel extends Model
         'reservation_id',
         'tourist_id',
         'date_paiement',
+        'prix',
+        'status',
     ];
 
     public function reservation()

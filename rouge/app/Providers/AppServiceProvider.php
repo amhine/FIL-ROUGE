@@ -11,6 +11,8 @@ use App\Repository\HotelRepository;
 use App\Repository\Interface\EquipementInterface;
 use App\Repository\Interface\RestaurantInterface;
 use App\Repository\RestaurantRepository;
+use App\Repository\Interface\ReservationHotelInterface;
+use App\Repository\ReservationHotelRepository;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -24,7 +26,7 @@ class AppServiceProvider extends ServiceProvider
     $this->app->bind(HotelInterface::class, HotelRepository::class);
     $this->app->bind(EquipementInterface::class, EquipementRepository::class);
     $this->app->bind(RestaurantInterface::class,RestaurantRepository::class);
-
+    $this->app->bind(ReservationHotelInterface::class, ReservationHotelRepository::class);
     }
 
     /**

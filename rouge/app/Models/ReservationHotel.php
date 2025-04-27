@@ -11,13 +11,15 @@ class ReservationHotel extends Model
 
 
     
-    protected $table = 'reservations_hotel';
+    protected $table = 'reservations_hotels';
     protected $fillable = [
         'date_debut',
         'date_fin',
-        'status',
         'hotels_id',
         'tourist_id',
+        'status',
+        'nombre_nuits',
+       'prix_total',
     ];
 
 
