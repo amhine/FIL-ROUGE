@@ -8,8 +8,10 @@ use App\Http\Controllers\FavorisController;
 use App\Models\Restaurant;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\MatcheController;
+use App\Http\Controllers\PaiementController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ReservationHotelController;
+use App\Models\PaiementHotel;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,8 +48,10 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/reservations/hotel', [ReservationHotelController::class, 'store'])->name('reservations.hotel.store')->middleware('auth');
     Route::get('/reservations/hotel/create/{hotelId}', [ReservationHotelController::class, 'create'])->name('reservations.hotel.create');
 
-Route::get('/payments/hotel/{reservationId}', [PaiementController::class, 'index'])->name('paiement');
 
+Route::get('/payments/hotel/{reservationId}', [PaiementController::class, 'index'])->name('paiement');
+Route::post('/payments/process', [PaiementController::class, 'processPaiement'])->name('paiement.process');
+Route::get('/payments/confirmation/{reservationId}', [PaiementController::class, 'confirmation'])->name('paiement.confirmation');
 });
 
 
