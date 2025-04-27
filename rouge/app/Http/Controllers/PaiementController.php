@@ -17,7 +17,7 @@ class PaiementController extends Controller
         $reservation = ReservationHotel::with('hotel')->findOrFail($reservationId);
         
         if (Auth::id() != $reservation->tourist_id) {
-            return redirect()->route('hotel')->with('error', 'Vous n\'êtes pas autorisé à accéder à cette page.');
+            return redirect()->route('hotel')->with('error', 'Vous etes pas autorise a acceder a cette page.');
         }
         
         $nombreDeNuits = $reservation->nombre_nuits;
@@ -31,7 +31,7 @@ class PaiementController extends Controller
         $reservation = ReservationHotel::with(['hotel', 'tourist'])->findOrFail($reservationId);
         
         if (Auth::id() != $reservation->tourist_id) {
-            return redirect()->route('hotel')->with('error', 'Vous n\'êtes pas autorisé à accéder à cette page.');
+            return redirect()->route('hotel')->with('error', 'Vous etes pas autorise a acceder  cette page.');
         }
         
         $proprietaire = User::findOrFail($reservation->hotel->hebergeur_id);
@@ -51,7 +51,7 @@ class PaiementController extends Controller
         $reservation = ReservationHotel::findOrFail($reservationId);
         
         if (Auth::id() != $reservation->tourist_id) {
-            return redirect()->route('hotel')->with('error', 'Vous n\'êtes pas autorisé à effectuer cette action.');
+            return redirect()->route('hotel')->with('error', 'Vous etes pas autorise a effectuer cette action.');
         }
         
         PaiementHotel::create([
@@ -66,7 +66,7 @@ class PaiementController extends Controller
             'status' => 'confirmer'
         ]);
         
-        return redirect()->route('paiement.confirmation', ['reservationId' => $reservationId])
-                         ->with('success', 'Paiement confirmé avec succès !');
+        return redirect()->route('hotel')->with('success', 'Paiement confirme avec succes !');
+
     }
 }

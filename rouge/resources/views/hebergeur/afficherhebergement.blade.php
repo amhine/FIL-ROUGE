@@ -21,12 +21,8 @@
             <!-- Desktop Menu  -->
             <div class="hidden md:flex items-center justify-center flex-grow">
                 <ul class="flex space-x-8">
-                    <li><a href="#accueil" class="">Accueil</a></li>
-                    <li><a href="#stades" class="">Stades</a></li>
-                    <li><a href="#hebergements" class="">Hébergements</a></li>
-                    <li><a href="#restaurants" class="">Restaurants</a></li>
-                    <li><a href="#restaurants" class="">Favoris</a></li>
-                    <li><a href="#trajets" class="">Trajets</a></li>
+                    <li><a href="#hebergements" class="">Mes Hébergements</a></li>
+                    <li><a href="#trajets" class="">Statistic</a></li>
                 </ul>
             </div>
             
@@ -45,13 +41,8 @@
         <!-- Mobile Menu -->
         <div class="md:hidden hidden bg-[#C02626] px-4 py-4" id="mobile-menu">
             <ul class="flex flex-col space-y-4">
-                <li><a href="#accueil" class="block py-2 hover:text-morocco-gold transition-colors duration-300">Accueil</a></li>
-                <li><a href="#equipes" class="block py-2 hover:text-morocco-gold transition-colors duration-300">Équipes</a></li>
-                <li><a href="#stades" class="block py-2 hover:text-morocco-gold transition-colors duration-300">Stades</a></li>
-                <li><a href="#hebergements" class="block py-2 hover:text-morocco-gold transition-colors duration-300">Hébergements</a></li>
-                <li><a href="#restaurants" class="block py-2 hover:text-morocco-gold transition-colors duration-300">Restaurants</a></li>
-                <li><a href="#trajets" class="block py-2 hover:text-morocco-gold transition-colors duration-300">Trajets</a></li>
-                <li><a href="#inscrire" class="block py-2 hover:text-morocco-gold transition-colors duration-300">S'inscrire</a></li>
+                <li><a href="#hebergements" class="block py-2 hover:text-morocco-gold transition-colors duration-300">Mes Hébergements</a></li>
+                <li><a href="#restaurants" class="block py-2 hover:text-morocco-gold transition-colors duration-300">Statistic</a></li>
             </ul>
         </div>
     </nav>

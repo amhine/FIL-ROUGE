@@ -33,7 +33,7 @@
       <!-- Détails de l'annonce -->
       <div class="card bg-white rounded-xl overflow-hidden shadow-lg">
         <div class="relative">
-          <img src="{{ ( $hotel->image) }}ec vue" class="w-full object-cover h-48">
+          <img src="{{ ( $hotel->image) }}" class="w-full object-cover h-48">
           <div class="absolute top-4 right-4 bg-purple-600 text-white px-3 py-1 rounded-full text-sm font-bold">
             {{ ( $hotel->prix_nuit) }} DH/nuit
           </div>
@@ -77,7 +77,6 @@
       </div> 
         
       <!-- Formulaire de réservation -->
-      <!-- Remplacer le formulaire actuel par ceci -->
 <form id="reservationForm" action="{{ route('reservations.hotel.store') }}" method="POST" class="space-y-4 mt-4">
   @csrf
   <input type="hidden" name="hotel_id" value="{{ $hotel->id }}">
