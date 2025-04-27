@@ -2,7 +2,7 @@
 
 namespace App\Repository\Interface;
 
-interface HotelInterface
+interface RestaurantInterface
 {
     public function all();
     public function find($id);
@@ -10,4 +10,5 @@ interface HotelInterface
     public function update($id, array $data);
     public function delete($id);
     public function search(array $filters);
+    
 }

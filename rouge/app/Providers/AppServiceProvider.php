@@ -2,9 +2,15 @@
 
 namespace App\Providers;
 
+use App\Repository\EquipementRepository;
 use Illuminate\Support\ServiceProvider;
 use App\Repository\Interface\UserInterface;
 use App\Repository\UserRepository;
+use App\Repository\Interface\HotelInterface;
+use App\Repository\HotelRepository;
+use App\Repository\Interface\EquipementInterface;
+use App\Repository\Interface\RestaurantInterface;
+use App\Repository\RestaurantRepository;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -15,7 +21,10 @@ class AppServiceProvider extends ServiceProvider
     {
  
     $this->app->bind(UserInterface::class, UserRepository::class);
-    
+    $this->app->bind(HotelInterface::class, HotelRepository::class);
+    $this->app->bind(EquipementInterface::class, EquipementRepository::class);
+    $this->app->bind(RestaurantInterface::class,RestaurantRepository::class);
+
     }
 
     /**

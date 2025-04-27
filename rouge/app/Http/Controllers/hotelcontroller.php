@@ -4,37 +4,42 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Hotel;
 use App\Models\Equipement;
+use App\Repository\Interface\EquipementInterface;
+use App\Repository\Interface\HotelInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class hotelcontroller extends Controller
 {
-    
-    public function search(Request $request)
+  
+    protected $hotelRepository;
+    protected $equipementRepository;
+
+    public function __construct(HotelInterface $hotelRepository, EquipementInterface $equipementRepository)
     {
-        $hotel = Hotel::query();
-
-        if ($request->filled('nom_hotel')) {
-            $hotel->where('nom_hotel', 'like', '%' . $request->nom_hotel . '%');
-        }
-
-        if ($request->filled('disponibilite')) {
-            $hotel->where('disponibilite', '>=', $request->disponibilite);
-        }
-
-        $hotels= $hotel->paginate(9);
-        $equipement= Equipement::all();
-        return view('touriste.hebergement', compact('hotels', 'equipement'));
+        $this->hotelRepository = $hotelRepository;
+        $this->equipementRepository = $equipementRepository;
     }
 
+    public function search(Request $request)
+    {
+        $filters = [
+            'nom_hotel' => $request->nom_hotel,
+            'disponibilite' => $request->disponibilite,
+        ];
+
+        $hotels = $this->hotelRepository->search($filters);
+        $equipement = $this->equipementRepository->all();
+
+        return view('touriste.hebergement', compact('hotels', 'equipement'));
+    }
     
     
     public function index()
     {
         $userId = Auth::id(); 
-        $hotels = Hotel::where('hebergeur_id', $userId)->with('equipements')->get();
+        $hotels =$this->hotelRepository->all()->where('hebergeur_id', $userId);
     
         return view('hebergeur.afficherhebergement', compact('hotels'));
     }
@@ -70,7 +75,7 @@ class hotelcontroller extends Controller
         ]);
     
         $userId = Auth::id();
-        $hotel = Hotel::create([
+        $hotelData = [
             'nom_hotel' => $request->nom_hotel,
             'description' => $request->description,
             'prix_nuit' => $request->prix_nuit,
@@ -81,7 +86,9 @@ class hotelcontroller extends Controller
             'image' => $request->image,
             'disponibilite' => $request->disponibilite,
             'hebergeur_id' => $userId,
-        ]);
+        ];
+
+        $hotel = $this->hotelRepository->create($hotelData);
     
         if ($request->has('equipement')) {
             $hotel->equipements()->attach($request->equipement); 
@@ -94,9 +101,9 @@ class hotelcontroller extends Controller
     {
         $userId = Auth::id();
         
-        $hotel = Hotel::where('hebergeur_id', $userId)->where('id', $id)->with('equipements') ->first(); 
+        $hotel = $this->hotelRepository->find($id); 
         
-        if (!$hotel) {
+        if ($hotel->hebergeur_id !== $userId) {
             return redirect()->route('hebergeur.hebergement')->with('error', 'Annonce introuvable.');
         }
     
@@ -114,11 +121,12 @@ class hotelcontroller extends Controller
     public function update(Request $request, $id)
     {
         $userId = Auth::id();
-        $hotel = Hotel::where('hebergeur_id', $userId)->where('id', $id)->first();
-        
-        if (!$hotel) {
+        $hotel = $this->hotelRepository->find($id);
+
+        if ($hotel->hebergeur_id !== $userId) {
             return redirect()->route('hebergeur.hebergement')->with('error', 'Annonce introuvable ou vous n\'êtes pas autorisé à la modifier.');
         }
+
         $request->validate([
             'nom_hotel' => 'required|string|max:255',
             'description' => 'required|string',
@@ -132,33 +140,37 @@ class hotelcontroller extends Controller
             'equipement' => 'array',
         ]);
 
-        $hotel->update([
+       $hotelData = [
             'nom_hotel' => $request->nom_hotel,
-            'prix_nuit' => $request->prix_nuit,
             'description' => $request->description,
+            'prix_nuit' => $request->prix_nuit,
             'nombre_chambre' => $request->nombre_chambre,
             'nombre_salle_debain' => $request->nombre_salle_debain,
             'adress' => $request->adress,
             'ville' => $request->ville,
-            'disponibilite' => $request->disponibilite,
             'image' => $request->image,
-        ]);
+            'disponibilite' => $request->disponibilite,
+        ];
 
+        $this->hotelRepository->update($id, $hotelData);
         $hotel->equipements()->sync($request->equipement ?? []);
-
         return redirect()->route('hebergeur.hebergement')->with('success', 'Annonce mise a jour avec succes');
     }
 
         
     public function destroy($id)
     {
-        $hotel = Hotel::where('id', $id)->first();
+        $userId = Auth::id();
+        $hotel = $this->hotelRepository->find($id);
 
-        $hotel->delete();
+        if ($hotel->hebergeur_id !== $userId) {
+            return redirect()->route('hebergeur.hebergement')->with('error', 'Annonce introuvable ou vous n\'êtes pas autorisé à la supprimer.');
+        }
 
-        return redirect()->route('hebergeur.hebergement');
+        $this->hotelRepository->delete($id);
+
+        return redirect()->route('hebergeur.hebergement')->with('success', 'Annonce supprimée avec succès.');
     }
-
 
 
 

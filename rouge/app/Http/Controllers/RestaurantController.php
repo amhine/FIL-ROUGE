@@ -2,44 +2,45 @@
 
 namespace App\Http\Controllers;
 
+use App\Repository\Interface\RestaurantInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Models\Restaurant;
 
 class RestaurantController extends Controller
 {
+    protected $restaurantRepository;
+
+    public function __construct(RestaurantInterface $restaurantRepository)
+    {
+        $this->restaurantRepository = $restaurantRepository;
+    }
 
     public function search(Request $request)
     {
-        $resteaux = Restaurant::query();
-    
-        if ($request->filled('nom_resteau')) {
-            $resteaux->where('nom_resteau', 'like', '%' . $request->nom_resteau . '%');
-        }
-    
-        if ($request->filled('localisation')) {
-            $resteaux->where('localisation', 'like', '%' . $request->localisation . '%');
-        }
-        if ($request->filled('type_cuisine')) {
-            $resteaux->where('type_cuisine', 'like', '%' . $request->type_cuisine . '%');
-        }
+        $filters = [
+            'nom_restaurant' => $request->nom_restaurant,
+            'localisation' => $request->localisation,
+            'type_cuisine' => $request->type_cuisine,
+        ];
 
+        $restaurants = $this->restaurantRepository->search($filters);
 
-        $resteau = $resteaux->paginate(9);
-        
-        return view('touriste.restaurant', compact('resteau'));
+        return view('touriste.restaurant', compact('restaurants'));
     }
-    // public function index()
-    // {
-    //     $userId = Auth::id(); 
-    //     $resteau = Restaurant::where('id_resteau', $userId)->get();
-    
-    //     return view('rest.restaurant', compact('restaurants'));
-    // }
-public function showRestaurants()
-{
-    $restaurants = Restaurant::paginate(9);
-    $user = Auth::user();
-    return view('touriste.restaurants', compact('restaurants', 'user'));
-}
+
+    public function index()
+    {
+        $userId = Auth::id();
+        $restaurants = $this->restaurantRepository->all()->where('restaurateur_id', $userId);
+
+        return view('restaurateur.restaurant', compact('restaurants'));
+    }
+
+    public function showRestaurants()
+    {
+        $restaurants = $this->restaurantRepository->all()->paginate(9);
+        $user = Auth::user();
+
+        return view('touriste.restaurants', compact('restaurants', 'user'));
+    }
 }
