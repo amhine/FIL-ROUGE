@@ -8,6 +8,8 @@ use App\Models\Hotel;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\ReservationConfirmed;
 use Carbon\Carbon;
 
 class PaiementController extends Controller
@@ -65,7 +67,7 @@ class PaiementController extends Controller
         $reservation->update([
             'status' => 'confirmer'
         ]);
-        
+        Mail::to($request->email)->send(new ReservationConfirmed($reservation));
         return redirect()->route('hotel')->with('success', 'Paiement confirme avec succes !');
 
     }
