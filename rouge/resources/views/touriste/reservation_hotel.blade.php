@@ -95,8 +95,8 @@
              placeholder="Sélectionnez une date">
   </div>
 
-  <button type="submit" class="w-full mt-4 bg-gradient-to-r from-purple-600 to-pink-500 text-white py-2 rounded-lg font-medium hover:opacity-90 transition duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50">
-      Réserver
+  <button type="submit" class="w-full mt-4 bg-red-600  text-white py-2 rounded-lg font-medium ">
+    Réserver
   </button>
 </form>
     

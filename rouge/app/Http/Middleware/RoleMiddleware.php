@@ -14,10 +14,10 @@ class RoleMiddleware
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle(Request $request, Closure $next, $role): Response
+    public function handle(Request $request, Closure $next, $roles): Response
     {
-        if (!Auth::check() || Auth::user()->roles->name_role !== $role) {
-            return response()->json(['error' => 'Unauthorized'], 403);
+        if (!Auth::check() || Auth::user()->roles->name_role !== $roles) {
+            return with('error', 'Vous etes pas autorise a effectuer cette action.');
         }
 
         return $next($request);

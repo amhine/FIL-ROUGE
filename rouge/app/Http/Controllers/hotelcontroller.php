@@ -5,9 +5,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Equipement;
+use App\Models\ReservationHotel;
 use App\Repository\Interface\EquipementInterface;
 use App\Repository\Interface\HotelInterface;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 
 class hotelcontroller extends Controller
@@ -165,6 +167,16 @@ class hotelcontroller extends Controller
 
         if ($hotel->hebergeur_id !== $userId) {
             return redirect()->route('hebergeur.hebergement')->with('error', 'Annonce introuvable ou vous n\'êtes pas autorisé à la supprimer.');
+        }
+
+        $today = Carbon::today();
+        $hasReservations = ReservationHotel::where('hotels_id', $id)
+            ->where('status', 'confirmer')
+            ->where('date_debut', '>=', $today)
+            ->exists();
+
+        if ($hasReservations) {
+            return redirect()->route('hebergeur.hebergement')->with('alert', 'Impossible de supprimer l\'annonce : des réservations confirmées existent pour aujourd\'hui ou après.');
         }
 
         $this->hotelRepository->delete($id);

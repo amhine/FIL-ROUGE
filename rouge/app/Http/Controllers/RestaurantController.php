@@ -23,9 +23,9 @@ class RestaurantController extends Controller
             'type_cuisine' => $request->type_cuisine,
         ];
 
-        $restaurants = $this->restaurantRepository->search($filters);
+        $resteau = $this->restaurantRepository->search($filters);
 
-        return view('touriste.restaurant', compact('restaurants'));
+        return view('touriste.restaurant', compact('resteau'));
     }
 
     public function index()
