@@ -95,6 +95,6 @@ Route::middleware(['auth', 'roles:Restaurant'])->group(function () {
     Route::put('/resteau/resteaurant/update/{id}', [RestaurantController::class, 'update'])->name('resteau.resteaurant.update');
     Route::delete('/resteau/resteaurant/delete/{id}', [RestaurantController::class, 'destroy'])->name('resteau.resteaurant.delete');
     Route::get('/resteaurant/statistiques', [RestaurantStatistiquesController::class, 'index'])->name('resteau.resteaurant.statistiques');
-    Route::get('/resteaurant/hotel/{hotelId}/detail', [RestaurantStatistiquesController::class, 'detailHotel'])->name('resteaurant.resteau.detail');
+    Route::get('/resteaurant/hotel/{hotelId}/detail', [RestaurantStatistiquesController::class, 'detailresteau'])->name('resteaurant.resteau.detail');
 
 });

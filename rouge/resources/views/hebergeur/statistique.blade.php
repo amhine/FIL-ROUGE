@@ -40,20 +40,21 @@
         @endif
 
         @if($totalReservations > 0)
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-                <div class="bg-white p-6 rounded-lg shadow">
-                    <h5 class="text-lg font-semibold">Total des réservations</h5>
-                    <h2 class="text-2xl font-bold">{{ $totalReservations }}</h2>
-                </div>
-                <div class="bg-white p-6 rounded-lg shadow">
-                    <h5 class="text-lg font-semibold">Réservations confirmées</h5>
-                    <h2 class="text-2xl font-bold">{{ $reservationsParStatut['confirmer'] ?? 0 }}</h2>
-                </div>
-                <div class="bg-white p-6 rounded-lg shadow">
-                    <h5 class="text-lg font-semibold">Réservations en attente</h5>
-                    <h2 class="text-2xl font-bold">{{ $reservationsParStatut['attends'] ?? 0 }}</h2>
-                </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <div class="bg-white p-6 rounded-2xl shadow hover:shadow-lg transition">
+                <h5 class="text-lg font-semibold text-gray-700 mb-2">Total des réservations</h5>
+                <h2 class="text-3xl font-extrabold text-[#C02626]">{{ $totalReservations }}</h2>
             </div>
+            <div class="bg-white p-6 rounded-2xl shadow hover:shadow-lg transition">
+                <h5 class="text-lg font-semibold text-gray-700 mb-2">Réservations confirmées</h5>
+                <h2 class="text-3xl font-extrabold text-green-600">{{ $reservationsParStatut['confirmer'] ?? 0 }}</h2>
+            </div>
+            <div class="bg-white p-6 rounded-2xl shadow hover:shadow-lg transition">
+                <h5 class="text-lg font-semibold text-gray-700 mb-2">Réservations en attente</h5>
+                <h2 class="text-3xl font-extrabold text-yellow-500">{{ $reservationsParStatut['attends'] ?? 0 }}</h2>
+            </div>
+        </div>
+
 
             <div class="bg-white p-6 rounded-lg shadow mb-6">
                 <h4 class="text-xl font-semibold mb-4">Statistiques par hôtel</h4>

@@ -64,4 +64,11 @@ class HebergeurStatistiquesController extends Controller
             'statistiquesParHotel'
         ));
     }
+
+    public function detailHotel($hotelId){
+
+        $hotelId = Auth::id();
+        $hotel = Hotel::findOrFail($hotelId);
+        return view('hebergeur.details_hotel', compact('hotel'));
+    }
 }

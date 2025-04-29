@@ -64,10 +64,10 @@ class RestaurantStatistiquesController extends Controller
         ));
     }
 
-    public function detailHotel($hotelId){
+    public function detailresteau($resteauId){
 
-        $hotelId = Auth::id();
-        $resteau = Restaurant::findOrFail($hotelId);
+        $resteauId = Auth::id();
+        $resteau = Restaurant::findOrFail($resteauId);
         return view('restaurateur.details_resteau', compact('resteau'));
     }
 
