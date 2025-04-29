@@ -63,4 +63,12 @@ class RestaurantStatistiquesController extends Controller
             'statistiquesParResteau'
         ));
     }
+
+    public function detailHotel($hotelId){
+
+        $hotelId = Auth::id();
+        $resteau = Restaurant::findOrFail($hotelId);
+        return view('restaurateur.details_resteau', compact('resteau'));
+    }
+
 }

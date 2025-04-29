@@ -112,7 +112,7 @@
                                     <tr class="border-b">
                                         <td class="p-3">{{ $reservation->id }}</td>
                                         <td class="p-3">{{ $reservation->hotel->nom_hotel }}</td>
-                                        <td class="p-3">{{ $reservation->tourist->name ?? 'Touriste inconnu' }}</td>
+                                        <td class="p-3">{{ $reservation->tourist->name  }}</td>
                                         <td class="p-3">{{ \Carbon\Carbon::parse($reservation->date_debut)->format('d/m/Y') }}</td>
                                         <td class="p-3">{{ \Carbon\Carbon::parse($reservation->date_fin)->format('d/m/Y') }}</td>
                                         <td class="p-3">{{ $reservation->nombre_nuits }}</td>

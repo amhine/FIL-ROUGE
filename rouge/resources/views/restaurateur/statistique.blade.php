@@ -7,11 +7,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-        }
-    </style>
+   
 </head>
 <body class="bg-gray-100">
 
@@ -118,7 +114,7 @@
                                     <tr class="border-b hover:bg-gray-100 transition">
                                         <td class="p-4">{{ $reservation->id }}</td>
                                         <td class="p-4">{{ $reservation->restaurant?->nom_resteau ?? 'Restaurant supprimé' }}</td>
-                                        <td class="p-4">{{ $reservation->tourist?->name ?? 'Touriste inconnu' }}</td>
+                                        <td class="p-4">{{ $reservation->tourist?->name }}</td>
                                         <td class="p-4">{{ \Carbon\Carbon::parse($reservation->date_debut)->format('d/m/Y H:i') }}</td>
                                         <td class="p-4">{{ \Carbon\Carbon::parse($reservation->date_fin)->format('d/m/Y H:i') }}</td>
                                         <td class="p-4">{{ $reservation->prix_total ? number_format($reservation->prix_total, 2) : 'N/A' }} MAD</td>
