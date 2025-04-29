@@ -13,6 +13,7 @@ use App\Http\Controllers\PaiementController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ReservationHotelController;
 use App\Http\Controllers\ReservationResteauController;
+use App\Http\Controllers\RestaurantStatistiquesController;
 use App\Models\PaiementHotel;
 
 /*
@@ -81,7 +82,19 @@ Route::middleware(['auth', 'roles:Hébergeur'])->group(function () {
     Route::delete('/hebergeur/hebergement/delete/{id}', [HotelController::class, 'destroy'])->name('hebergeur.hebergement.delete');
     Route::get('/hebergeur/statistiques', [HebergeurStatistiquesController::class, 'index'])->name('hebergeur.statistiques');
     Route::get('/hebergeur/hotel/{hotelId}/detail', [HebergeurStatistiquesController::class, 'detailHotel'])->name('hebergeur.hotel.detail');
+
+
+
 });
+Route::middleware(['auth', 'roles:Restaurant'])->group(function () {
 
+    Route::get('/resteau/resteaurant', [RestaurantController::class, 'index'])->name('resteau.resteaurant');
+    Route::get('/resteau/resteaurant/ajouter', [RestaurantController::class, 'afficherForm'])->name('resteau.resteaurant.ajouter');
+    Route::post('/resteau/resteaurant/store', [RestaurantController::class, 'store'])->name('resteau.resteaurant.store');
+    Route::get('/resteau/resteaurant/edit/{id}', [RestaurantController::class, 'edit'])->name('resteau.resteaurant.edit');
+    Route::put('/resteau/resteaurant/update/{id}', [RestaurantController::class, 'update'])->name('resteau.resteaurant.update');
+    Route::delete('/resteau/resteaurant/delete/{id}', [RestaurantController::class, 'destroy'])->name('resteau.resteaurant.delete');
+    Route::get('/resteaurant/statistiques', [RestaurantStatistiquesController::class, 'index'])->name('resteau.resteaurant.statistiques');
+    Route::get('/resteaurant/hotel/{hotelId}/detail', [RestaurantStatistiquesController::class, 'detailHotel'])->name('resteaurant.resteau.detail');
 
-
+});

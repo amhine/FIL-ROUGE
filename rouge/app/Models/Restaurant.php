@@ -16,8 +16,9 @@ class Restaurant extends Model
         'nom_resteau',
         'localisation',
         'type_cuisine',
-        'capaciter',
         'image',
+        'prix',
+        'description',
         'id_resteau',
     ];
 
