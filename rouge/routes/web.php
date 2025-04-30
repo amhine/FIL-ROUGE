@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\hotelcontroller;
 use App\Http\Controllers\RestaurantController;
@@ -97,4 +98,16 @@ Route::middleware(['auth', 'roles:Restaurant'])->group(function () {
     Route::get('/resteaurant/statistiques', [RestaurantStatistiquesController::class, 'index'])->name('resteau.resteaurant.statistiques');
     Route::get('/resteaurant/hotel/{hotelId}/detail', [RestaurantStatistiquesController::class, 'detailresteau'])->name('resteaurant.resteau.detail');
 
+});
+
+
+Route::middleware(['auth', 'roles:Admin'])->group(function () {
+
+Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
+Route::post('/users/{user}/toggle-status', [AdminController::class, 'toggleStatus'])->name('users.toggle-status');
+// Routes pour la gestion des hébergements par l'admin
+Route::get('/admin/hebergements', [AdminController::class, 'hebergements'])->name('admin.hebergements');
+Route::get('/admin/hebergements/{id}', [AdminController::class, 'showHebergement'])->name('admin.hebergements.show');
+Route::post('/admin/hebergements/{id}/statut', [AdminController::class, 'changeStatutHebergement'])->name('admin.hebergements.statut');
+Route::delete('/admin/hebergements/{id}', [AdminController::class, 'deleteHebergement'])->name('admin.hebergements.delete');
 });
