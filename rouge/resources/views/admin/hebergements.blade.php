@@ -52,21 +52,7 @@
         </div>
     @endif
 
-    <!-- Statistiques -->
-    <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-        <div class="bg-white p-6 rounded-xl shadow-md">
-            <div class="flex items-center">
-                <div class="rounded-full bg-blue-100 p-3">
-                    <i class="fas fa-building text-blue-600 text-xl"></i>
-                </div>
-                <div class="ml-4">
-                    <h3 class="text-gray-500 text-sm">Total hébergements</h3>
-                    <p class="text-2xl font-bold">{{ $totalHebergements }}</p>
-                </div>
-            </div>
-        </div>
-       
-    </div>
+
 
     <div class="bg-white rounded-xl shadow-md overflow-hidden mb-8">
         <div class="overflow-x-auto">
