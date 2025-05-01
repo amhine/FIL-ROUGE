@@ -87,7 +87,7 @@ class AdminController extends Controller
         $roleFilter = $request->query('role');
         $statusFilter = $request->query('status');
 
-        $query = User::with('role');
+        $query = User::with('role')->where('id_role', '!=', 1);
         
         if ($roleFilter) {
             $query->where('id_role', $roleFilter);
@@ -98,7 +98,7 @@ class AdminController extends Controller
         }
 
         $users = $query->paginate(10);
-        $roles = Role::all();
+        $roles = Role::where('id', '!=', 1)->get();
 
         // Statistiques des hôtels
         $totalHotels = DB::table('hotels')->count();
@@ -212,7 +212,7 @@ class AdminController extends Controller
             ->first();
     
         if (!$hotel) {
-            return redirect()->route('admin.hebergements')
+            return redirect()->route('dashboard')
                              ->with('error', 'Hébergement non trouvé');
         }
     
@@ -234,7 +234,7 @@ class AdminController extends Controller
         $hebergement = DB::table('hotels')->where('id', $id)->first();
         
         if (!$hebergement) {
-            return redirect()->route('admin.hebergements')
+            return redirect()->route('dashboard')
                              ->with('error', 'Hébergement non trouvé');
         }
         DB::table('hotel_equipe')->where('hotel_id', $id)->delete();
@@ -243,7 +243,64 @@ class AdminController extends Controller
         
         DB::table('hotels')->where('id', $id)->delete();
     
-        return redirect()->route('admin.hebergements')
+        return redirect()->route('dashboard')
                          ->with('success', 'Hébergement supprimé avec succès');
     }
+
+
+
+
+    public function showRestaurant($id)
+    {
+        $resteau = DB::table('restaurants')
+            ->join('users', 'restaurants.id_resteau', '=', 'users.id')
+            ->select(
+                'restaurants.*',
+                'users.name as restaurants_nom',
+                'users.email as restaurants_email'
+            )
+            ->where('restaurants.id', $id)
+            ->first();
+    
+        if (!$resteau) {
+            return redirect()->route('dashboard')
+                             ->with('error', 'restaurants non trouvé');
+        }
+    
+
+        return view('admin.restaurants-details', compact('resteau'));
+    }
+    // public function deleteRestaurant($id)
+    // {
+    //     $restaurants = DB::table('restaurants')->where('id', $id)->first();
+        
+    //     if (!$restaurants) {
+    //         return redirect()->route('dashboard')
+    //                          ->with('error', 'restaurants non trouvé');
+    //     }
+
+    //     DB::table('reservations_resteaux')->where('id_resteau', $id)->delete();
+        
+    //     DB::table('restaurants')->where('id', $id)->delete();
+    
+    //     return redirect()->route('dashboard')
+    //                      ->with('success', 'restaurants supprimé avec succès');
+    // }
+
+    public function deleteRestaurant($id)
+{
+    $restaurants = DB::table('restaurants')->where('id', $id)->first();
+    
+    if (!$restaurants) {
+        return redirect()->route('dashboard')
+                         ->with('error', 'restaurants non trouvé');
+    }
+
+    DB::table('reservations_resteaux')->where('id_resteau', $id)->delete();
+    
+    DB::table('restaurants')->where('id', $id)->delete();
+
+    return redirect()->route('dashboard')
+                     ->with('success', 'restaurants supprimé avec succès');
+}
 }

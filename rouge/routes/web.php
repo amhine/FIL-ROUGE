@@ -105,9 +105,9 @@ Route::middleware(['auth', 'roles:Admin'])->group(function () {
 
 Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
 Route::post('/users/{user}/toggle-status', [AdminController::class, 'toggleStatus'])->name('users.toggle-status');
-// Routes pour la gestion des hébergements par l'admin
-Route::get('/admin/hebergements', [AdminController::class, 'hebergements'])->name('admin.hebergements');
 Route::get('/admin/hebergements/{id}', [AdminController::class, 'showHebergement'])->name('admin.hebergements.show');
-Route::post('/admin/hebergements/{id}/statut', [AdminController::class, 'changeStatutHebergement'])->name('admin.hebergements.statut');
 Route::delete('/admin/hebergements/{id}', [AdminController::class, 'deleteHebergement'])->name('admin.hebergements.delete');
+Route::get('/admin/Restaurant/{id}', [AdminController::class, 'showRestaurant'])->name('admin.restaurants.show');
+Route::delete('/admin/Restaurant/{id}', [AdminController::class, 'deleteRestaurant'])->name('admin.restaurants.delete');
+
 });

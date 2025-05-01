@@ -453,13 +453,19 @@
                                 </span>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ \Carbon\Carbon::parse($hebergement->created_at)->format('d/m/Y') }}</td>
+                           
                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                {{-- <a href="{{ route('hotels.edit', $hebergement->id) }}" class="btn text-blue-600 hover:text-blue-900 mr-2">
-                                    <i class="fas fa-edit"></i> Modifier
-                                </a> --}}
-                                <button onclick="confirmDelete({{ $hebergement->id }})" class="btn text-red-600 hover:text-red-900">
-                                    <i class="fas fa-trash"></i> Supprimer
-                                </button>
+                                <a href="{{ route('admin.hebergements.show', $hebergement->id) }}" class="btn text-blue-600 hover:text-blue-900 mr-2">
+                                    <i class="fas fa-eye"></i> Voir
+                                </a>
+                                <form action="{{ route('admin.hebergements.delete', $hebergement->id) }}" method="POST" class="inline-block" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce restaurant ?');">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn text-red-600 hover:text-red-900">
+                                        <i class="fas fa-trash"></i> Supprimer
+                                    </button>
+                                </form>
+                                
                             </td>
                         </tr>
                     @empty
@@ -590,12 +596,16 @@
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ number_format($resto->prix, 2) }} MAD</td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ \Carbon\Carbon::parse($resto->created_at)->format('d/m/Y') }}</td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                {{-- <a href="{{ route('restaurants.edit', $resto->id) }}" class="btn text-blue-600 hover:text-blue-900 mr-2">
-                                    <i class="fas fa-edit"></i> Modifier
-                                </a> --}}
-                                <button onclick="confirmDelete({{ $resto->id }})" class="btn text-red-600 hover:text-red-900">
-                                    <i class="fas fa-trash"></i> Supprimer
-                                </button>
+                                <a href="{{ route('admin.restaurants.show', $resto->id) }}" class="btn text-blue-600 hover:text-blue-900 mr-2">
+                                    <i class="fas fa-eye"></i> Voir
+                                </a>
+                                <form action="{{ route('admin.restaurants.delete', $resto->id) }}" method="POST" class="inline-block" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce restaurant ?');">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn text-red-600 hover:text-red-900">
+                                        <i class="fas fa-trash"></i> Supprimer
+                                    </button>
+                                </form>
                             </td>
                         </tr>
                     @empty
