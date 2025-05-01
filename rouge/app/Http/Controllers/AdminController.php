@@ -10,13 +10,80 @@ class AdminController extends Controller
 {
    
 
+    // public function index(Request $request)
+    // {
+        
+    //     $totalUsers = User::count();
+    //     $activeUsers = User::where('status', 'active')->count();
+    //     $inactiveUsers = User::where('status', 'inactive')->count();
+
+    //     $roleFilter = $request->query('role');
+    //     $statusFilter = $request->query('status');
+
+    //     $query = User::with('role');
+        
+    //     if ($roleFilter) {
+    //         $query->where('id_role', $roleFilter);
+    //     }
+        
+    //     if ($statusFilter) {
+    //         $query->where('status', $statusFilter);
+    //     }
+
+        
+    //     $users = $query->paginate(10);
+    //     $roles = Role::all();
+
+    //     $query = DB::table('hotels')
+    //     ->join('users', 'hotels.hebergeur_id', '=', 'users.id')
+    //     ->select(
+    //         'hotels.*',
+    //         'users.name as proprietaire_nom',
+    //         'users.email as proprietaire_email'
+    //     );
+
+    //     if ($request->has('ville') && $request->ville) {
+    //         $query->where('hotels.ville', $request->ville);
+    //     }
+
+   
+
+    //     if ($request->has('recherche') && $request->recherche) {
+    //         $searchTerm = $request->recherche;
+    //         $query->where(function($q) use ($searchTerm) {
+    //             $q->where('hotels.nom_hotel', 'like', "%{$searchTerm}%")
+    //             ->orWhere('hotels.adress', 'like', "%{$searchTerm}%")
+    //             ->orWhere('hotels.ville', 'like', "%{$searchTerm}%")
+    //             ->orWhere('users.name', 'like', "%{$searchTerm}%")
+    //             ->orWhere('users.email', 'like', "%{$searchTerm}%");
+    //         });
+    //     }
+    //     $hebergements = $query->orderBy('hotels.created_at', 'desc')
+    //                           ->paginate(10);
+    
+    //     // Récupérer la liste des villes pour le filtre
+    //     $villes = DB::table('hotels')
+    //                 ->select('ville')
+    //                 ->distinct()
+    //                 ->orderBy('ville')
+    //                 ->pluck('ville');
+
+    //     return view('admin.dashboard', compact(
+    //         'totalUsers', 'activeUsers', 'inactiveUsers',
+    //         'users', 'roles', 'roleFilter', 'statusFilter', 'hebergements',
+    //         'villes'
+    //     ));
+    // }
+
+
     public function index(Request $request)
     {
-        
+        // Statistiques des utilisateurs
         $totalUsers = User::count();
         $activeUsers = User::where('status', 'active')->count();
         $inactiveUsers = User::where('status', 'inactive')->count();
 
+        // Filtres pour les utilisateurs
         $roleFilter = $request->query('role');
         $statusFilter = $request->query('status');
 
@@ -30,52 +97,98 @@ class AdminController extends Controller
             $query->where('status', $statusFilter);
         }
 
-        
         $users = $query->paginate(10);
         $roles = Role::all();
 
+        // Statistiques des hôtels
+        $totalHotels = DB::table('hotels')->count();
+        $availableHotels = DB::table('hotels')
+            ->where('disponibilite', '>=', now()->toDateString())
+            ->count();
+        $recentHotels = DB::table('hotels')
+            ->select('nom_hotel', 'created_at')
+            ->orderBy('created_at', 'desc')
+            ->limit(5)
+            ->get();
+
+        // Récupérer la liste des hôtels avec pagination et filtres
         $query = DB::table('hotels')
-        ->join('users', 'hotels.hebergeur_id', '=', 'users.id')
-        ->select(
-            'hotels.*',
-            'users.name as proprietaire_nom',
-            'users.email as proprietaire_email'
-        );
+            ->join('users', 'hotels.hebergeur_id', '=', 'users.id')
+            ->select(
+                'hotels.*',
+                'users.name as proprietaire_nom',
+                'users.email as proprietaire_email'
+            );
 
-    // Appliquer les filtres si présents dans la requête
-    if ($request->has('ville') && $request->ville) {
-        $query->where('hotels.ville', $request->ville);
-    }
+        if ($request->has('ville') && $request->ville) {
+            $query->where('hotels.ville', $request->ville);
+        }
 
-   
+        if ($request->has('recherche') && $request->recherche) {
+            $searchTerm = $request->recherche;
+            $query->where(function($q) use ($searchTerm) {
+                $q->where('hotels.nom_hotel', 'like', "%{$searchTerm}%")
+                  ->orWhere('hotels.adress', 'like', "%{$searchTerm}%")
+                  ->orWhere('hotels.ville', 'like', "%{$searchTerm}%")
+                  ->orWhere('users.name', 'like', "%{$searchTerm}%")
+                  ->orWhere('users.email', 'like', "%{$searchTerm}%");
+            });
+        }
 
-    if ($request->has('recherche') && $request->recherche) {
-        $searchTerm = $request->recherche;
-        $query->where(function($q) use ($searchTerm) {
-            $q->where('hotels.nom_hotel', 'like', "%{$searchTerm}%")
-              ->orWhere('hotels.adress', 'like', "%{$searchTerm}%")
-              ->orWhere('hotels.ville', 'like', "%{$searchTerm}%")
-              ->orWhere('users.name', 'like', "%{$searchTerm}%")
-              ->orWhere('users.email', 'like', "%{$searchTerm}%");
-        });
-    }
-    $hebergements = $query->orderBy('hotels.created_at', 'desc')
-                              ->paginate(10);
-    
+        $hebergements = $query->orderBy('hotels.created_at', 'desc')->paginate(10);
+
         // Récupérer la liste des villes pour le filtre
         $villes = DB::table('hotels')
-                    ->select('ville')
-                    ->distinct()
-                    ->orderBy('ville')
-                    ->pluck('ville');
+            ->select('ville')
+            ->distinct()
+            ->orderBy('ville')
+            ->pluck('ville');
+
+        // Statistiques des restaurants
+        $totalRestaurants = DB::table('restaurants')->count();
+        $restaurantsByType = DB::table('restaurants')
+            ->select('type_cuisine', DB::raw('count(*) as count'))
+            ->groupBy('type_cuisine')
+            ->get();
+        $recentRestaurants = DB::table('restaurants')
+            ->select('nom_resteau', 'created_at')
+            ->orderBy('created_at', 'desc')
+            ->limit(5)
+            ->get();
+
+        // Récupérer la liste des restaurants avec pagination et filtres
+        $query = DB::table('restaurants')
+            ->select('id', 'nom_resteau', 'localisation', 'type_cuisine', 'image', 'prix', 'description', 'created_at', 'updated_at');
+
+        if ($request->has('type_cuisine') && $request->type_cuisine) {
+            $query->where('type_cuisine', $request->type_cuisine);
+        }
+
+        if ($request->has('recherche_resto') && $request->recherche_resto) {
+            $searchTerm = $request->recherche_resto;
+            $query->where(function($q) use ($searchTerm) {
+                $q->where('nom_resteau', 'like', "%{$searchTerm}%")
+                  ->orWhere('localisation', 'like', "%{$searchTerm}%")
+                  ->orWhere('type_cuisine', 'like', "%{$searchTerm}%");
+            });
+        }
+
+        $restaurants = $query->orderBy('created_at', 'desc')->paginate(10);
+
+        // Récupérer la liste des types de cuisine pour le filtre
+        $typesCuisine = DB::table('restaurants')
+            ->select('type_cuisine')
+            ->distinct()
+            ->orderBy('type_cuisine')
+            ->pluck('type_cuisine');
 
         return view('admin.dashboard', compact(
             'totalUsers', 'activeUsers', 'inactiveUsers',
-            'users', 'roles', 'roleFilter', 'statusFilter', 'hebergements',
-            'villes'
+            'users', 'roles', 'roleFilter', 'statusFilter',
+            'totalHotels', 'availableHotels', 'recentHotels', 'hebergements', 'villes',
+            'totalRestaurants', 'restaurantsByType', 'recentRestaurants', 'restaurants', 'typesCuisine'
         ));
     }
-
     public function toggleStatus(User $user)
     {
         $user->status = $user->status === 'active' ? 'inactive' : 'active';
