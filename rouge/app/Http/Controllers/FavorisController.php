@@ -32,15 +32,15 @@ class FavorisController extends Controller
         $user = Auth::user();
         
         if (!$user) {
-            return redirect()->route('login')->with('error', 'Vous devez être connecté pour gérer vos favoris.');
+            return redirect()->route('login')->with('error', 'Vous devez être connecte pour gerer vos favoris.');
         }
         
         if ($user->favoritesHotels()->where('id_hotels', $id)->exists()) {
             $user->favoritesHotels()->detach($id);
-            $message = 'Hôtel retiré des favoris.';
+            $message = 'Hotel retire des favoris.';
         } else {
             $user->favoritesHotels()->attach($id);
-            $message = 'Hôtel ajouté aux favoris.';
+            $message = 'Hotel ajoute aux favoris.';
         }
         
         return redirect()->back()->with('success', $message);
@@ -52,7 +52,7 @@ class FavorisController extends Controller
         $user = Auth::user();
         
         if (!$user) {
-            return redirect()->route('login')->with('error', 'Vous devez être connecté pour gérer vos favoris.');
+            return redirect()->route('login')->with('error', 'Vous devez etre connecte pour gerer vos favoris.');
         }
         
         if ($user->favoritesRestaurants()->where('favori_resteaux.id_resteau', $id)->exists()) {
@@ -60,7 +60,7 @@ class FavorisController extends Controller
             $message = 'Restaurant retiré des favoris.';
         } else {
             $user->favoritesRestaurants()->attach($id);
-            $message = 'Restaurant ajouté aux favoris.';
+            $message = 'Restaurant ajoute aux favoris.';
         }
         
         return redirect()->back()->with('success', $message);
@@ -72,7 +72,7 @@ class FavorisController extends Controller
         $user = Auth::user();
         
         if (!$user) {
-            return redirect()->route('login')->with('error', 'Vous devez être connecté pour gérer vos favoris.');
+            return redirect()->route('login')->with('error', 'Vous devez etre connecte pour gerer vos favoris.');
         }
         
         if ($user->favoritesMatches()->where('id_match', $id)->exists()) {

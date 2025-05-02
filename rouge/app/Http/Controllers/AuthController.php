@@ -43,10 +43,10 @@ class AuthController extends Controller
                 'id_role' => $validateUser['id_role'],
             ]);
             Auth::login($user);
-            return redirect()->route('dashboard')->with('success', 'Compte créé avec succès');
+            return redirect()->route('dashboard')->with('success', 'Compte cree avec succes');
 
         } catch (\Throwable $th) {
-            return back()->withInput()->with('error', 'Erreur lors de la création du compte: ' . $th->getMessage());
+            return back()->withInput()->with('error', 'Erreur lors de la creation du compte: ' . $th->getMessage());
         }
     }
    
@@ -89,16 +89,16 @@ class AuthController extends Controller
         return redirect('/')->with('success', 'Déconnexion réussie');
     }
 
-    public function profile()
-    {
-        $user = Auth::user();
+    // public function profile()
+    // {
+    //     $user = Auth::user();
         
-        if (!$user) {
-            return redirect('login')->with('error', 'Session expirée, veuillez vous reconnecter');
-        }
+    //     if (!$user) {
+    //         return redirect('login')->with('error', 'Session expirée, veuillez vous reconnecter');
+    //     }
         
-        return view('user.profile', compact('user'));
-    }
+    //     return view('user.profile', compact('user'));
+    // }
 
     // public function updateProfile(Request $request)
     // {

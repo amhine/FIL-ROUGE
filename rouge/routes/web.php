@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ReservationHotelController;
 use App\Http\Controllers\ReservationResteauController;
 use App\Http\Controllers\RestaurantStatistiquesController;
+use App\Http\Controllers\Trajetcontroller;
 use App\Models\PaiementHotel;
 
 /*
@@ -29,7 +30,7 @@ use App\Models\PaiementHotel;
 */
 
 Route::get('/', function () {
-    return view('auth.login');
+    return view('');
 });
 Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register.form');
 Route::post('/register', [AuthController::class, 'createUser'])->name('register');
@@ -69,6 +70,12 @@ Route::middleware(['auth','roles:Touriste'])->group(function () {
 
     Route::get('touriste/matches', [MatcheController::class, 'index'])->name('matche');
     Route::get('touriste/matches/{id}', [MatcheController::class, 'show'])->name('matche.details');
+
+    
+
+    Route::get('/trajets', [Trajetcontroller::class, 'index'])->name('trajet.index');
+    Route::post('/trajets', [TrajetController::class, 'search'])->name('trajet.search');
+
 });
 
 

@@ -18,7 +18,7 @@
 
         /* Custom Moroccan Theme */
         .bg-morocco {
-            background: linear-gradient(135deg, #b91c1c 0%, #f97316 100%);
+            background:  #b91c1c;
         }
 
         .text-morocco {
@@ -99,34 +99,9 @@
     <nav class="fixed w-full bg-morocco text-white shadow-lg z-50">
         <div class="container mx-auto py-4 px-6 flex items-center justify-between">
             <div class="flex items-center space-x-3">
-                <i class="fas fa-atlas text-3xl"></i>
                 <span class="font-bold text-2xl tracking-wide">StayMorocco</span>
             </div>
-            <div class="hidden md:flex space-x-10 text-lg">
-                <a href="#statistiques" class="nav-link hover:text-gray-200 transition flex items-center">
-                    <i class="fas fa-chart-line mr-2"></i>Statistiques
-                </a>
-                <a href="#users" class="nav-link hover:text-gray-200 transition flex items-center">
-                    <i class="fas fa-users mr-2"></i>Utilisateurs
-                </a>
-                <a href="#hebergements" class="nav-link hover:text-gray-200 transition flex items-center">
-                    <i class="fas fa-hotel mr-2"></i>Hébergements
-                </a>
-                <!-- Uncomment for logout functionality -->
-                <!--
-                <form action="{" method="POST" class="inline">
-                    @csrf
-                    <button type="submit" class="nav-link hover:text-gray-200 transition flex items-center">
-                        <i class="fas fa-sign-out-alt mr-2"></i>Déconnexion
-                    </button>
-                </form>
-                -->
-            </div>
-            <button class="md:hidden flex flex-col space-y-1" id="mobile-menu-button">
-                <span class="w-6 h-0.5 bg-white"></span>
-                <span class="w-6 h-0.5 bg-white"></span>
-                <span class="w-6 h-0.5 bg-white"></span>
-            </button>
+            
         </div>
         <div class="md:hidden hidden bg-morocco px-4 py-4" id="mobile-menu">
             <ul class="flex flex-col space-y-4">

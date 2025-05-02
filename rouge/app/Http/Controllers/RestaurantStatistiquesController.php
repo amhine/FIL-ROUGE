@@ -19,8 +19,8 @@ class RestaurantStatistiquesController extends Controller
                 'totalReservations' => 0,
                 'reservationsParMois' => [],
                 'reservationsParStatut' => [],
-                'statistiquesParResteau' => [], // Fixed variable name
-            ])->with('message', 'Vous n\'avez pas encore d\'annonces publiées.');
+                'statistiquesParResteau' => [], 
+            ])->with('message', 'Vous navez pas encore dannonces publies.');
         }
 
         $restaurantIds = $restaurants->pluck('id');

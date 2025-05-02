@@ -10,80 +10,15 @@ class AdminController extends Controller
 {
    
 
-    // public function index(Request $request)
-    // {
-        
-    //     $totalUsers = User::count();
-    //     $activeUsers = User::where('status', 'active')->count();
-    //     $inactiveUsers = User::where('status', 'inactive')->count();
-
-    //     $roleFilter = $request->query('role');
-    //     $statusFilter = $request->query('status');
-
-    //     $query = User::with('role');
-        
-    //     if ($roleFilter) {
-    //         $query->where('id_role', $roleFilter);
-    //     }
-        
-    //     if ($statusFilter) {
-    //         $query->where('status', $statusFilter);
-    //     }
-
-        
-    //     $users = $query->paginate(10);
-    //     $roles = Role::all();
-
-    //     $query = DB::table('hotels')
-    //     ->join('users', 'hotels.hebergeur_id', '=', 'users.id')
-    //     ->select(
-    //         'hotels.*',
-    //         'users.name as proprietaire_nom',
-    //         'users.email as proprietaire_email'
-    //     );
-
-    //     if ($request->has('ville') && $request->ville) {
-    //         $query->where('hotels.ville', $request->ville);
-    //     }
-
-   
-
-    //     if ($request->has('recherche') && $request->recherche) {
-    //         $searchTerm = $request->recherche;
-    //         $query->where(function($q) use ($searchTerm) {
-    //             $q->where('hotels.nom_hotel', 'like', "%{$searchTerm}%")
-    //             ->orWhere('hotels.adress', 'like', "%{$searchTerm}%")
-    //             ->orWhere('hotels.ville', 'like', "%{$searchTerm}%")
-    //             ->orWhere('users.name', 'like', "%{$searchTerm}%")
-    //             ->orWhere('users.email', 'like', "%{$searchTerm}%");
-    //         });
-    //     }
-    //     $hebergements = $query->orderBy('hotels.created_at', 'desc')
-    //                           ->paginate(10);
-    
-    //     // Récupérer la liste des villes pour le filtre
-    //     $villes = DB::table('hotels')
-    //                 ->select('ville')
-    //                 ->distinct()
-    //                 ->orderBy('ville')
-    //                 ->pluck('ville');
-
-    //     return view('admin.dashboard', compact(
-    //         'totalUsers', 'activeUsers', 'inactiveUsers',
-    //         'users', 'roles', 'roleFilter', 'statusFilter', 'hebergements',
-    //         'villes'
-    //     ));
-    // }
-
 
     public function index(Request $request)
     {
-        // Statistiques des utilisateurs
+        
         $totalUsers = User::count();
         $activeUsers = User::where('status', 'active')->count();
         $inactiveUsers = User::where('status', 'inactive')->count();
 
-        // Filtres pour les utilisateurs
+        
         $roleFilter = $request->query('role');
         $statusFilter = $request->query('status');
 
@@ -100,7 +35,7 @@ class AdminController extends Controller
         $users = $query->paginate(10);
         $roles = Role::where('id', '!=', 1)->get();
 
-        // Statistiques des hôtels
+        
         $totalHotels = DB::table('hotels')->count();
         $availableHotels = DB::table('hotels')
             ->where('disponibilite', '>=', now()->toDateString())
@@ -111,7 +46,6 @@ class AdminController extends Controller
             ->limit(5)
             ->get();
 
-        // Récupérer la liste des hôtels avec pagination et filtres
         $query = DB::table('hotels')
             ->join('users', 'hotels.hebergeur_id', '=', 'users.id')
             ->select(
@@ -137,14 +71,12 @@ class AdminController extends Controller
 
         $hebergements = $query->orderBy('hotels.created_at', 'desc')->paginate(10);
 
-        // Récupérer la liste des villes pour le filtre
         $villes = DB::table('hotels')
             ->select('ville')
             ->distinct()
             ->orderBy('ville')
             ->pluck('ville');
 
-        // Statistiques des restaurants
         $totalRestaurants = DB::table('restaurants')->count();
         $restaurantsByType = DB::table('restaurants')
             ->select('type_cuisine', DB::raw('count(*) as count'))
@@ -156,7 +88,6 @@ class AdminController extends Controller
             ->limit(5)
             ->get();
 
-        // Récupérer la liste des restaurants avec pagination et filtres
         $query = DB::table('restaurants')
             ->select('id', 'nom_resteau', 'localisation', 'type_cuisine', 'image', 'prix', 'description', 'created_at', 'updated_at');
 
@@ -175,7 +106,6 @@ class AdminController extends Controller
 
         $restaurants = $query->orderBy('created_at', 'desc')->paginate(10);
 
-        // Récupérer la liste des types de cuisine pour le filtre
         $typesCuisine = DB::table('restaurants')
             ->select('type_cuisine')
             ->distinct()
@@ -213,7 +143,7 @@ class AdminController extends Controller
     
         if (!$hotel) {
             return redirect()->route('dashboard')
-                             ->with('error', 'Hébergement non trouvé');
+                             ->with('error', 'Hebergement non trouve');
         }
     
         $equipements = DB::table('equipements')
@@ -244,7 +174,7 @@ class AdminController extends Controller
         DB::table('hotels')->where('id', $id)->delete();
     
         return redirect()->route('dashboard')
-                         ->with('success', 'Hébergement supprimé avec succès');
+                         ->with('success', 'Hebergement supprime avec succes');
     }
 
 
@@ -264,43 +194,28 @@ class AdminController extends Controller
     
         if (!$resteau) {
             return redirect()->route('dashboard')
-                             ->with('error', 'restaurants non trouvé');
+                             ->with('error', 'restaurants non trouve');
         }
     
 
         return view('admin.restaurants-details', compact('resteau'));
     }
-    // public function deleteRestaurant($id)
-    // {
-    //     $restaurants = DB::table('restaurants')->where('id', $id)->first();
-        
-    //     if (!$restaurants) {
-    //         return redirect()->route('dashboard')
-    //                          ->with('error', 'restaurants non trouvé');
-    //     }
-
-    //     DB::table('reservations_resteaux')->where('id_resteau', $id)->delete();
-        
-    //     DB::table('restaurants')->where('id', $id)->delete();
-    
-    //     return redirect()->route('dashboard')
-    //                      ->with('success', 'restaurants supprimé avec succès');
-    // }
+  
 
     public function deleteRestaurant($id)
-{
-    $restaurants = DB::table('restaurants')->where('id', $id)->first();
-    
-    if (!$restaurants) {
+    {
+        $restaurants = DB::table('restaurants')->where('id', $id)->first();
+        
+        if (!$restaurants) {
+            return redirect()->route('dashboard')
+                             ->with('error', 'restaurants non trouve');
+        }
+
+        DB::table('reservations_resteaux')->where('id_resteau', $id)->delete();
+        
+        DB::table('restaurants')->where('id', $id)->delete();
+
         return redirect()->route('dashboard')
-                         ->with('error', 'restaurants non trouvé');
+                         ->with('success', 'restaurants supprime avec succes');
     }
-
-    DB::table('reservations_resteaux')->where('id_resteau', $id)->delete();
-    
-    DB::table('restaurants')->where('id', $id)->delete();
-
-    return redirect()->route('dashboard')
-                     ->with('success', 'restaurants supprimé avec succès');
-}
 }

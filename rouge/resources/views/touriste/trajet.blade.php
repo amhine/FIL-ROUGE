@@ -3,195 +3,330 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Maroc </title>
+    <title>Maroc - Trouver un trajet</title>
     <script src="https://cdn.tailwindcss.com"></script>
- 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body class="bg-gray-50">
-    <!-- Nav -->
-    <nav id="navbar" class="fixed w-full bg-[#C02626] text-white transition-all duration-300 z-50">
-        <div class="container mx-auto py-4 flex items-center justify-between">
-           
-            <div class="flex items-center">
-                <span class="font-bold text-xl">StayMorocco</span>
+    <!-- Navigation -->
+    <nav class="fixed w-full bg-[#C02626] text-white z-50">
+        <div class="container mx-auto py-4 flex items-center justify-between px-4">
+            <span class="font-bold text-xl">StayMorocco</span>
+            <div class="hidden md:flex space-x-8">
+                <a href="#accueil" class="hover:text-yellow-300">Accueil</a>
+                <a href="#stades" class="hover:text-yellow-300">Stades</a>
+                <a href="#hebergements" class="hover:text-yellow-300">Hébergements</a>
+                <a href="#restaurants" class="hover:text-yellow-300">Restaurants</a>
+                <a href="#trajets" class="hover:text-yellow-300 border-b-2 border-yellow-300">Trajets</a>
             </div>
-            
-            <!-- Desktop Menu  -->
-            <div class="hidden md:flex items-center justify-center flex-grow">
-                <ul class="flex space-x-8">
-                    <li><a href="#accueil" class="">Accueil</a></li>
-                    <li><a href="#stades" class="">Stades</a></li>
-                    <li><a href="#hebergements" class="">Hébergements</a></li>
-                    <li><a href="#restaurants" class="">Restaurants</a></li>
-                    <li><a href="#restaurants" class="">Favoris</a></li>
-                    <li><a href="#trajets" class="">Trajets</a></li>
-                </ul>
-            </div>
-            
-            
-            <!-- Mobile menu button -->
-            <div class="md:hidden flex items-center space-x-4">
-                <button class="flex flex-col space-y-1" id="mobile-menu-button">
-                    <span class="w-6 h-0.5 bg-white"></span>
-                    <span class="w-6 h-0.5 bg-white"></span>
-                    <span class="w-6 h-0.5 bg-white"></span>
-                </button>
-            </div>
+            <button class="md:hidden flex flex-col space-y-1" id="mobile-menu-button">
+                <span class="w-6 h-0.5 bg-white"></span>
+                <span class="w-6 h-0.5 bg-white"></span>
+                <span class="w-6 h-0.5 bg-white"></span>
+            </button>
         </div>
-    
-        <!-- Mobile Menu -->
         <div class="md:hidden hidden bg-[#C02626] px-4 py-4" id="mobile-menu">
             <ul class="flex flex-col space-y-4">
-                <li><a href="#accueil" class="block py-2 hover:text-morocco-gold transition-colors duration-300">Accueil</a></li>
-                <li><a href="#equipes" class="block py-2 hover:text-morocco-gold transition-colors duration-300">Équipes</a></li>
-                <li><a href="#stades" class="block py-2 hover:text-morocco-gold transition-colors duration-300">Stades</a></li>
-                <li><a href="#hebergements" class="block py-2 hover:text-morocco-gold transition-colors duration-300">Hébergements</a></li>
-                <li><a href="#restaurants" class="block py-2 hover:text-morocco-gold transition-colors duration-300">Restaurants</a></li>
-                <li><a href="#trajets" class="block py-2 hover:text-morocco-gold transition-colors duration-300">Trajets</a></li>
-                <li><a href="#inscrire" class="block py-2 hover:text-morocco-gold transition-colors duration-300">S'inscrire</a></li>
+                <li><a href="#accueil" class="block py-2 hover:text-yellow-300">Accueil</a></li>
+                <li><a href="#stades" class="block py-2 hover:text-yellow-300">Stades</a></li>
+                <li><a href="#hebergements" class="block py-2 hover:text-yellow-300">Hébergements</a></li>
+                <li><a href="#restaurants" class="block py-2 hover:text-yellow-300">Restaurants</a></li>
+                <li><a href="#trajets" class="block py-2 hover:text-yellow-300 border-b-2 border-yellow-300">Trajets</a></li>
             </ul>
         </div>
     </nav>
 
-     <!-- Hero Image -->
-     <section id="accueil" class=" w-full min-h-screen pt-16">
-        
-        <div class="relative w-full h-full">
-        <img src="{{ asset('images/hero-trajet.png') }}" alt="Équipe nationale du Maroc" class="w-full h-full object-cover" />
+    <!-- Main Content -->
+    <section class="pt-20 pb-12">
+        <div class="max-w-5xl mx-auto px-4">
+            <h1 class="text-3xl font-bold text-gray-800 mb-8">Trouvez votre trajet au Maroc</h1>
+
+            <!-- Search Form -->
+            <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+                <form method="POST" action="{{ route('trajet.search') }}">
+                    @csrf
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                        <div>
+                            <label for="departure" class="block text-gray-700 font-medium mb-2">Ville de départ</label>
+                            <select id="departure" name="departure" class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-600" required>
+                                <option value="">Sélectionner une ville</option>
+                                @foreach($cities as $city)
+                                    <option value="{{ $city['id'] }}" {{ old('departure') == $city['id'] ? 'selected' : '' }}>{{ $city['name'] }}</option>
+                                @endforeach
+                            </select>
+                            @error('departure')
+                                <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                            @enderror
+                        </div>
+                        <div>
+                            <label for="arrival" class="block text-gray-700 font-medium mb-2">Ville d'arrivée</label>
+                            <select id="arrival" name="arrival" class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-600" required>
+                                <option value="">Sélectionner une ville</option>
+                                @foreach($cities as $city)
+                                    <option value="{{ $city['id'] }}" {{ old('arrival') == $city['id'] ? 'selected' : '' }}>{{ $city['name'] }}</option>
+                                @endforeach
+                            </select>
+                            @error('arrival')
+                                <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                            @enderror
+                        </div>
+                       
+                        <div class="flex items-end">
+                            <button type="submit" class="w-full bg-green-700 hover:bg-green-800 text-white py-2 px-4 rounded-md font-medium transition-colors">
+                                <i class="fas fa-search mr-2"></i> Rechercher
+                            </button>
+                        </div>
+                    </div>
+                </form>
+                @if (session('error'))
+                    <div class="text-red-500 text-sm mt-4">{{ session('error') }}</div>
+                @endif
+            </div>
+
+            <!-- Search Results -->
+            @if (isset($routes))
+                <div>
+                    <div class="mb-6 bg-white rounded-lg shadow-md p-6 border-l-4 border-green-600">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <h2 class="text-2xl font-bold text-gray-800">{{ $departureCity['name'] }} → {{ $arrivalCity['name'] }}</h2>
+                           
+                            </div>
+                            <div class="text-right">
+                                <div class="text-gray-600 text-sm">Distance totale</div>
+                                <div class="text-xl font-bold text-green-700">{{ $routes[0]['distance'] }} km</div>
+                            </div>
+                        </div>
+                    </div>
+
+                   
+                    <!-- Mode de transport tabs -->
+                    <div class="bg-white rounded-lg shadow-md overflow-hidden mb-6">
+                        <div class="flex border-b">
+                            <button class="w-1/2 py-3 font-medium text-center focus:outline-none transport-tab active" data-target="train-options">
+                                <i class="fas fa-train mr-2"></i> Train
+                            </button>
+                            <button class="w-1/2 py-3 font-medium text-center focus:outline-none transport-tab" data-target="bus-options">
+                                <i class="fas fa-bus mr-2"></i> Bus
+                            </button>
+                        </div>
+                        
+                        <!-- Train Options -->
+                        <div id="train-options" class="transport-content">
+                            @php
+                                $showTrain = collect($routes)->firstWhere('duration.train', '!=', null) !== null;
+                            @endphp
+                            
+                            @if ($showTrain)
+                                <!-- Train Schedules Grid -->
+                                <div class="p-6">
+                                    <h5 class="font-medium text-gray-800 mb-4 flex items-center">
+                                        <i class="fas fa-clock mr-2 text-purple-700"></i> Horaires disponibles
+                                    </h5>
+                                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+                                        @foreach ($routes as $route)
+                                            @if (isset($route['duration']['train']) && $route['duration']['train'] !== null)
+                                                @foreach ($route['schedule']['train'] as $time)
+                                                    <div class="border rounded-lg p-4 hover:shadow-md transition-shadow bg-purple-50">
+                                                        <div class="flex justify-between items-center mb-3">
+                                                            <span class="font-semibold text-purple-800">{{ $time }}</span>
+                                                            <span class="text-xs bg-purple-200 text-purple-800 rounded-full px-2 py-1">
+                                                                {{ $route['duration']['train'] }} min
+                                                            </span>
+                                                        </div>
+                                                        
+                                                        <div class="flex items-center my-3 relative">
+                                                            <div class="flex flex-col items-center">
+                                                                <div class="text-sm font-bold text-gray-800">{{ $time }}</div>
+                                                                <div class="text-xs text-gray-600">{{ strtoupper($departureCity['name']) }} AGDAL</div>
+                                                            </div>
+                                                            <div class="flex-1 h-1 bg-gray-200 mx-2 relative">
+                                                                <div class="absolute top-0 left-0 h-full bg-purple-600" style="width: 100%;"></div>
+                                                            </div>
+                                                            <div class="flex flex-col items-center">
+                                                                <div class="text-sm font-bold text-gray-800">
+                                                                    {{ date('H:i', strtotime($time . ' + ' . $route['duration']['train'] . ' minutes')) }}
+                                                                </div>
+                                                                <div class="text-xs text-gray-600">{{ strtoupper($arrivalCity['name']) }} VOYAGEURS</div>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                        <div class="flex justify-between items-center mt-3 text-sm">
+                                                            <span class="font-medium text-gray-700">2ème Classe</span>
+                                                            <span class="font-bold text-purple-700">{{ $route['price']['train']['secondClass'] }} DH</span>
+                                                        </div>
+                                                        
+                                                        @if (isset($route['price']['train']['firstClass']))
+                                                        <div class="flex justify-between items-center mt-2 text-sm">
+                                                            <span class="font-medium text-gray-700">1ère Classe</span>
+                                                            <span class="font-bold text-purple-700">{{ $route['price']['train']['firstClass'] }} DH</span>
+                                                        </div>
+                                                        @endif
+                                                        
+                                                        <div class="flex flex-wrap gap-2 mt-3 mb-3">
+                                                            @foreach ($transportModes->where('id', 'train')->first()['features'] as $feature)
+                                                                <span class="text-xs bg-white rounded-full px-2 py-1 text-gray-600 border">
+                                                                    <i class="fas fa-{{ $feature == 'wifi' ? 'wifi' : ($feature == 'air_conditioning' ? 'snowflake' : 'utensils') }} text-purple-700 mr-1"></i>
+                                                                    {{ ucfirst(str_replace('_', ' ', $feature)) }}
+                                                                </span>
+                                                            @endforeach
+                                                        </div>
+                                                        
+                                                       
+                                                    </div>
+                                                @endforeach
+                                            @endif
+                                        @endforeach
+                                    </div>
+                                </div>
+                            @else
+                                <div class="p-8 text-center text-gray-600">
+                                    <i class="fas fa-train text-4xl mb-3 text-gray-400"></i>
+                                    <p>Aucun trajet en train disponible pour cette destination.</p>
+                                </div>
+                            @endif
+                        </div>
+                        
+                        <!-- Bus Options -->
+                        <div id="bus-options" class="transport-content hidden">
+                            @php
+                                $showBus = collect($routes)->firstWhere('duration.bus', '!=', null) !== null;
+                            @endphp
+                            
+                            @if ($showBus)
+                                <!-- Bus Schedules Grid -->
+                                <div class="p-6">
+                                    <h5 class="font-medium text-gray-800 mb-4 flex items-center">
+                                        <i class="fas fa-clock mr-2 text-blue-700"></i> Horaires disponibles
+                                    </h5>
+                                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+                                        @foreach ($routes as $route)
+                                            @if (isset($route['duration']['bus']) && $route['duration']['bus'] !== null)
+                                                @foreach ($route['schedule']['bus'] as $time)
+                                                    <div class="border rounded-lg p-4 hover:shadow-md transition-shadow bg-blue-50">
+                                                        <div class="flex justify-between items-center mb-3">
+                                                            <span class="font-semibold text-blue-800">{{ $time }}</span>
+                                                            <span class="text-xs bg-blue-200 text-blue-800 rounded-full px-2 py-1">
+                                                                {{ $route['duration']['bus'] }} min
+                                                            </span>
+                                                        </div>
+                                                        
+                                                        <div class="flex items-center my-3 relative">
+                                                            <div class="flex flex-col items-center">
+                                                                <div class="text-sm font-bold text-gray-800">{{ $time }}</div>
+                                                                <div class="text-xs text-gray-600">{{ strtoupper($departureCity['name']) }}</div>
+                                                            </div>
+                                                            <div class="flex-1 h-1 bg-gray-200 mx-2 relative">
+                                                                <div class="absolute top-0 left-0 h-full bg-blue-600" style="width: 100%;"></div>
+                                                            </div>
+                                                            <div class="flex flex-col items-center">
+                                                                <div class="text-sm font-bold text-gray-800">
+                                                                    {{ date('H:i', strtotime($time . ' + ' . $route['duration']['bus'] . ' minutes')) }}
+                                                                </div>
+                                                                <div class="text-xs text-gray-600">{{ strtoupper($arrivalCity['name']) }}</div>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                        <div class="flex justify-between items-center mt-3 text-sm">
+                                                            <span class="font-medium text-gray-700">Prix standard</span>
+                                                            <span class="font-bold text-blue-700">{{ $route['price']['bus'] }} DH</span>
+                                                        </div>
+                                                        
+                                                        <div class="flex flex-wrap gap-2 mt-3 mb-3">
+                                                            @foreach ($transportModes->where('id', 'bus')->first()['features'] as $feature)
+                                                                <span class="text-xs bg-white rounded-full px-2 py-1 text-gray-600 border">
+                                                                    <i class="fas fa-{{ $feature == 'wifi' ? 'wifi' : 'snowflake' }} text-blue-700 mr-1"></i>
+                                                                    {{ ucfirst(str_replace('_', ' ', $feature)) }}
+                                                                </span>
+                                                            @endforeach
+                                                            <span class="text-xs bg-white rounded-full px-2 py-1 text-gray-600 border">
+                                                                <i class="fas fa-suitcase text-blue-700 mr-1"></i>
+                                                                20kg inclus
+                                                            </span>
+                                                        </div>
+                                                        
+                                                       
+                                                    </div>
+                                                @endforeach
+                                            @endif
+                                        @endforeach
+                                    </div>
+                                </div>
+                            @else
+                                <div class="p-8 text-center text-gray-600">
+                                    <i class="fas fa-bus text-4xl mb-3 text-gray-400"></i>
+                                    <p>Aucun trajet en bus disponible pour cette destination.</p>
+                                </div>
+                            @endif
+                        </div>
+                    </div>
+                    
+                    <!-- Extra Travel Tips -->
+                    <div class="bg-white rounded-lg shadow-md p-6">
+                        <h3 class="text-lg font-semibold mb-4 text-gray-800 flex items-center">
+                            <i class="fas fa-info-circle mr-2 text-green-700"></i> Conseils de voyage
+                        </h3>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div class="border rounded-lg p-4 hover:shadow-md transition-shadow">
+                                <div class="flex items-center text-green-700 mb-2">
+                                    <i class="fas fa-clock text-xl mr-2"></i>
+                                    <h4 class="font-medium">Horaires d'affluence</h4>
+                                </div>
+                                <p class="text-gray-600 text-sm">Les trajets sont généralement plus chargés le matin (7h-9h) et le soir (17h-19h).</p>
+                            </div>
+                            <div class="border rounded-lg p-4 hover:shadow-md transition-shadow">
+                                <div class="flex items-center text-green-700 mb-2">
+                                    <i class="fas fa-tag text-xl mr-2"></i>
+                                    <h4 class="font-medium">Tarifs réduits</h4>
+                                </div>
+                                <p class="text-gray-600 text-sm">Réductions disponibles pour les étudiants, seniors et groupes de 4+ personnes.</p>
+                            </div>
+                            <div class="border rounded-lg p-4 hover:shadow-md transition-shadow">
+                                <div class="flex items-center text-green-700 mb-2">
+                                    <i class="fas fa-luggage-cart text-xl mr-2"></i>
+                                    <h4 class="font-medium">Bagages</h4>
+                                </div>
+                                <p class="text-gray-600 text-sm">2 bagages inclus gratuitement. Frais supplémentaires pour les bagages volumineux.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endif
         </div>
-        
-        
     </section>
 
-    <section class="bg-white rounded-lg shadow-md p-6 mb-8">
-        <form>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
-                <div class="mb-4">
-                    <label for="departure" class="block text-gray-700 font-medium mb-2">Ville de départ</label>
-                    <select id="departure" name="departure" class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-600">
-                        <option value="">Sélectionner une ville</option>
-                        <option value="casablanca">Casablanca</option>
-                        <option value="rabat">Rabat</option>
-                        <option value="marrakech">Marrakech</option>
-                        <option value="agadir">Agadir</option>
-                        <option value="tanger">Tanger</option>
-                        <option value="fes">Fès</option>
-                    </select>
-                </div>
+    <!-- JavaScript for Tab Switching -->
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+        
+        // Transport tab switching
+        document.querySelectorAll('.transport-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Update active tab styles
+                document.querySelectorAll('.transport-tab').forEach(t => {
+                    t.classList.remove('active');
+                    t.classList.remove('bg-gray-100');
+                    t.classList.remove('text-gray-800');
+                });
                 
-                <div class="mb-4">
-                    <label for="arrival" class="block text-gray-700 font-medium mb-2">Ville d'arrivée</label>
-                    <select id="arrival" name="arrival" class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-600">
-                        <option value="">Sélectionner une ville</option>
-                        <option value="casablanca">Casablanca</option>
-                        <option value="rabat">Rabat</option>
-                        <option value="marrakech">Marrakech</option>
-                        <option value="agadir">Agadir</option>
-                        <option value="tanger">Tanger</option>
-                        <option value="fes">Fès</option>
-                    </select>
-                </div>
+                tab.classList.add('active');
+                tab.classList.add('bg-gray-100');
+                tab.classList.add('text-gray-800');
                 
-                <div class="mb-4">
-                    <label for="date" class="block text-gray-700 font-medium mb-2">Date</label>
-                    <input type="date" id="date" name="date" class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-600">
-                </div>
+                // Hide all content and show the selected one
+                document.querySelectorAll('.transport-content').forEach(content => {
+                    content.classList.add('hidden');
+                });
                 
-                <div class="mb-4">
-                    <label for="transport" class="block text-gray-700 font-medium mb-2">Mode de transport</label>
-                    <select id="transport" name="transport" class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-600">
-                        <option value="">Tous</option>
-                        <option value="train">Train</option>
-                        <option value="bus">Bus</option>
-                        <option value="navette">Navette</option>
-                    </select>
-                </div>
-                
-                <div class="mb-4 flex items-end">
-                    <button type="submit" class="w-full bg-green-700 hover:bg-green-800 text-white py-2 px-4 rounded-md font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-green-600">
-                        Rechercher
-                    </button>
-                </div>
-            </div>
-        </form>
-    </section>
-
-     <!-- Footer -->
-     <footer class="bg-[#c92424] text-white py-16">
-        <div class="container mx-auto px-8">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 md:gap-y-10 mb-16">
-                
-                <div class="flex justify-center md:justify-start">
-                    <h2 class="font-bold text-xl w-fit mx-auto">StayMorocco</h2>
-                </div>
-    
-                <div class="text-center md:text-left">
-                    <h3 class="font-semibold text-lg mb-6">Informations</h3>
-                    <ul class="space-y-4">
-                        <li><a href="#" class="hover:underline">À propos</a></li>
-                        <li><a href="#" class="hover:underline">Actualités</a></li>
-                        <li><a href="#" class="hover:underline">Contact</a></li>
-                    </ul>
-                </div>
-    
-                <div class="text-center md:text-left">
-                    <h3 class="font-semibold text-lg mb-6">Liens utiles</h3>
-                    <ul class="space-y-4">
-                        <li><a href="#" class="hover:underline">Calendrier des matchs</a></li>
-                        <li><a href="#" class="hover:underline">Classements</a></li>
-                        <li><a href="#" class="hover:underline">Billetterie</a></li>
-                    </ul>
-                </div>
-    
-                <div class="text-center md:text-left">
-                    <h3 class="font-semibold text-lg mb-6">Partenaires</h3>
-                    <ul class="space-y-4">
-                        <li><a href="#" class="hover:underline">FIFA</a></li>
-                        <li><a href="#" class="hover:underline">Sponsors</a></li>
-                        <li><a href="#" class="hover:underline">Hôtels & Transports</a></li>
-                    </ul>
-                </div>
-            </div>
-    
-            <div class="border-t border-white/30 mb-8"></div>
-    
-            <div class="flex flex-col md:flex-row justify-between items-center">
-                
-                <div class="flex space-x-6 mb-6 md:mb-0">
-                    <a href="#" class="hover:opacity-80 hover:scale-110 transition">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-twitter-x" viewBox="0 0 16 16">
-                            <path d="M12.6.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867-5.07-4.425 5.07H.316l5.733-6.57L0 .75h5.063l3.495 4.633L12.601.75Zm-.86 13.028h1.36L4.323 2.145H2.865z"/>
-                        </svg>
-                    </a>
-                    <a href="#" class="hover:opacity-80 hover:scale-110 transition">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-linkedin" viewBox="0 0 16 16">
-                            <path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854zm4.943 12.248V6.169H2.542v7.225zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248S2.4 3.226 2.4 3.934c0 .694.521 1.248 1.327 1.248zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016l.016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225z"/>
-                        </svg>
-                    </a>
-                    <a href="#" class="hover:opacity-80 hover:scale-110 transition">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-facebook" viewBox="0 0 16 16">
-                            <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951"/>
-                        </svg>
-                    </a>
-                </div>
-    
-                <div class="text-center">
-                    <p class="text-sm">&copy; 2025 Coupe du Monde 2030 - Tous droits réservés.</p>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    
-  
+                document.getElementById(tab.getAttribute('data-target')).classList.remove('hidden');
+            });
+        });
+        
+        // Apply some initial styles to active tab
+        document.querySelector('.transport-tab.active').classList.add('bg-gray-100', 'text-gray-800');
+    </script>
 </body>
 </html>
-
-
-
-    
-
-
-
-
-
