@@ -73,8 +73,8 @@ Route::middleware(['auth','roles:Touriste'])->group(function () {
 
     
 
-    Route::get('/trajets', [Trajetcontroller::class, 'index'])->name('trajet.index');
-    Route::post('/trajets', [TrajetController::class, 'search'])->name('trajet.search');
+    Route::get('touriste/trajets', [Trajetcontroller::class, 'index'])->name('trajet.index');
+    Route::post('touriste/trajets', [TrajetController::class, 'search'])->name('trajet.search');
 
 });
 
