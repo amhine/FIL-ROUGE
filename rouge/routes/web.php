@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\EquipementController;
 use App\Http\Controllers\hotelcontroller;
 use App\Http\Controllers\RestaurantController;
 use App\Http\Controllers\stadeController;
@@ -90,6 +91,7 @@ Route::middleware(['auth', 'roles:Hébergeur'])->group(function () {
     Route::delete('/hebergeur/hebergement/delete/{id}', [HotelController::class, 'destroy'])->name('hebergeur.hebergement.delete');
     Route::get('/hebergeur/statistiques', [HebergeurStatistiquesController::class, 'index'])->name('hebergeur.statistiques');
     Route::get('/hebergeur/hotel/{hotelId}/detail', [HebergeurStatistiquesController::class, 'detailHotel'])->name('hebergeur.hotel.detail');
+    Route::delete('/hebergeur/reservations/{id}/cancel', [HebergeurStatistiquesController::class, 'cancel'])->name('hebergement.reservations.cancel');
 
 
 
@@ -104,7 +106,7 @@ Route::middleware(['auth', 'roles:Restaurant'])->group(function () {
     Route::delete('/resteau/resteaurant/delete/{id}', [RestaurantController::class, 'destroy'])->name('resteau.resteaurant.delete');
     Route::get('/resteaurant/statistiques', [RestaurantStatistiquesController::class, 'index'])->name('resteau.resteaurant.statistiques');
     Route::get('/resteaurant/hotel/{hotelId}/detail', [RestaurantStatistiquesController::class, 'detailresteau'])->name('resteaurant.resteau.detail');
-
+    Route::delete('/resteaurant/reservations/{id}/cancel', [RestaurantStatistiquesController::class, 'cancel'])->name('reservations.cancel');
 });
 
 
@@ -116,5 +118,7 @@ Route::get('/admin/hebergements/{id}', [AdminController::class, 'showHebergement
 Route::delete('/admin/hebergements/{id}', [AdminController::class, 'deleteHebergement'])->name('admin.hebergements.delete');
 Route::get('/admin/Restaurant/{id}', [AdminController::class, 'showRestaurant'])->name('admin.restaurants.show');
 Route::delete('/admin/Restaurant/{id}', [AdminController::class, 'deleteRestaurant'])->name('admin.restaurants.delete');
+Route::post('/equipement/store', [EquipementController::class, 'store'])->name('equipement.storeMultiple');
+Route::delete('/equipement/{id}', [EquipementController::class, 'destroy'])->name('equipement.delete');
 
 });

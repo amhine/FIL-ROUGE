@@ -5,20 +5,23 @@ use App\Models\User;
 use App\Models\Role;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Repository\Interface\EquipementInterface;
 
 class AdminController extends Controller
 {
-   
+    protected $equipementRepository;
 
+    public function __construct(EquipementInterface $equipementRepository)
+    {
+        $this->equipementRepository = $equipementRepository;
+    }
 
     public function index(Request $request)
     {
-        
         $totalUsers = User::count();
         $activeUsers = User::where('status', 'active')->count();
         $inactiveUsers = User::where('status', 'inactive')->count();
 
-        
         $roleFilter = $request->query('role');
         $statusFilter = $request->query('status');
 
@@ -35,7 +38,6 @@ class AdminController extends Controller
         $users = $query->paginate(10);
         $roles = Role::where('id', '!=', 1)->get();
 
-        
         $totalHotels = DB::table('hotels')->count();
         $availableHotels = DB::table('hotels')
             ->where('disponibilite', '>=', now()->toDateString())
@@ -112,13 +114,17 @@ class AdminController extends Controller
             ->orderBy('type_cuisine')
             ->pluck('type_cuisine');
 
+        $equipements = $this->equipementRepository->all();
+
         return view('admin.dashboard', compact(
             'totalUsers', 'activeUsers', 'inactiveUsers',
             'users', 'roles', 'roleFilter', 'statusFilter',
             'totalHotels', 'availableHotels', 'recentHotels', 'hebergements', 'villes',
-            'totalRestaurants', 'restaurantsByType', 'recentRestaurants', 'restaurants', 'typesCuisine'
+            'totalRestaurants', 'restaurantsByType', 'recentRestaurants', 'restaurants', 'typesCuisine',
+            'equipements'
         ));
     }
+
     public function toggleStatus(User $user)
     {
         $user->status = $user->status === 'active' ? 'inactive' : 'active';
@@ -126,8 +132,6 @@ class AdminController extends Controller
 
         return redirect()->route('dashboard')->with('message', 'User status updated.');
     }
-
-
 
     public function showHebergement($id)
     {
@@ -143,21 +147,16 @@ class AdminController extends Controller
     
         if (!$hotel) {
             return redirect()->route('dashboard')
-                             ->with('error', 'Hebergement non trouve');
+                             ->with('error', 'Hébergement non trouvé');
         }
     
         $equipements = DB::table('equipements')
-        ->join('hotel_equipe', 'equipements.id', '=', 'hotel_equipe.equipe_id')
-        ->where('hotel_equipe.hotel_id', $id)
-        ->get();
-        
-    
-        
+            ->join('hotel_equipe', 'equipements.id', '=', 'hotel_equipe.equipe_id')
+            ->where('hotel_equipe.hotel_id', $id)
+            ->get();
     
         return view('admin.hebergement-details', compact('hotel', 'equipements'));
     }
-    
-  
     
     public function deleteHebergement($id)
     {
@@ -168,17 +167,12 @@ class AdminController extends Controller
                              ->with('error', 'Hébergement non trouvé');
         }
         DB::table('hotel_equipe')->where('hotel_id', $id)->delete();
-
         DB::table('reservations_hotels')->where('hotels_id', $id)->delete();
-        
         DB::table('hotels')->where('id', $id)->delete();
     
         return redirect()->route('dashboard')
-                         ->with('success', 'Hebergement supprime avec succes');
+                         ->with('success', 'Hébergement supprimé avec succès');
     }
-
-
-
 
     public function showRestaurant($id)
     {
@@ -194,13 +188,11 @@ class AdminController extends Controller
     
         if (!$resteau) {
             return redirect()->route('dashboard')
-                             ->with('error', 'restaurants non trouve');
+                             ->with('error', 'Restaurant non trouvé');
         }
     
-
         return view('admin.restaurants-details', compact('resteau'));
     }
-  
 
     public function deleteRestaurant($id)
     {
@@ -208,14 +200,13 @@ class AdminController extends Controller
         
         if (!$restaurants) {
             return redirect()->route('dashboard')
-                             ->with('error', 'restaurants non trouve');
+                             ->with('error', 'Restaurant non trouvé');
         }
 
         DB::table('reservations_resteaux')->where('id_resteau', $id)->delete();
-        
         DB::table('restaurants')->where('id', $id)->delete();
 
         return redirect()->route('dashboard')
-                         ->with('success', 'restaurants supprime avec succes');
+                         ->with('success', 'Restaurant supprimé avec succès');
     }
 }

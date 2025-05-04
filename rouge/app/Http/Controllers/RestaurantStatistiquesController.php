@@ -50,7 +50,7 @@ class RestaurantStatistiquesController extends Controller
                 $restaurant->id => [
                     'nom_resteau' => $restaurant->nom_resteau,
                     'total_reservations' => $restaurantReservations->count(),
-                    'revenu_total' => $restaurantReservations->where('status', 'confirme')->sum('prix_total'), // Fixed status spelling
+                    'revenu_total' => $restaurantReservations->where('status', 'confirme')->sum('prix_total'),
                 ],
             ];
         })->toArray();
@@ -70,5 +70,12 @@ class RestaurantStatistiquesController extends Controller
         $resteau = Restaurant::findOrFail($resteauId);
         return view('restaurateur.details_resteau', compact('resteau'));
     }
+
+    public function cancel($id)
+{
+    $reservation = ReservationResteau::findOrFail($id);
+    $reservation->update(['status' => 'annule']);
+    return redirect()->back()->with('success', 'Réservation annulée avec succès.');
+}
 
 }

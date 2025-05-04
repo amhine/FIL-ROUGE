@@ -7,6 +7,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
@@ -18,7 +19,7 @@
 
         /* Custom Moroccan Theme */
         .bg-morocco {
-            background:  #b91c1c;
+            background: #b91c1c;
         }
 
         .text-morocco {
@@ -101,22 +102,14 @@
             <div class="flex items-center space-x-3">
                 <span class="font-bold text-2xl tracking-wide">StayMorocco</span>
             </div>
-            
         </div>
         <div class="md:hidden hidden bg-morocco px-4 py-4" id="mobile-menu">
             <ul class="flex flex-col space-y-4">
                 <li><a href="#statistiques" class="block py-2 hover:text-gray-300 flex items-center"><i class="fas fa-chart-line mr-2"></i>Statistiques</a></li>
                 <li><a href="#users" class="block py-2 hover:text-gray-300 flex items-center"><i class="fas fa-users mr-2"></i>Utilisateurs</a></li>
                 <li><a href="#hebergements" class="block py-2 hover:text-gray-300 flex items-center"><i class="fas fa-hotel mr-2"></i>Hébergements</a></li>
-                <!-- Uncomment for logout functionality -->
-                <!--
-                <li>
-                    <form action="}" method="POST">
-                        @csrf
-                        <button type="submit" class="block py-2 hover:text-gray-300 flex items-center"><i class="fas fa-sign-out-alt mr-2"></i>Déconnexion</button>
-                    </form>
-                </li>
-                -->
+                <li><a href="#restaurants" class="block py-2 hover:text-gray-300 flex items-center"><i class="fas fa-utensils mr-2"></i>Restaurants</a></li>
+                <li><a href="#equipements" class="block py-2 hover:text-gray-300 flex items-center"><i class="fas fa-tools mr-2"></i>Équipements</a></li>
             </ul>
         </div>
     </nav>
@@ -193,7 +186,7 @@
         <!-- User Management Section -->
         <div id="users" class="mt-16 scroll-mt-28">
             <div class="flex items-center mb-8">
-                <h2 class="text-3xl font-bold text-gray-800">Gestion des utilisateurs</h2>
+                <h2 class="text-3xl font-bold text-gray-800">Gestion des utilisateurs</h>
             </div>
             <div class="bg-white p-8 rounded-2xl shadow-lg mb-8">
                 <h4 class="text-xl font-bold mb-6 text-gray-800 flex items-center">
@@ -237,7 +230,7 @@
 
             @if($users->isEmpty())
                 <div class="bg-white p-12 rounded-2xl shadow-lg text-center">
-                    <i class="fas fa-user LOOKING FOR ASSISTANCE? Grok can help with almost anything—hit me up! 😄 What's on your mind? -slash text-6xl text-gray-300 mb-4"></i>
+                    <i class="fas fa-user-slash text-6xl text-gray-300 mb-4"></i>
                     <p class="text-gray-500 text-xl">Aucun utilisateur trouvé pour ces critères.</p>
                 </div>
             @else
@@ -315,308 +308,434 @@
         </div>
 
         <!-- Hébergements Section -->
-<div id="hebergements" class="mt-16 scroll-mt-28">
-    <div class="flex items-center mb-8">
-        <h2 class="text-3xl font-bold text-gray-800">Gestion des hébergements</h2>
-    </div>
+        <div id="hebergements" class="mt-16 scroll-mt-28">
+            <div class="flex items-center mb-8">
+                <h2 class="text-3xl font-bold text-gray-800">Gestion des hébergements</h2>
+            </div>
 
-    <!-- Statistiques des hôtels -->
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-        <div class="stat-card bg-white p-6 rounded-2xl shadow-lg border-l-4 border-morocco">
-            <div class="flex justify-between items-center mb-4">
-                <h5 class="text-lg font-semibold text-gray-700">Total des hôtels</h5>
-                <div class="bg-red-100 p-3 rounded-full text-morocco">
-                    <i class="fas fa-hotel text-xl"></i>
-                </div>
-            </div>
-            <h2 class="text-4xl font-extrabold text-morocco">{{ $totalHotels }}</h2>
-            <p class="text-gray-500 mt-2 text-sm">Hôtels enregistrés</p>
-        </div>
-        <div class="stat-card bg-white p-6 rounded-2xl shadow-lg border-l-4 border-blue-500">
-            <div class="flex justify-between items-center mb-4">
-                <h5 class="text-lg font-semibold text-gray-700">Hôtels disponibles</h5>
-                <div class="bg-blue-100 p-3 rounded-full text-blue-600">
-                    <i class="fas fa-check-circle text-xl"></i>
-                </div>
-            </div>
-            <h2 class="text-4xl font-extrabold text-blue-600">{{ $availableHotels }}</h2>
-            <p class="text-gray-500 mt-2 text-sm">Hôtels actuellement disponibles</p>
-        </div>
-        <div class="stat-card bg-white p-6 rounded-2xl shadow-lg border-l-4 border-green-500">
-            <div class="flex justify-between items-center mb-4">
-                <h5 class="text-lg font-semibold text-gray-700">Nouveaux hôtels</h5>
-                <div class="bg-green-100 p-3 rounded-full text-green-600">
-                    <i class="fas fa-clock text-xl"></i>
-                </div>
-            </div>
-            <h2 class="text-4xl font-extrabold text-green-600">{{ $recentHotels->count() }}</h2>
-            <p class="text-gray-500 mt-2 text-sm">Ajoutés récemment</p>
-        </div>
-    </div>
-
-    <!-- Filtrage des hôtels -->
-    <div class="bg-white p-8 rounded-2xl shadow-lg mb-8">
-        <h4 class="text-xl font-bold mb-6 text-gray-800 flex items-center">
-            <i class="fas fa-filter mr-2 text-morocco"></i>Filtrer les hébergements
-        </h4>
-        <form method="GET" action="{{ route('dashboard') }}" class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4">
-            <div class="w-full md:w-1/3">
-                <label class="block text-gray-700 text-sm font-medium mb-2">Ville</label>
-                <div class="relative">
-                    <select name="ville" id="ville" class="appearance-none w-full bg-gray-50 border border-gray-300 text-gray-700 py-3 px-4 pr-8 rounded-lg focus:outline-none focus:ring-2 focus:ring-morocco focus:border-transparent">
-                        <option value="">Toutes les villes</option>
-                        @foreach ($villes as $ville)
-                            <option value="{{ $ville }}" {{ request('ville') == $ville ? 'selected' : '' }}>{{ $ville }}</option>
-                        @endforeach
-                    </select>
-                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                        <i class="fas fa-chevron-down"></i>
+            <!-- Statistiques des hôtels -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+                <div class="stat-card bg-white p-6 rounded-2xl shadow-lg border-l-4 border-morocco">
+                    <div class="flex justify-between items-center mb-4">
+                        <h5 class="text-lg font-semibold text-gray-700">Total des hôtels</h5>
+                        <div class="bg-red-100 p-3 rounded-full text-morocco">
+                            <i class="fas fa-hotel text-xl"></i>
+                        </div>
                     </div>
+                    <h2 class="text-4xl font-extrabold text-morocco">{{ $totalHotels }}</h2>
+                    <p class="text-gray-500 mt-2 järvi text-sm">Hôtels enregistrés</p>
                 </div>
-            </div>
-            <div class="w-full md:w-1/3">
-                <label class="block text-gray-700 text-sm font-medium mb-2">Recherche</label>
-                <div class="relative">
-                    <input type="text" name="recherche" id="recherche" value="{{ request('recherche') }}" 
-                           placeholder="Nom, adresse, ville, propriétaire..." 
-                           class="pl-10 pr-4 py-3 border border-gray-300 rounded-lg w-full focus:outline-none focus:ring-2 focus:ring-morocco focus:border-transparent">
-                    <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
-                </div>
-            </div>
-            <div class="w-full md:w-1/3 flex items-end">
-                <button type="submit" class="btn w-full bg-morocco text-white px-6 py-3 rounded-lg hover:bg-red-700 transition flex items-center justify-center">
-                    <i class="fas fa-search mr-2"></i>Filtrer
-                </button>
-            </div>
-        </form>
-        @if(request('recherche') || request('ville'))
-            <div class="mt-4">
-                <a href="{{ route('dashboard') }}" class="btn bg-gray-600 text-white px-4 py-2 rounded-lg hover:bg-gray-700 transition">
-                    <i class="fas fa-times mr-2"></i>Réinitialiser
-                </a>
-            </div>
-        @endif
-    </div>
-
-    <!-- Liste des hôtels -->
-    <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
-        <div class="overflow-x-auto">
-            <table class="min-w-full divide-y divide-gray-200">
-                <thead class="bg-gray-50">
-                    <tr>
-                        <th scope="col" class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
-                        <th scope="col" class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Hôtel</th>
-                        <th scope="col" class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Propriétaire</th>
-                        <th scope="col" class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Ville</th>
-                        <th scope="col" class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Prix/Nuit</th>
-                        <th scope="col" class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Disponibilité</th>
-                        <th scope="col" class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date de création</th>
-                        <th scope="col" class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
-                    </tr>
-                </thead>
-                <tbody class="bg-white divide-y divide-gray-200">
-                    @forelse ($hebergements as $hebergement)
-                        <tr class="table-row">
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $hebergement->id }}</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ $hebergement->nom_hotel }}</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $hebergement->proprietaire_nom }} ({{ $hebergement->proprietaire_email }})</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $hebergement->ville }}</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ number_format($hebergement->prix_nuit, 2) }} MAD</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                <span class="px-3 py-1 text-sm rounded-full {{ $hebergement->disponibilite ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700' }}">
-                                    {{ $hebergement->disponibilite ? 'Disponible' : 'Indisponible' }}
-                                </span>
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ \Carbon\Carbon::parse($hebergement->created_at)->format('d/m/Y') }}</td>
-                           
-                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                <a href="{{ route('admin.hebergements.show', $hebergement->id) }}" class="btn text-blue-600 hover:text-blue-900 mr-2">
-                                    <i class="fas fa-eye"></i> Voir
-                                </a>
-                                <form action="{{ route('admin.hebergements.delete', $hebergement->id) }}" method="POST" class="inline-block" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce restaurant ?');">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn text-red-600 hover:text-red-900">
-                                        <i class="fas fa-trash"></i> Supprimer
-                                    </button>
-                                </form>
-                                
-                            </td>
-                        </tr>
-                    @empty
-                        <tr>
-                            <td colspan="8" class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-center">
-                                Aucun hébergement trouvé.
-                            </td>
-                        </tr>
-                    @endforelse
-                </tbody>
-            </table>
-        </div>
-        <!-- Pagination -->
-        <div class="mt-6 flex justify-center">
-            {{ $hebergements->links('pagination::tailwind') }}
-        </div>
-    </div>
-</div>
-
-    <!-- Restaurants Section -->
-<div id="restaurants" class="mt-16 scroll-mt-28">
-    <div class="flex items-center mb-8">
-        <h2 class="text-3xl font-bold text-gray-800">Gestion des restaurants</h2>
-    </div>
-
-    <!-- Statistiques des restaurants -->
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-        <div class="stat-card bg-white p-6 rounded-2xl shadow-lg border-l-4 border-morocco">
-            <div class="flex justify-between items-center mb-4">
-                <h5 class="text-lg font-semibold text-gray-700">Total des restaurants</h5>
-                <div class="bg-red-100 p-3 rounded-full text-morocco">
-                    <i class="fas fa-utensils text-xl"></i>
-                </div>
-            </div>
-            <h2 class="text-4xl font-extrabold text-morocco">{{ $totalRestaurants }}</h2>
-            <p class="text-gray-500 mt-2 text-sm">Restaurants enregistrés</p>
-        </div>
-        <div class="stat-card bg-white p-6 rounded-2xl shadow-lg border-l-4 border-blue-500">
-            <div class="flex justify-between items-center mb-4">
-                <h5 class="text-lg font-semibold text-gray-700">Types de cuisine</h5>
-                <div class="bg-blue-100 p-3 rounded-full text-blue-600">
-                    <i class="fas fa-list-alt text-xl"></i>
-                </div>
-            </div>
-            <h2 class="text-4xl font-extrabold text-blue-600">{{ $restaurantsByType->count() }}</h2>
-            <p class="text-gray-500 mt-2 text-sm">Catégories distinctes</p>
-        </div>
-        <div class="stat-card bg-white p-6 rounded-2xl shadow-lg border-l-4 border-green-500">
-            <div class="flex justify-between items-center mb-4">
-                <h5 class="text-lg font-semibold text-gray-700">Nouveaux restaurants</h5>
-                <div class="bg-green-100 p-3 rounded-full text-green-600">
-                    <i class="fas fa-clock text-xl"></i>
-                </div>
-            </div>
-            <h2 class="text-4xl font-extrabold text-green-600">{{ $recentRestaurants->count() }}</h2>
-            <p class="text-gray-500 mt-2 text-sm">Ajoutés récemment</p>
-        </div>
-    </div>
-
-    <!-- Filtrage des restaurants -->
-    <div class="bg-white p-8 rounded-2xl shadow-lg mb-8">
-        <h4 class="text-xl font-bold mb-6 text-gray-800 flex items-center">
-            <i class="fas fa-filter mr-2 text-morocco"></i>Filtrer les restaurants
-        </h4>
-        <form method="GET" action="{{ route('dashboard') }}" class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4">
-            <div class="w-full md:w-1/3">
-                <label class="block text-gray-700 text-sm font-medium mb-2">Type de cuisine</label>
-                <div class="relative">
-                    <select name="type_cuisine" id="type_cuisine" class="appearance-none w-full bg-gray-50 border border-gray-300 text-gray-700 py-3 px-4 pr-8 rounded-lg focus:outline-none focus:ring-2 focus:ring-morocco focus:border-transparent">
-                        <option value="">Tous les types</option>
-                        @foreach ($typesCuisine as $type)
-                            <option value="{{ $type }}" {{ request('type_cuisine') == $type ? 'selected' : '' }}>{{ $type }}</option>
-                        @endforeach
-                    </select>
-                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                        <i class="fas fa-chevron-down"></i>
+                <div class="stat-card bg-white p-6 rounded-2xl shadow-lg border-l-4 border-blue-500">
+                    <div class="flex justify-between items-center mb-4">
+                        <h5 class="text-lg font-semibold text-gray-700">Hôtels disponibles</h5>
+                        <div class="bg-blue-100 p-3 rounded-full text-blue-600">
+                            <i class="fas fa-check-circle text-xl"></i>
+                        </div>
                     </div>
+                    <h2 class="text-4xl font-extrabold text-blue-600">{{ $availableHotels }}</h2>
+                    <p class="text-gray-500 mt-2 text-sm">Hôtels actuellement disponibles</p>
+                </div>
+                <div class="stat-card bg-white p-6 rounded-2xl shadow-lg border-l-4 border-green-500">
+                    <div class="flex justify-between items-center mb-4">
+                        <h5 class="text-lg font-semibold text-gray-700">Nouveaux hôtels</h5>
+                        <div class="bg-green-100 p-3 rounded-full text-green-600">
+                            <i class="fas fa-clock text-xl"></i>
+                        </div>
+                    </div>
+                    <h2 class="text-4xl font-extrabold text-green-600">{{ $recentHotels->count() }}</h2>
+                    <p class="text-gray-500 mt-2 text-sm">Ajoutés récemment</p>
                 </div>
             </div>
-            <div class="w-full md:w-1/3">
-                <label class="block text-gray-700 text-sm font-medium mb-2">Recherche</label>
-                <div class="relative">
-                    <input type="text" name="recherche_resto" id="recherche_resto" value="{{ request('recherche_resto') }}" 
-                           placeholder="Nom, localisation, type..." 
-                           class="pl-10 pr-4 py-3 border border-gray-300 rounded-lg w-full focus:outline-none focus:ring-2 focus:ring-morocco focus:border-transparent">
-                    <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
+
+            <!-- Filtrage des hôtels -->
+            <div class="bg-white p-8 rounded-2xl shadow-lg mb-8">
+                <h4 class="text-xl font-bold mb-6 text-gray-800 flex items-center">
+                    <i class="fas fa-filter mr-2 text-morocco"></i>Filtrer les hébergements
+                </h4>
+                <form method="GET" action="{{ route('dashboard') }}" class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4">
+                    <div class="w-full md:w-1/3">
+                        <label class="block text-gray-700 text-sm font-medium mb-2">Ville</label>
+                        <div class="relative">
+                            <select name="ville" id="ville" class="appearance-none w-full bg-gray-50 border border-gray-300 text-gray-700 py-3 px-4 pr-8 rounded-lg focus:outline-none focus:ring-2 focus:ring-morocco focus:border-transparent">
+                                <option value="">Toutes les villes</option>
+                                @foreach ($villes as $ville)
+                                    <option value="{{ $ville }}" {{ request('ville') == $ville ? 'selected' : '' }}>{{ $ville }}</option>
+                                @endforeach
+                            </select>
+                            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-full md:w-1/3">
+                        <label class="block text-gray-700 text-sm font-medium mb-2">Recherche</label>
+                        <div class="relative">
+                            <input type="text" name="recherche" id="recherche" value="{{ request('recherche') }}" 
+                                   placeholder="Nom, adresse, ville, propriétaire..." 
+                                   class="pl-10 pr-4 py-3 border border-gray-300 rounded-lg w-full focus:outline-none focus:ring-2 focus:ring-morocco focus:border-transparent">
+                            <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
+                        </div>
+                    </div>
+                    <div class="w-full md:w-1/3 flex items-end">
+                        <button type="submit" class="btn w-full bg-morocco text-white px-6 py-3 rounded-lg hover:bg-red-700 transition flex items-center justify-center">
+                            <i class="fas fa-search mr-2"></i>Filtrer
+                        </button>
+                    </div>
+                </form>
+                @if(request('recherche') || request('ville'))
+                    <div class="mt-4">
+                        <a href="{{ route('dashboard') }}" class="btn bg-gray-600 text-white px-4 py-2 rounded-lg hover:bg-gray-700 transition">
+                            <i class="fas fa-times mr-2"></i>Réinitialiser
+                        </a>
+                    </div>
+                @endif
+            </div>
+
+            <!-- Liste des hôtels -->
+            <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th scope="col" class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
+                                <th scope="col" class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Hôtel</th>
+                                <th scope="col" class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Propriétaire</th>
+                                <th scope="col" class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Ville</th>
+                                <th scope="col" class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Prix/Nuit</th>
+                                <th scope="col" class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Disponibilité</th>
+                                <th scope="col" class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date de création</th>
+                                <th scope="col" class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200">
+                            @forelse ($hebergements as $hebergement)
+                                <tr class="table-row">
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $hebergement->id }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ $hebergement->nom_hotel }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $hebergement->proprietaire_nom }} ({{ $hebergement->proprietaire_email }})</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $hebergement->ville }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ number_format($hebergement->prix_nuit, 2) }} MAD</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                        <span class="px-3 py-1 text-sm rounded-full {{ $hebergement->disponibilite ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700' }}">
+                                            {{ $hebergement->disponibilite ? 'Disponible' : 'Indisponible' }}
+                                        </span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ \Carbon\Carbon::parse($hebergement->created_at)->format('d/m/Y') }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                        <a href="{{ route('admin.hebergements.show', $hebergement->id) }}" class="btn text-blue-600 hover:text-blue-900 mr-2">
+                                            <i class="fas fa-eye"></i> Voir
+                                        </a>
+                                        <form action="{{ route('admin.hebergements.delete', $hebergement->id) }}" method="POST" class="inline-block" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet hébergement ?');">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn text-red-600 hover:text-red-900">
+                                                <i class="fas fa-trash"></i> Supprimer
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="8" class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-center">
+                                        Aucun hébergement trouvé.
+                                    </td>
+                                </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                </div>
+                <!-- Pagination -->
+                <div class="mt-6 flex justify-center">
+                    {{ $hebergements->links('pagination::tailwind') }}
                 </div>
             </div>
-            <div class="w-full md:w-1/3 flex items-end">
-                <button type="submit" class="btn w-full bg-morocco text-white px-6 py-3 rounded-lg hover:bg-red-700 transition flex items-center justify-center">
-                    <i class="fas fa-search mr-2"></i>Filtrer
-                </button>
-            </div>
-        </form>
-        @if(request('recherche_resto') || request('type_cuisine'))
-            <div class="mt-4">
-                <a href="{{ route('dashboard') }}" class="btn bg-gray-600 text-white px-4 py-2 rounded-lg hover:bg-gray-700 transition">
-                    <i class="fas fa-times mr-2"></i>Réinitialiser
-                </a>
-            </div>
-        @endif
-    </div>
-
-    <!-- Liste des restaurants -->
-    <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
-        <div class="overflow-x-auto">
-            <table class="min-w-full divide-y divide-gray-200">
-                <thead class="bg-gray-50">
-                    <tr>
-                        <th scope="col" class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
-                        <th scope="col" class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nom</th>
-                        <th scope="col" class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Localisation</th>
-                        <th scope="col" class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Type de cuisine</th>
-                        <th scope="col" class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Prix moyen</th>
-                        <th scope="col" class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date de création</th>
-                        <th scope="col" class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
-                    </tr>
-                </thead>
-                <tbody class="bg-white divide-y divide-gray-200">
-                    @forelse ($restaurants as $resto)
-                        <tr class="table-row">
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $resto->id }}</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ $resto->nom_resteau }}</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $resto->localisation }}</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                <span class="px-3 py-1 text-sm rounded-full bg-blue-100 text-blue-700">{{ $resto->type_cuisine }}</span>
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ number_format($resto->prix, 2) }} MAD</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ \Carbon\Carbon::parse($resto->created_at)->format('d/m/Y') }}</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                <a href="{{ route('admin.restaurants.show', $resto->id) }}" class="btn text-blue-600 hover:text-blue-900 mr-2">
-                                    <i class="fas fa-eye"></i> Voir
-                                </a>
-                                <form action="{{ route('admin.restaurants.delete', $resto->id) }}" method="POST" class="inline-block" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce restaurant ?');">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn text-red-600 hover:text-red-900">
-                                        <i class="fas fa-trash"></i> Supprimer
-                                    </button>
-                                </form>
-                            </td>
-                        </tr>
-                    @empty
-                        <tr>
-                            <td colspan="7" class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-center">
-                                Aucun restaurant trouvé.
-                            </td>
-                        </tr>
-                    @endforelse
-                </tbody>
-            </table>
         </div>
-        <!-- Pagination -->
-        <div class="mt-6 flex justify-center">
-            {{ $restaurants->links('pagination::tailwind') }}
+
+        <!-- Restaurants Section -->
+        <div id="restaurants" class="mt-16 scroll-mt-28">
+            <div class="flex items-center mb-8">
+                <h2 class="text-3xl font-bold text-gray-800">Gestion des restaurants</h2>
+            </div>
+
+            <!-- Statistiques des restaurants -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+                <div class="stat-card bg-white p-6 rounded-2xl shadow-lg border-l-4 border-morocco">
+                    <div class="flex justify-between items-center mb-4">
+                        <h5 class="text-lg font-semibold text-gray-700">Total des restaurants</h5>
+                        <div class="bg-red-100 p-3 rounded-full text-morocco">
+                            <i class="fas fa-utensils text-xl"></i>
+                        </div>
+                    </div>
+                    <h2 class="text-4xl font-extrabold text-morocco">{{ $totalRestaurants }}</h2>
+                    <p class="text-gray-500 mt-2 text-sm">Restaurants enregistrés</p>
+                </div>
+                <div class="stat-card bg-white p-6 rounded-2xl shadow-lg border-l-4 border-blue-500">
+                    <div class="flex justify-between items-center mb-4">
+                        <h5 class="text-lg font-semibold text-gray-700">Types de cuisine</h5>
+                        <div class="bg-blue-100 p-3 rounded-full text-blue-600">
+                            <i class="fas fa-list-alt text-xl"></i>
+                        </div>
+                    </div>
+                    <h2 class="text-4xl font-extrabold text-blue-600">{{ $restaurantsByType->count() }}</h2>
+                    <p class="text-gray-500 mt-2 text-sm">Catégories distinctes</p>
+                </div>
+                <div class="stat-card bg-white p-6 rounded-2xl shadow-lg border-l-4 border-green-500">
+                    <div class="flex justify-between items-center mb-4">
+                        <h5 class="text-lg font-semibold text-gray-700">Nouveaux restaurants</h5>
+                        <div class="bg-green-100 p-3 rounded-full text-green-600">
+                            <i class="fas fa-clock text-xl"></i>
+                        </div>
+                    </div>
+                    <h2 class="text-4xl font-extrabold text-green-600">{{ $recentRestaurants->count() }}</h2>
+                    <p class="text-gray-500 mt-2 text-sm">Ajoutés récemment</p>
+                </div>
+            </div>
+
+            <!-- Filtrage des restaurants -->
+            <div class="bg-white p-8 rounded-2xl shadow-lg mb-8">
+                <h4 class="text-xl font-bold mb-6 text-gray-800 flex items-center">
+                    <i class="fas fa-filter mr-2 text-morocco"></i>Filtrer les restaurants
+                </h4>
+                <form method="GET" action="{{ route('dashboard') }}" class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4">
+                    <div class="w-full md:w-1/3">
+                        <label class="block text-gray-700 text-sm font-medium mb-2">Type de cuisine</label>
+                        <div class="relative">
+                            <select name="type_cuisine" id="type_cuisine" class="appearance-none w-full bg-gray-50 border border-gray-300 text-gray-700 py-3 px-4 pr-8 rounded-lg focus:outline-none focus:ring-2 focus:ring-morocco focus:border-transparent">
+                                <option value="">Tous les types</option>
+                                @foreach ($typesCuisine as $type)
+                                    <option value="{{ $type }}" {{ request('type_cuisine') == $type ? 'selected' : '' }}>{{ $type }}</option>
+                                @endforeach
+                            </select>
+                            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-full md:w-1/3">
+                        <label class="block text-gray-700 text-sm font-medium mb-2">Recherche</label>
+                        <div class="relative">
+                            <input type="text" name="recherche_resto" id="recherche_resto" value="{{ request('recherche_resto') }}" 
+                                   placeholder="Nom, localisation, type..." 
+                                   class="pl-10 pr-4 py-3 border border-gray-300 rounded-lg w-full focus:outline-none focus:ring-2 focus:ring-morocco focus:border-transparent">
+                            <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
+                        </div>
+                    </div>
+                    <div class="w-full md:w-1/3 flex items-end">
+                        <button type="submit" class="btn w-full bg-morocco text-white px-6 py-3 rounded-lg hover:bg-red-700 transition flex items-center justify-center">
+                            <i class="fas fa-search mr-2"></i>Filtrer
+                        </button>
+                    </div>
+                </form>
+                @if(request('recherche_resto') || request('type_cuisine'))
+                    <div class="mt-4">
+                        <a href="{{ route('dashboard') }}" class="btn bg-gray-600 text-white px-4 py-2 rounded-lg hover:bg-gray-700 transition">
+                            <i class="fas fa-times mr-2"></i>Réinitialiser
+                        </a>
+                    </div>
+                @endif
+            </div>
+
+            <!-- Liste des restaurants -->
+            <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th scope="col" class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
+                                <th scope="col" class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nom</th>
+                                <th scope="col" class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Localisation</th>
+                                <th scope="col" class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Type de cuisine</th>
+                                <th scope="col" class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Prix moyen</th>
+                                <th scope="col" class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date de création</th>
+                                <th scope="col" class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200">
+                            @forelse ($restaurants as $resto)
+                                <tr class="table-row">
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $resto->id }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ $resto->nom_resteau }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $resto->localisation }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                        <span class="px-3 py-1 text-sm rounded-full bg-blue-100 text-blue-700">{{ $resto->type_cuisine }}</span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ number_format($resto->prix, 2) }} MAD</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ \Carbon\Carbon::parse($resto->created_at)->format('d/m/Y') }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                        <a href="{{ route('admin.restaurants.show', $resto->id) }}" class="btn text-blue-600 hover:text-blue-900 mr-2">
+                                            <i class="fas fa-eye"></i> Voir
+                                        </a>
+                                        <form action="{{ route('admin.restaurants.delete', $resto->id) }}" method="POST" class="inline-block" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce restaurant ?');">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn text-red-600 hover:text-red-900">
+                                                <i class="fas fa-trash"></i> Supprimer
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="7" class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-center">
+                                        Aucun restaurant trouvé.
+                                    </td>
+                                </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                </div>
+                <!-- Pagination -->
+                <div class="mt-6 flex justify-center">
+                    {{ $restaurants->links('pagination::tailwind') }}
+                </div>
+            </div>
+        </div>
+
+        <!-- Equipements Section -->
+        <div id="equipements" class="mt-16 scroll-mt-28">
+            <div class="flex items-center mb-8">
+                <h2 class="text-3xl font-bold text-gray-800">Gestion des équipements</h2>
+            </div>
+
+            <!-- Form to Add Multiple Equipments -->
+            <div class="bg-white p-8 rounded-2xl shadow-lg mb-8">
+                <h4 class="text-xl font-bold mb-6 text-gray-800 flex items-center">
+                    <i class="fas fa-tools mr-2 text-morocco"></i>Ajouter des équipements
+                </h4>
+                <form action="{{ route('equipement.storeMultiple') }}" method="POST" enctype="multipart/form-data" class="space-y-6">
+                    @csrf
+                    <div id="equipements-container">
+                        <div class="equipement-form bg-gray-50 p-6 rounded-lg border border-gray-200">
+                            <div class="mb-4">
+                                <label for="equipements[0][nom_equipe]" class="block text-gray-700 text-sm font-medium mb-2">Nom de l'équipement</label>
+                                <input type="text" name="equipements[0][nom_equipe]" 
+                                       class="w-full bg-white border border-gray-300 text-gray-700 py-3 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-morocco focus:border-transparent @error('equipements.0.nom_equipe') border-red-500 @enderror"
+                                       value="{{ old('equipements.0.nom_equipe') }}"
+                                       placeholder="Ex: Piscine, Wi-Fi...">
+                                @error('equipements.0.nom_equipe')
+                                    <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                                @enderror
+                            </div>
+                            <div>
+                                <label for="equipements[0][image]" class="block text-gray-700 text-sm font-medium mb-2">Image</label>
+                                <input type="text" name="equipements[0][image]" 
+                                       class="w-full bg-white border border-gray-300 text-gray-700 py-3 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-morocco focus:border-transparent @error('equipements.0.image') border-red-500 @enderror"
+                                       placeholder="Image">
+                                @error('equipements.0.image')
+                                    <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                                @enderror
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex justify-between items-center mt-6">
+                        <button type="button" id="add-equipement" class="btn bg-gray-600 text-white px-4 py-2 rounded-lg hover:bg-gray-700 transition flex items-center">
+                            <i class="fas fa-plus mr-2"></i>Ajouter un autre équipement
+                        </button>
+                        <button type="submit" class="btn bg-morocco text-white px-6 py-3 rounded-lg hover:bg-red-700 transition flex items-center">
+                            <i class="fas fa-save mr-2"></i>Enregistrer tous les équipements
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Liste des équipements -->
+            <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th scope="col" class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
+                                <th scope="col" class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nom</th>
+                                <th scope="col" class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Image</th>
+                                <th scope="col" class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date de création</th>
+                                <th scope="col" class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200">
+                            @forelse ($equipements as $equipement)
+                                <tr class="table-row">
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $equipement->id }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ $equipement->nom_equipe }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                        @if($equipement->image)
+                                            <img src="{{  $equipement->image }}" alt="{{ $equipement->nom_equipe }}" class="h-12 w-12 object-cover rounded">
+                                        @else
+                                            <span class="text-gray-400">Aucune image</span>
+                                        @endif
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ \Carbon\Carbon::parse($equipement->created_at)->format('d/m/Y') }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                        <form action="{{ route('equipement.delete', $equipement->id) }}" method="POST" class="inline-block" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet équipement ?');">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn text-red-600 hover:text-red-900">
+                                                <i class="fas fa-trash"></i> Supprimer
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="5" class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-center">
+                                        Aucun équipement trouvé.
+                                    </td>
+                                </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                </div>
+                <!-- Pagination -->
+                {{-- <div class="mt-6 flex justify-center">
+                    {{ $equipements->links('pagination::tailwind') }}
+                </div> --}}
+            </div>
         </div>
     </div>
-</div>
 
-<!-- JavaScript for Delete Confirmation -->
-<script>
-function confirmDelete(id) {
-    if (confirm('Êtes-vous sûr de vouloir supprimer ce restaurant ?')) {
-        const form = document.createElement('form');
-        form.method = 'POST';
-        form.action = `/restaurants/${id}`;
-        form.innerHTML = `
-            <input type="hidden" name="_token" value="{{ csrf_token() }}">
-            <input type="hidden" name="_method" value="DELETE">
-        `;
-        document.body.appendChild(form);
-        form.submit();
-    }
-}
-</script>
-    </div>
+    <!-- JavaScript for Delete Confirmation and Dynamic Form -->
+    <script>
+        function confirmDelete(id, type) {
+            if (confirm(`Êtes-vous sûr de vouloir supprimer ce ${type} ?`)) {
+                const form = document.createElement('form');
+                form.method = 'POST';
+                form.action = `/${type}s/${id}`;
+                form.innerHTML = `
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                    <input type="hidden" name="_method" value="DELETE">
+                `;
+                document.body.appendChild(form);
+                form.submit();
+            }
+        }
 
+        let equipementCount = 1;
+        $('#add-equipement').click(function() {
+            const newEquipement = `
+                <div class="equipement-form bg-gray-50 p-6 rounded-lg border border-gray-200 mt-4">
+                    <div class="mb-4">
+                        <label for="equipements[${equipementCount}][nom_equipe]" class="block text-gray-700 text-sm font-medium mb-2">Nom de l'équipement</label>
+                        <input type="text" name="equipements[${equipementCount}][nom_equipe]" 
+                               class="w-full bg-white border border-gray-300 text-gray-700 py-3 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-morocco focus:border-transparent"
+                               placeholder="Ex: Piscine, Wi-Fi...">
+                    </div>
+                    <div>
+                        <label for="equipements[${equipementCount}][image]" class="block text-gray-700 text-sm font-medium mb-2">Image</label>
+                        <input type="text" name="equipements[${equipementCount}][image]" 
+                               class="w-full bg-white border border-gray-300 text-gray-700 py-3 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-morocco focus:border-transparent"
+                               placeholder="Image">
+                    </div>
+                    <button type="button" class="btn text-red-600 hover:text-red-900 mt-4 remove-equipement">
+                        <i class="fas fa-trash mr-2"></i>Supprimer cet équipement
+                    </button>
+                </div>
+            `;
+            $('#equipements-container').append(newEquipement);
+            equipementCount++;
+        });
+
+        $(document).on('click', '.remove-equipement', function() {
+            $(this).closest('.equipement-form').remove();
+        });
+    </script>
 </body>
 </html>

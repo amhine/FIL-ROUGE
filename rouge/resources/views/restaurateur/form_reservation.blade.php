@@ -1,119 +1,94 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ajouter une Annonce - TouriStay</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body>
-    <div class="w-full max-w-2xl mx-auto p-8">
-        <!-- Card Container -->
+@extends('layouts.resteaurateur')
+
+@section('title', 'Ajouter un Restaurant')
+
+@section('content')
+    <div class="w-full max-w-2xl mx-auto">
         <div class="bg-white rounded-lg shadow-lg p-6">
             <h2 class="text-lg font-medium mb-6 text-center">Ajouter une Annonce de Restaurant</h2>
-            
-            <!-- Affichage des erreurs -->
-            @if ($errors->any())
-                <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-4" role="alert">
+            @if($errors->any())
+                <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-4">
                     <ul>
-                        @foreach ($errors->all() as $error)
+                        @foreach($errors->all() as $error)
                             <li>{{ $error }}</li>
                         @endforeach
                     </ul>
                 </div>
             @endif
-            
-            <!-- Form -->
-            <form action="{{ route('resteau.resteaurant.store') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('resteau.resteaurant.store') }}" method="POST">
                 @csrf
-                
-                <!-- Informations de Base -->
                 <div class="mb-6">
                     <div class="grid grid-cols-1 gap-6">
-                        <!-- Titre -->
                         <div class="col-span-1">
                             <label for="nom_resteau" class="block text-sm font-medium text-gray-700 mb-2">Nom du restaurant</label>
-                            <input type="text" name="nom_resteau" id="nom_resteau" placeholder="Nom du restaurant" 
-                                   class="w-full py-3 px-4 border border-gray-400 rounded-lg focus:outline-none focus:border-blue-500" value="{{ old('nom_resteau') }}">
+                            <input type="text" name="nom_resteau" id="nom_resteau" value="{{ old('nom_resteau') }}" placeholder="Nom du restaurant" 
+                                   class="w-full py-3 px-4 border border-gray-400 rounded-lg focus:outline-none focus:border-blue-500 @error('nom_resteau') border-red-500 @enderror">
                             @error('nom_resteau')
-                                <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                                <span class="text-red-500 text-sm">{{ $message }}</span>
                             @enderror
                         </div>
-                        
                         <div class="col-span-1">
                             <label for="localisation" class="block text-sm font-medium text-gray-700 mb-2">Localisation</label>
-                            <input type="text" name="localisation" id="localisation" placeholder="Localisation du restaurant" 
-                                   class="w-full py-3 px-4 border border-gray-400 rounded-lg focus:outline-none focus:border-blue-500" value="{{ old('localisation') }}">
+                            <input type="text" name="localisation" id="localisation" value="{{ old('localisation') }}" placeholder="Localisation du restaurant" 
+                                   class="w-full py-3 px-4 border border-gray-400 rounded-lg focus:outline-none focus:border-blue-500 @error('localisation') border-red-500 @enderror">
                             @error('localisation')
-                                <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                                <span class="text-red-500 text-sm">{{ $message }}</span>
                             @enderror
                         </div>
                     </div>
                 </div>
-
-                <!-- Détails de l'Annonce -->
                 <div class="mb-6">
                     <div class="grid grid-cols-1 gap-6">
-                        <!-- Type de cuisine -->
                         <div class="col-span-1">
                             <label for="type_cuisine" class="block text-sm font-medium text-gray-700 mb-2">Type de cuisine</label>
-                            <input type="text" name="type_cuisine" id="type_cuisine" placeholder="Type de cuisine" 
-                                   class="w-full py-3 px-4 border border-gray-400 rounded-lg focus:outline-none focus:border-blue-500" value="{{ old('type_cuisine') }}">
+                            <input type="text" name="type_cuisine" id="type_cuisine" value="{{ old('type_cuisine') }}" placeholder="Type de cuisine" 
+                                   class="w-full py-3 px-4 border border-gray-400 rounded-lg focus:outline-none focus:border-blue-500 @error('type_cuisine') border-red-500 @enderror">
                             @error('type_cuisine')
-                                <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                                <span class="text-red-500 text-sm">{{ $message }}</span>
                             @enderror
                         </div>
-
-                        <!-- Image -->
                         <div class="col-span-1">
-                            <label for="image" class="block text-sm font-medium text-gray-700 mb-2">Image du restaurant</label>
-                            <input type="text" name="image" id="image" accept="image/*" 
-                                   class="w-full py-3 px-4 border border-gray-400 rounded-lg focus:outline-none focus:border-blue-500">
+                            <label for="image" class="block text-sm font-medium text-gray-700 mb-2">Image (URL)</label>
+                            <input type="text" name="image" id="image" value="{{ old('image') }}" placeholder="Image (URL)" 
+                                   class="w-full py-3 px-4 border border-gray-400 rounded-lg focus:outline-none focus:border-blue-500 @error('image') border-red-500 @enderror">
                             @error('image')
-                                <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                                <span class="text-red-500 text-sm">{{ $message }}</span>
                             @enderror
                         </div>
-
-                        <!-- Prix -->
                         <div class="col-span-1">
                             <label for="prix" class="block text-sm font-medium text-gray-700 mb-2">Prix</label>
-                            <input type="number" name="prix" id="prix" placeholder="Prix" step="0.01" 
-                                   class="w-full py-3 px-4 border border-gray-400 rounded-lg focus:outline-none focus:border-blue-500" value="{{ old('prix') }}">
+                            <input type="number" name="prix" id="prix" value="{{ old('prix') }}" placeholder="Prix" step="0.01" 
+                                   class="w-full py-3 px-4 border border-gray-400 rounded-lg focus:outline-none focus:border-blue-500 @error('prix') border-red-500 @enderror">
                             @error('prix')
-                                <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                                <span class="text-red-500 text-sm">{{ $message }}</span>
                             @enderror
                         </div>
                     </div>
                 </div>
-
-                <!-- Description -->
                 <div class="mb-6">
                     <div class="grid grid-cols-1 gap-6">
                         <div class="col-span-1">
                             <label for="description" class="block text-sm font-medium text-gray-700 mb-2">Description</label>
                             <textarea name="description" id="description" placeholder="Description du restaurant" 
-                                      class="w-full py-3 px-4 border border-gray-400 rounded-lg focus:outline-none focus:border-blue-500">{{ old('description') }}</textarea>
+                                      class="w-full py-3 px-4 border border-gray-400 rounded-lg focus:outline-none focus:border-blue-500 @error('description') border-red-500 @enderror">{{ old('description') }}</textarea>
                             @error('description')
-                                <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                                <span class="text-red-500 text-sm">{{ $message }}</span>
                             @enderror
                         </div>
                     </div>
                 </div>
-
-                <!-- Propriétaire (caché) -->
                 <div class="hidden">
-                    <input type="hidden" name="proprietaire_id" value="{{ auth()->check() ? auth()->user()->id : '' }}">
+                    <input type="hidden" name="proprietaire_id" value="{{ auth()->id() }}">
                 </div>
-
-                <!-- Submit Button -->
-                <div class="mt-8">
-                    <button type="submit" class="w-full bg-green-500 hover:bg-green-600 text-white font-medium py-3 rounded-lg focus:outline-none">
+                <div class="mt-8 flex justify-between">
+                    <a href="{{ route('resteau.resteaurant') }}" class="px-4 py-2 bg-gray-400 text-white rounded-lg hover:bg-gray-500">
+                        Annuler
+                    </a>
+                    <button type="submit" class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700">
                         Ajouter l'Annonce
                     </button>
                 </div>
             </form>
         </div>
     </div>
-</body>
-</html>
+@endsection

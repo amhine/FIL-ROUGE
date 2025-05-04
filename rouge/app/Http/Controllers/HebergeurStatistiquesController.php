@@ -65,10 +65,21 @@ class HebergeurStatistiquesController extends Controller
         ));
     }
 
-    public function detailHotel($hotelId){
+    
 
-        $hotelId = Auth::id();
-        $hotel = Hotel::findOrFail($hotelId);
+    public function detailHotel($hotelId)
+    {
+        $hotel = Hotel::where('id', $hotelId)
+                    ->where('hebergeur_id', Auth::id())
+                    ->with('equipements') 
+                    ->firstOrFail();
+
         return view('hebergeur.details_hotel', compact('hotel'));
+    }
+    public function cancel($id)
+    {
+        $hotel = ReservationHotel::findOrFail($id);
+        $hotel-> update(['status' => 'annuler']);
+        return redirect()->back()->with('success', 'Réservation annulée avec succès.');
     }
 }

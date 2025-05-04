@@ -50,6 +50,7 @@ class AuthController extends Controller
         }
     }
    
+   
     public function loginUser(Request $request)
     {
         try {
@@ -63,22 +64,27 @@ class AuthController extends Controller
             }
             
             $credentials = $request->only('email', 'password');
-
+            $user = User::where('email', $request->email)->first();
+            
+            if ($user && $user->status === 'inactive') {
+                return back()->withErrors([
+                    'email' => 'Votre compte est inactif.',
+                ])->withInput();
+            }
+    
             if (Auth::attempt($credentials, $request->filled('remember'))) {
                 $request->session()->regenerate();
                 return redirect()->intended('dashboard')->with('success', 'Connexion réussie');
             }
-
+    
             return back()->withErrors([
-                'email' => 'Les informations d\'identification fournies ne correspondent pas à nos enregistrements.',
+                'email' => 'Les informations  fournies ne correspondent pas à nos enregistrements.',
             ])->withInput();
             
         } catch (\Exception $e) {
             return back()->withInput()->with('error', 'Erreur lors de la connexion: ' . $e->getMessage());
         }
-    
     }
-
     public function logout(Request $request)
     {
         Auth::logout();
@@ -89,35 +95,5 @@ class AuthController extends Controller
         return redirect('/')->with('success', 'Déconnexion réussie');
     }
 
-    // public function profile()
-    // {
-    //     $user = Auth::user();
-        
-    //     if (!$user) {
-    //         return redirect('login')->with('error', 'Session expirée, veuillez vous reconnecter');
-    //     }
-        
-    //     return view('user.profile', compact('user'));
-    // }
-
-    // public function updateProfile(Request $request)
-    // {
-    //     $user = Auth::user();
-        
-    //     if (!$user) {
-    //         return redirect('login')->with('error', 'Session expirée, veuillez vous reconnecter');
-    //     }
-        
-    //     $request->validate([
-    //         'name' => 'required|string|max:255',
-    //         'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
-    //     ]);
-        
-    //     $user->update([
-    //         'name' => $request->name,
-    //         'email' => $request->email,
-    //     ]);
-        
-    //     return redirect()->route('profile')->with('success', 'Profil mis à jour avec succès');
-    // }
+   
 }
