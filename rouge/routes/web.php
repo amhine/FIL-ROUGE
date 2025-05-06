@@ -10,6 +10,7 @@ use App\Http\Controllers\FavorisController;
 use App\Models\Restaurant;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\HebergeurStatistiquesController;
+use App\Http\Controllers\homecontroller;
 use App\Http\Controllers\MatcheController;
 use App\Http\Controllers\PaiementController;
 use Illuminate\Support\Facades\Route;
@@ -31,7 +32,7 @@ use App\Models\PaiementHotel;
 */
 
 Route::get('/', function () {
-    return view('');
+    return view('auth.login');
 });
 Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register.form');
 Route::post('/register', [AuthController::class, 'createUser'])->name('register');
@@ -44,6 +45,7 @@ Route::post('/login', [AuthController::class, 'loginUser'])->name('login');
 
 
 Route::middleware(['auth','roles:Touriste'])->group(function () {
+    Route::get('/home', function () {return view('touriste.home');})->name('home');
     Route::get('/favoris', [FavorisController::class, 'index'])->name('favoris.index');
     Route::post('/hotel/{id}/favorite', [FavorisController::class, 'toggleHotelFavorite'])->name('favoris.hotel');
     Route::post('/restaurant/{id}/favorite', [FavorisController::class, 'toggleRestaurantFavorite'])->name('favoris.restaurant');
@@ -62,7 +64,7 @@ Route::middleware(['auth','roles:Touriste'])->group(function () {
     Route::get('/reservations/resteau/create/{resteauId}', [ReservationResteauController::class, 'create'])->name('reservations.resteau.create');
     Route::post('/reservations/resteau', [ReservationResteauController::class, 'store'])->name('reservations.resteau.store');
     Route::get('/payments/resteau/{reservationId}', [PaiementController::class, 'indexresteau'])->name('paiement.resteau');
-    Route::post('/payments/process', [PaiementController::class, 'processPaiementResteau'])->name('paiement.process.resteau');
+    Route::post('/payments/process/resteau', [PaiementController::class, 'processPaiementResteau'])->name('paiement.process.resteau');
     Route::get('/payments/confirmation/{reservationId}', [PaiementController::class, 'confirmationResteau'])->name('paiement.confirmation.resteau');
 
 

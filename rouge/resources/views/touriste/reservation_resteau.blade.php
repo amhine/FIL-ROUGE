@@ -47,7 +47,6 @@
             </div>
         </div>
 
-        <!-- Formulaire de réservation -->
         <form id="reservationForm" action="{{ route('reservations.resteau.store') }}" method="POST" class="space-y-4 mt-4">
             @csrf
             <input type="hidden" name="id_resteau" value="{{ $resteau->id }}">

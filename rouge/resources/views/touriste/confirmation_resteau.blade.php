@@ -9,7 +9,7 @@
 </head>
 <body class="bg-gray-100 flex items-center justify-center min-h-screen">
     <div class="bg-white shadow-2xl rounded-lg p-8 w-96 text-center transform transition-transform hover:scale-105">
-        <!-- Affichage des messages de succès -->
+        
         @if(session('success'))
             <div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 mb-4" role="alert">
                 <p>{{ session('success') }}</p>
@@ -22,7 +22,7 @@
         <h2 class="text-2xl font-bold mb-4 text-gray-800">Réservation Confirmée</h2>
         <p class="text-gray-600 mb-6">Votre réservation pour <strong>{{ $reservation->restaurant->nom_resteau }}</strong> a été confirmée avec succès.</p>
         
-        <!-- Détails de la réservation -->
+        
         <div class="mb-6 text-left bg-gray-50 p-4 rounded-lg">
             <p class="mb-2"><span class="font-semibold text-gray-700">Restaurant :</span> <span class="text-gray-600">{{ $reservation->restaurant->nom_resteau }}</span></p>
             <p class="mb-2"><span class="font-semibold text-gray-700">Date et heure de début :</span> <span class="text-gray-600">{{ \Carbon\Carbon::parse($reservation->date_debut)->format('d/m/Y H:i') }}</span></p>

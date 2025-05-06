@@ -9,7 +9,7 @@
 </head>
 <body class="bg-gray-100 flex items-center justify-center min-h-screen">
     <div class="bg-white shadow-2xl rounded-lg p-8 w-96 text-center transform transition-transform hover:scale-105">
-        <!-- Affichage des messages d'erreur -->
+        
         @if(session('error'))
             <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-4" role="alert">
                 <p>{{ session('error') }}</p>
@@ -26,14 +26,14 @@
             </div>
         @endif
         
-        <!-- Logo PayPal -->
+        
         <div class="mb-6">
             <i class="fab fa-paypal text-4xl text-blue-500"></i>
         </div>
         <h2 class="text-2xl font-bold mb-4 text-gray-800">Paiement sécurisé</h2>
         <p class="text-gray-600 mb-6">Finalisez votre réservation en toute sécurité avec PayPal.</p>
         
-        <!-- Détails de la réservation -->
+        
         <div class="mb-6 text-left bg-gray-50 p-4 rounded-lg">
             <p class="mb-2"><span class="font-semibold text-gray-700">Restaurant :</span> <span class="text-gray-600">{{ $reservation->restaurant->nom_resteau }}</span></p>
             <p class="mb-2"><span class="font-semibold text-gray-700">Date et heure de début :</span> <span class="text-gray-600">{{ \Carbon\Carbon::parse($reservation->date_debut)->format('d/m/Y H:i') }}</span></p>
@@ -47,7 +47,7 @@
             @csrf
             <input type="hidden" name="reservation_id" value="{{ $reservation->id }}">
             
-            <!-- Champs PayPal simulés -->
+           
             <div class="mb-4">
                 <input type="email" name="email" placeholder="Email PayPal" required
                        class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
@@ -62,7 +62,7 @@
             </button>
         </form>
          
-        <!-- Message de sécurité -->
+        
         <p class="text-sm text-gray-500 mt-6">
             <i class="fas fa-lock mr-1"></i>Vos informations sont sécurisées.
         </p>

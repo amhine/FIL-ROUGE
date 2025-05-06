@@ -88,19 +88,19 @@
 
 <body>
     <div class="container">
-        <!-- En-tête -->
+       
         <div class="header">
             <h1>Confirmation de Paiement</h1>
         </div>
 
-        <!-- Corps de l'e-mail -->
+        
         <div class="content">
             <h2>Bonjour <?php echo htmlspecialchars($notifiable->name, ENT_QUOTES, 'UTF-8'); ?>,</h2>
 
             <p>Nous vous remercions pour votre confiance. Votre paiement a été traité avec succès.</p>
             <p>Voici les détails de votre transaction :</p>
 
-            <!-- Détails du paiement -->
+            
             <div class="payment-details">
                 <p><strong>Numéro de transaction :</strong> <?php echo htmlspecialchars($displayId, ENT_QUOTES, 'UTF-8'); ?></p>
                 <p><strong>Date :</strong> <?php echo htmlspecialchars($date, ENT_QUOTES, 'UTF-8'); ?></p>
@@ -108,10 +108,10 @@
                 <p><strong>Statut :</strong> <span style="background-color: #c6f6d5; color: #2f855a; padding: 4px 12px; border-radius: 20px; font-size: 12px;"><?php echo htmlspecialchars($status, ENT_QUOTES, 'UTF-8'); ?></span></p>
             </div>
 
-            <!-- Bouton d'action -->
+            
             <a href="<?php echo $paymentUrl; ?>" class="button">Voir le détail de la transaction</a>
 
-            <!-- Message de fin -->
+            
             <p>Si vous avez des questions concernant votre paiement, notre équipe d'assistance est à votre disposition.</p>
         </div>
 

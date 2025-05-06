@@ -1,47 +1,13 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Maroc - Trouver un trajet</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-</head>
-<body class="bg-gray-50">
-    <!-- Navigation -->
-    <nav class="fixed w-full bg-[#C02626] text-white z-50">
-        <div class="container mx-auto py-4 flex items-center justify-between px-4">
-            <span class="font-bold text-xl">StayMorocco</span>
-            <div class="hidden md:flex space-x-8">
-                <a href="#accueil" class="hover:text-yellow-300">Accueil</a>
-                <a href="#stades" class="hover:text-yellow-300">Stades</a>
-                <a href="#hebergements" class="hover:text-yellow-300">Hébergements</a>
-                <a href="#restaurants" class="hover:text-yellow-300">Restaurants</a>
-                <a href="#trajets" class="hover:text-yellow-300 border-b-2 border-yellow-300">Trajets</a>
-            </div>
-            <button class="md:hidden flex flex-col space-y-1" id="mobile-menu-button">
-                <span class="w-6 h-0.5 bg-white"></span>
-                <span class="w-6 h-0.5 bg-white"></span>
-                <span class="w-6 h-0.5 bg-white"></span>
-            </button>
-        </div>
-        <div class="md:hidden hidden bg-[#C02626] px-4 py-4" id="mobile-menu">
-            <ul class="flex flex-col space-y-4">
-                <li><a href="#accueil" class="block py-2 hover:text-yellow-300">Accueil</a></li>
-                <li><a href="#stades" class="block py-2 hover:text-yellow-300">Stades</a></li>
-                <li><a href="#hebergements" class="block py-2 hover:text-yellow-300">Hébergements</a></li>
-                <li><a href="#restaurants" class="block py-2 hover:text-yellow-300">Restaurants</a></li>
-                <li><a href="#trajets" class="block py-2 hover:text-yellow-300 border-b-2 border-yellow-300">Trajets</a></li>
-            </ul>
-        </div>
-    </nav>
+@extends('layouts.touriste')
 
-    <!-- Main Content -->
+@section('title', 'Trajet')
+
+@section('content')
     <section class="pt-20 pb-12">
         <div class="max-w-5xl mx-auto px-4">
             <h1 class="text-3xl font-bold text-gray-800 mb-8">Trouvez votre trajet au Maroc</h1>
 
-            <!-- Search Form -->
+            
             <div class="bg-white rounded-lg shadow-md p-6 mb-8">
                 <form method="POST" action="{{ route('trajet.search') }}">
                     @csrf
@@ -83,7 +49,7 @@
                 @endif
             </div>
 
-            <!-- Search Results -->
+            
             @if (isset($routes))
                 <div>
                     <div class="mb-6 bg-white rounded-lg shadow-md p-6 border-l-4 border-green-600">
@@ -100,7 +66,7 @@
                     </div>
 
                    
-                    <!-- Mode de transport tabs -->
+                    
                     <div class="bg-white rounded-lg shadow-md overflow-hidden mb-6">
                         <div class="flex border-b">
                             <button class="w-1/2 py-3 font-medium text-center focus:outline-none transport-tab active" data-target="train-options">
@@ -111,14 +77,14 @@
                             </button>
                         </div>
                         
-                        <!-- Train Options -->
+                        
                         <div id="train-options" class="transport-content">
                             @php
                                 $showTrain = collect($routes)->firstWhere('duration.train', '!=', null) !== null;
                             @endphp
                             
                             @if ($showTrain)
-                                <!-- Train Schedules Grid -->
+                                
                                 <div class="p-6">
                                     <h5 class="font-medium text-gray-800 mb-4 flex items-center">
                                         <i class="fas fa-clock mr-2 text-purple-700"></i> Horaires disponibles
@@ -187,14 +153,14 @@
                             @endif
                         </div>
                         
-                        <!-- Bus Options -->
+                       
                         <div id="bus-options" class="transport-content hidden">
                             @php
                                 $showBus = collect($routes)->firstWhere('duration.bus', '!=', null) !== null;
                             @endphp
                             
                             @if ($showBus)
-                                <!-- Bus Schedules Grid -->
+                                
                                 <div class="p-6">
                                     <h5 class="font-medium text-gray-800 mb-4 flex items-center">
                                         <i class="fas fa-clock mr-2 text-blue-700"></i> Horaires disponibles
@@ -261,7 +227,7 @@
                         </div>
                     </div>
                     
-                    <!-- Extra Travel Tips -->
+                    
                     <div class="bg-white rounded-lg shadow-md p-6">
                         <h3 class="text-lg font-semibold mb-4 text-gray-800 flex items-center">
                             <i class="fas fa-info-circle mr-2 text-green-700"></i> Conseils de voyage
@@ -295,17 +261,15 @@
         </div>
     </section>
 
-    <!-- JavaScript for Tab Switching -->
+    
     <script>
-        // Mobile menu toggle
-        document.getElementById('mobile-menu-button').addEventListener('click', function() {
-            document.getElementById('mobile-menu').classList.toggle('hidden');
-        });
         
-        // Transport tab switching
+      
+        
+       
         document.querySelectorAll('.transport-tab').forEach(tab => {
             tab.addEventListener('click', () => {
-                // Update active tab styles
+               
                 document.querySelectorAll('.transport-tab').forEach(t => {
                     t.classList.remove('active');
                     t.classList.remove('bg-gray-100');
@@ -316,7 +280,7 @@
                 tab.classList.add('bg-gray-100');
                 tab.classList.add('text-gray-800');
                 
-                // Hide all content and show the selected one
+                
                 document.querySelectorAll('.transport-content').forEach(content => {
                     content.classList.add('hidden');
                 });
@@ -325,8 +289,7 @@
             });
         });
         
-        // Apply some initial styles to active tab
+        
         document.querySelector('.transport-tab.active').classList.add('bg-gray-100', 'text-gray-800');
     </script>
-</body>
-</html>
+@endsection

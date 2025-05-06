@@ -30,7 +30,7 @@
   @endif
       <h2 class="text-2xl font-bold text-center text-gray-800 mb-6">Réserver l'annonce </h2>
       
-      <!-- Détails de l'annonce -->
+     
       <div class="card bg-white rounded-xl overflow-hidden shadow-lg">
         <div class="relative">
           <img src="{{ ( $hotel->image) }}" class="w-full object-cover h-48">
@@ -76,29 +76,29 @@
         </div>
       </div> 
         
-      <!-- Formulaire de réservation -->
-<form id="reservationForm" action="{{ route('reservations.hotel.store') }}" method="POST" class="space-y-4 mt-4">
-  @csrf
-  <input type="hidden" name="hotel_id" value="{{ $hotel->id }}">
-  
-  <div>
-      <label for="date_debut" class="block text-gray-700 mb-2">Date de début:</label>
-      <input type="text" name="date_debut" id="date_debut" required 
-             class="px-4 py-2 border rounded-lg w-full focus:ring-2 focus:ring-purple-500"
-             placeholder="Sélectionnez une date">
-  </div>
+     
+    <form id="reservationForm" action="{{ route('reservations.hotel.store') }}" method="POST" class="space-y-4 mt-4">
+      @csrf
+      <input type="hidden" name="hotel_id" value="{{ $hotel->id }}">
+      
+      <div>
+          <label for="date_debut" class="block text-gray-700 mb-2">Date de début:</label>
+          <input type="text" name="date_debut" id="date_debut" required 
+                class="px-4 py-2 border rounded-lg w-full focus:ring-2 focus:ring-purple-500"
+                placeholder="Sélectionnez une date">
+      </div>
 
-  <div>
-      <label for="date_fin" class="block text-gray-700 mb-2">Date de fin:</label>
-      <input type="text" name="date_fin" id="date_fin" required 
-             class="px-4 py-2 border rounded-lg w-full focus:ring-2 focus:ring-purple-500"
-             placeholder="Sélectionnez une date">
-  </div>
+      <div>
+          <label for="date_fin" class="block text-gray-700 mb-2">Date de fin:</label>
+          <input type="text" name="date_fin" id="date_fin" required 
+                class="px-4 py-2 border rounded-lg w-full focus:ring-2 focus:ring-purple-500"
+                placeholder="Sélectionnez une date">
+      </div>
 
-  <button type="submit" class="w-full mt-4 bg-red-600  text-white py-2 rounded-lg font-medium ">
-    Réserver
-  </button>
-</form>
+      <button type="submit" class="w-full mt-4 bg-red-600  text-white py-2 rounded-lg font-medium ">
+        Réserver
+      </button>
+    </form>
     
       <a href="{{ route('hotel') }}" class="block text-center text-gray-600 mt-4 hover:underline">Retour aux annonces</a>
     </div>
@@ -122,7 +122,6 @@
             @endif
           ],
           onChange: function(selectedDates, dateStr) {
-            // Met à jour la date minimale de l'input "date_fin"
             document.querySelector('#date_fin')._flatpickr.set('minDate', dateStr);
           }
         });

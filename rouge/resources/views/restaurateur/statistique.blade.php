@@ -17,7 +17,7 @@
             </div>
             <div class="bg-white p-6 rounded-2xl shadow hover:shadow-lg transition">
                 <h5 class="text-lg font-semibold text-gray-700 mb-2">Réservations confirmées</h5>
-                <h2 class="text-3xl font-extrabold text-green-600">{{ $reservationsParStatut['confirme'] ?? 0 }}</h2>
+                <h2 class="text-3xl font-extrabold text-green-600">{{ $reservationsParStatut['confirmer'] ?? 0 }}</h2>
             </div>
             <div class="bg-white p-6 rounded-2xl shadow hover:shadow-lg transition">
                 <h5 class="text-lg font-semibold text-gray-700 mb-2">Réservations en attente</h5>
