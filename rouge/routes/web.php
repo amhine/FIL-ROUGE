@@ -38,7 +38,7 @@ Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('regi
 Route::post('/register', [AuthController::class, 'createUser'])->name('register');
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login.form');
 Route::post('/login', [AuthController::class, 'loginUser'])->name('login');
-
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 
 

@@ -43,7 +43,18 @@ class AuthController extends Controller
                 'id_role' => $validateUser['id_role'],
             ]);
             Auth::login($user);
-            return redirect()->route('dashboard')->with('success', 'Compte cree avec succes');
+            switch ($user->id_role) {
+                case 1:
+                    return redirect()->route('dashboard')->with('success', 'Compte créé avec succès');
+                case 2:
+                    return redirect()->route('home')->with('success', 'Compte créé avec succès');
+                case 3:
+                    return redirect()->route('hebergeur.hebergement')->with('success', 'Compte créé avec succès');
+                case 4:
+                    return redirect()->route('resteau.resteaurant')->with('success', 'Compte créé avec succès');
+                default:
+                    return redirect()->route('login.form')->with('success', 'Compte créé avec succès');
+            }
 
         } catch (\Throwable $th) {
             return back()->withInput()->with('error', 'Erreur lors de la creation du compte: ' . $th->getMessage());
@@ -74,11 +85,24 @@ class AuthController extends Controller
     
             if (Auth::attempt($credentials, $request->filled('remember'))) {
                 $request->session()->regenerate();
-                return redirect()->intended('dashboard')->with('success', 'Connexion réussie');
+                $user = Auth::user();
+                
+                switch ($user->id_role) {
+                    case 1:
+                        return redirect()->route('dashboard')->with('success', 'Connexion réussie');
+                    case 2:
+                        return redirect()->route('home')->with('success', 'Connexion réussie');
+                    case 3:
+                        return redirect()->route('hebergeur.hebergement')->with('success', 'Connexion réussie');
+                    case 4:
+                        return redirect()->route('resteau.resteaurant')->with('success', 'Connexion réussie');
+                    default:
+                        return redirect()->route('login.form')->with('success', 'Connexion réussie');
+                }
             }
     
             return back()->withErrors([
-                'email' => 'Les informations  fournies ne correspondent pas à nos enregistrements.',
+                'email' => 'Les informations fournies ne correspondent pas à nos enregistrements.',
             ])->withInput();
             
         } catch (\Exception $e) {

@@ -27,6 +27,12 @@
                     <li><a href="{{ route('matche') }}" class="hover:text-morocco-gold transition-colors duration-300">Matches</a></li>
                     <li><a href="{{ route('favoris.index') }}" class="hover:text-morocco-gold transition-colors duration-300">Favoris</a></li>
                     <li><a href="{{ route('trajet.index') }}" class="hover:text-morocco-gold transition-colors duration-300">Trajets</a></li>
+                    <li>
+                        <form action="{{ route('logout') }}" method="POST">
+                            @csrf
+                            <button type="submit" class="hover:text-morocco-gold transition-colors duration-300">Déconnexion</button>
+                        </form>
+                    </li>
                 </ul>
             </div>
             
@@ -49,6 +55,12 @@
                 <li><a href="{{ route('matche') }}" class="block py-2 hover:text-morocco-gold transition-colors duration-300">Matche</a></li>
                 <li><a href="{{ route('favoris.index') }}" class="block py-2 hover:text-morocco-gold transition-colors duration-300">Favoris</a></li>
                 <li><a href="{{ route('trajet.index') }}" class="block py-2 hover:text-morocco-gold transition-colors duration-300">Trajets</a></li>
+                <li>
+                    <form action="{{ route('logout') }}" method="POST">
+                        @csrf
+                        <button type="submit" class="block py-2 hover:text-morocco-gold transition-colors duration-300">Déconnexion</button>
+                    </form>
+                </li>
             </ul>
         </div>
     </nav>

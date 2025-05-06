@@ -10,14 +10,20 @@
     @yield('styles')
 </head>
 <body class="bg-gray-50">
-    <!-- Navbar -->
     <nav class="fixed w-full bg-[#C02626] text-white z-50">
         <div class="container mx-auto py-4 px-4 flex items-center justify-between">
             <span class="font-bold text-xl">StayMorocco</span>
-            <div class="hidden md:flex space-x-8">
+            <div class="hidden md:flex items-center space-x-8">
+                <div class="flex space-x-8">
                     <a href="{{ route('resteau.resteaurant') }}" class="hover:text-gray-200 transition-colors">Mes Hébergements</a>
                     <a href="{{ route('resteau.resteaurant.statistiques') }}" class="hover:text-gray-200 transition-colors">Statistiques</a>
-               
+                </div>
+                <form action="{{ route('logout') }}" method="POST">
+                    @csrf
+                    <button type="submit" class="hover:text-gray-200 transition-colors">
+                        <i class="fas fa-sign-out-alt mr-2"></i>Déconnexion
+                    </button>
+                </form>
             </div>
             <button class="md:hidden flex flex-col space-y-1" id="mobile-menu-button">
                 <span class="w-6 h-0.5 bg-white"></span>
@@ -27,21 +33,28 @@
         </div>
         <div class="md:hidden hidden bg-[#C02626] px-4 py-4" id="mobile-menu">
             <ul class="flex flex-col space-y-4">
-                    <li><a href="{{ route('resteau.resteaurant') }}" class="block py-2 hover:text-gray-200 transition-colors">Mes Restaurants</a></li>
-                    <li><a href="{{ route('resteau.resteaurant.statistiques') }}" class="block py-2 hover:text-gray-200 transition-colors">Statistiques</a></li>
-                
+                <li><a href="{{ route('resteau.resteaurant') }}" class="block py-2 hover:text-gray-200 transition-colors">Mes Restaurants</a></li>
+                <li><a href="{{ route('resteau.resteaurant.statistiques') }}" class="block py-2 hover:text-gray-200 transition-colors">Statistiques</a></li>
+                <li>
+                    <form action="{{ route('logout') }}" method="POST">
+                        @csrf
+                        <button type="submit" class="block py-2 hover:text-gray-200 transition-colors">
+                            <i class="fas fa-sign-out-alt mr-2"></i>Déconnexion
+                        </button>
+                    </form>
+                </li>
             </ul>
         </div>
     </nav>
 
-    <!-- Contenu principal -->
+    
     <main class="container mx-auto px-4 pt-20 pb-8">
         @yield('content')
     </main>
 
     
 
-    <!-- Scripts -->
+  
     <script>
         const mobileMenuButton = document.getElementById('mobile-menu-button');
         const mobileMenu = document.getElementById('mobile-menu');
