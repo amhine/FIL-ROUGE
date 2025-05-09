@@ -25,7 +25,7 @@
                                    class="w-full py-3 px-4 border border-gray-400 rounded-lg focus:outline-none focus:border-blue-500 @error('nom_hotel') border-red-500 @enderror">
                             @error('nom_hotel')
                                 <span class="text-red-500 text-sm">{{ $message }}</span>
-                            @error
+                            @enderror
                         </div>
                         <div class="col-span-1">
                             <label for="prix_nuit" class="block text-sm font-medium text-gray-700 mb-2">Prix par nuit</label>
@@ -33,7 +33,7 @@
                                    class="w-full py-3 px-4 border border-gray-400 rounded-lg focus:outline-none focus:border-blue-500 @error('prix_nuit') border-red-500 @enderror">
                             @error('prix_nuit')
                                 <span class="text-red-500 text-sm">{{ $message }}</span>
-                            @error
+                            @enderror
                         </div>
                     </div>
                 </div>
@@ -45,7 +45,7 @@
                                       class="w-full py-3 px-4 border border-gray-400 rounded-lg focus:outline-none focus:border-blue-500 @error('description') border-red-500 @enderror">{{ old('description') }}</textarea>
                             @error('description')
                                 <span class="text-red-500 text-sm">{{ $message }}</span>
-                            @error
+                            @enderror
                         </div>
                         <div class="col-span-1">
                             <label for="nombre_chambre" class="block text-sm font-medium text-gray-700 mb-2">Nombre de chambres</label>
@@ -53,7 +53,7 @@
                                    class="w-full py-3 px-4 border border-gray-400 rounded-lg focus:outline-none focus:border-blue-500 @error('nombre_chambre') border-red-500 @enderror">
                             @error('nombre_chambre')
                                 <span class="text-red-500 text-sm">{{ $message }}</span>
-                            @error
+                            @enderror
                         </div>
                         <div class="col-span-1">
                             <label for="nombre_salle_debain" class="block text-sm font-medium text-gray-700 mb-2">Nombre de salles de bain</label>
@@ -61,7 +61,7 @@
                                    class="w-full py-3 px-4 border border-gray-400 rounded-lg focus:outline-none focus:border-blue-500 @error('nombre_salle_debain') border-red-500 @enderror">
                             @error('nombre_salle_debain')
                                 <span class="text-red-500 text-sm">{{ $message }}</span>
-                            @error
+                            @enderror
                         </div>
                     </div>
                 </div>
@@ -73,7 +73,7 @@
                                    class="w-full py-3 px-4 border border-gray-400 rounded-lg focus:outline-none focus:border-blue-500 @error('adress') border-red-500 @enderror">
                             @error('adress')
                                 <span class="text-red-500 text-sm">{{ $message }}</span>
-                            @error
+                            @enderror
                         </div>
                         <div class="col-span-1">
                             <label for="ville" class="block text-sm font-medium text-gray-700 mb-2">Ville</label>
@@ -81,7 +81,7 @@
                                    class="w-full py-3 px-4 border border-gray-400 rounded-lg focus:outline-none focus:border-blue-500 @error('ville') border-red-500 @enderror">
                             @error('ville')
                                 <span class="text-red-500 text-sm">{{ $message }}</span>
-                            @error
+                            @enderror
                         </div>
                     </div>
                 </div>
@@ -93,7 +93,7 @@
                                    class="w-full py-3 px-4 border border-gray-400 rounded-lg focus:outline-none focus:border-blue-500 @error('image') border-red-500 @enderror">
                             @error('image')
                                 <span class="text-red-500 text-sm">{{ $message }}</span>
-                            @error
+                            @enderror
                         </div>
                         <div class="col-span-1">
                             <label for="disponibilite" class="block text-sm font-medium text-gray-700 mb-2">Disponibilité</label>
@@ -102,7 +102,7 @@
                                    min="{{ date('Y-m-d') }}">
                             @error('disponibilite')
                                 <span class="text-red-500 text-sm">{{ $message }}</span>
-                            @error
+                            @enderror
                         </div>
                     </div>
                 </div>
@@ -119,7 +119,7 @@
                     </div>
                     @error('equipement')
                         <span class="text-red-500 text-sm">{{ $message }}</span>
-                    @error
+                    @enderror
                 </div>
                 <div class="hidden">
                     <input type="hidden" name="hebergeur_id" value="{{ auth()->id() }}">

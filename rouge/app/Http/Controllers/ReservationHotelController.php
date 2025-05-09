@@ -17,8 +17,7 @@ class ReservationHotelController extends Controller
             $hotel = Hotel::findOrFail($hotelId);
             
             $reservations = ReservationHotel::where('hotels_id', $hotel->id)
-                ->where('status', 'confirmer')
-                ->get();
+                ->where('status', 'confirmer')->get();
                 
             $dates_indisponibles = [];
             foreach ($reservations as $reservation) {
@@ -35,8 +34,8 @@ class ReservationHotelController extends Controller
             
             return view('touriste.reservation_hotel', compact('hotel', 'dates_indisponibles'));
         } catch (\Exception $e) {
-            Log::error('Erreur lors de l\'accès à la page de réservation: ' . $e->getMessage());
-            return redirect()->route('hotel')->with('error', 'Une erreur s\'est produite lors de l\'accès à la page de réservation.');
+            Log::error('Erreur lors de l accès à la page de réservation: ' . $e->getMessage());
+            return redirect()->route('hotel')->with('error', 'Une erreur s est produite lors de l accès à la page de réservation.');
         }
     }
 

@@ -94,7 +94,7 @@ class PaiementController extends Controller
     $reservation = ReservationResteau::with(['restaurant', 'tourist'])->findOrFail($reservationId);
     
     if (Auth::id() != $reservation->tourist_id) {
-        return redirect()->route('restaurants.search')->with('error', 'Vous n\'êtes pas autorisé à accéder à cette page.');
+        return redirect()->route('restaurants.search')->with('error', 'Vous n êtes pas autorisé à accéder à cette page.');
     }
     
     return view('touriste.confirmation_resteau', compact('reservation'));

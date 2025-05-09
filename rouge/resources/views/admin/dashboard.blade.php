@@ -17,7 +17,6 @@
             color: #2d3748;
         }
 
-        /* Custom Moroccan Theme */
         .bg-morocco {
             background: #b91c1c;
         }
@@ -30,7 +29,6 @@
             border-color: #b91c1c;
         }
 
-        /* Navbar Styling */
         .nav-link {
             position: relative;
             transition: color 0.3s ease;
@@ -51,7 +49,6 @@
             width: 100%;
         }
 
-        /* Stat Card Styling */
         .stat-card {
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
@@ -61,7 +58,6 @@
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
         }
 
-        /* Table Styling */
         .table-row {
             transition: background-color 0.2s ease;
         }
@@ -70,7 +66,6 @@
             background-color: #f1f5f9;
         }
 
-        /* Button Styling */
         .btn {
             transition: background-color 0.3s ease, transform 0.2s ease;
         }
@@ -79,7 +74,6 @@
             transform: scale(1.05);
         }
 
-        /* Mobile Menu Animation */
         #mobile-menu {
             transition: transform 0.3s ease-in-out;
             transform: translateY(-100%);
@@ -89,29 +83,24 @@
             transform: translateY(0);
         }
 
-        /* Smooth Scroll */
-        html {
-            scroll-behavior: smooth;
-        }
+      
     </style>
 </head>
 <body>
-    <!-- Navbar -->
+   
     <nav class="fixed w-full bg-morocco text-white shadow-lg z-50">
         <div class="container mx-auto py-4 px-6 flex items-center justify-between">
             <div class="flex items-center space-x-3">
                 <span class="font-bold text-2xl tracking-wide">StayMorocco</span>
             </div>
+            <form action="{{ route('logout') }}" method="POST">
+                @csrf
+                <button type="submit" class="hover:text-gray-200 transition-colors">
+                    <i class="fas fa-sign-out-alt mr-2"></i>Déconnexion
+                </button>
+            </form>
         </div>
-        <div class="md:hidden hidden bg-morocco px-4 py-4" id="mobile-menu">
-            <ul class="flex flex-col space-y-4">
-                <li><a href="#statistiques" class="block py-2 hover:text-gray-300 flex items-center"><i class="fas fa-chart-line mr-2"></i>Statistiques</a></li>
-                <li><a href="#users" class="block py-2 hover:text-gray-300 flex items-center"><i class="fas fa-users mr-2"></i>Utilisateurs</a></li>
-                <li><a href="#hebergements" class="block py-2 hover:text-gray-300 flex items-center"><i class="fas fa-hotel mr-2"></i>Hébergements</a></li>
-                <li><a href="#restaurants" class="block py-2 hover:text-gray-300 flex items-center"><i class="fas fa-utensils mr-2"></i>Restaurants</a></li>
-                <li><a href="#equipements" class="block py-2 hover:text-gray-300 flex items-center"><i class="fas fa-tools mr-2"></i>Équipements</a></li>
-            </ul>
-        </div>
+        
     </nav>
 
     <!-- Main Content -->

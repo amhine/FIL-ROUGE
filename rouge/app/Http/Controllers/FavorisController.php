@@ -21,9 +21,8 @@ class FavorisController extends Controller
         
         $hotels = $user->favoritesHotels()->paginate(3, ['*'], 'hotels');
         $restaurants = $user->favoritesRestaurants()->paginate(3, ['*'], 'restaurants');
-        $matches = $user->favoritesMatches()->paginate(3, ['*'], 'matches');
         
-        return view('touriste.favori', compact('hotels', 'restaurants', 'matches'));
+        return view('touriste.favori', compact('hotels', 'restaurants'));
     }
 
     public function toggleHotelFavorite($id)

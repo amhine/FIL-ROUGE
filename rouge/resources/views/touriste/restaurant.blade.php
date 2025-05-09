@@ -5,7 +5,7 @@
 @section('content')
     <!-- Hero Section -->
     <section id="restaurants" class="pt-[76px] bg-gray-50">
-        <div class="max-w-7xl mx-auto ">
+        <div class="max-w-full mx-auto ">
             <div class="relative h-[550px]  overflow-hidden ">
                 <img src="https://www.visitmorocco.com/sites/default/files/styles/thumbnail_events_slider/public/thumbnails/image/se-nourrir-au-maroc_1.jpg?itok=MoCChSDy" 
                      alt="Moroccan culinary experience" 
